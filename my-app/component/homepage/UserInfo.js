@@ -1,15 +1,15 @@
 import React from "react";
-import { View, Text, Image, ImageBackground } from "react-native";
+import { View, Text, Image } from "react-native";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
 export default function UserInfo() {
   return (
-    <ImageBackground
-      source={require("../../assets/background/Untitled design.png")}
+    <View
+     
       style={{
-        backgroundColor: "#3171ee",
-        height: 210,
+        backgroundColor: "#66B2ECFF",
+        height: 300,
         flex: 2.5,
         justifyContent: "center",
       }}
@@ -46,6 +46,6 @@ export default function UserInfo() {
           <Text style={{ fontFamily: "Jakarta" }}>Staff</Text>
         </View>
       </View>
-    </ImageBackground>
+    </View>
   );
 }

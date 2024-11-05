@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { View, ScrollView, Dimensions } from "react-native";
+import { View, ScrollView, Dimensions, Text } from "react-native";
 
 import TopBar from "../component/allpages/TopBar";
 import { useFonts } from "expo-font";
@@ -18,8 +18,7 @@ export default function Home({ navigation }) {
 
   const [loaded, error] = useFonts({
     Jakarta: require("../assets/font/PlusJakartaSans-Bold.ttf"),
-    'Jakarta-Italic': require('../assets/font/PlusJakartaSans-BoldItalic.ttf'),
-  
+    "Jakarta-Italic": require("../assets/font/PlusJakartaSans-BoldItalic.ttf"),
   });
 
   useEffect(() => {
@@ -33,15 +32,81 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <View style={{ flex: 1 }}>
-      <TopBar />
-
+    <View style={{ width: screenWidth }}>
       <ScrollView>
-        <UserInfo />
+        {/* <UserInfo /> */}
+        <View
+          style={{
+            backgroundColor: "#66B2ECFF",
+            height: 300,
+            paddingTop: 70,
+            paddingHorizontal: 20,
+          }}
+        >
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{
+                height: 60,
+                gap: 2,
+                justifyContent: "center",
+              }}
+            >
+              <Text style={{ color: "white", fontSize: 16 }}>
+                PT Radhika Amerta Gemilang
+              </Text>
+              <Text style={{ color: "white", fontSize: 14 }}>
+                Kamis 27 Sep 2024, 09:33:12
+              </Text>
+            </View>
+
+            <View
+              style={{ height: 40, width: 40, backgroundColor: "red" }}
+            ></View>
+          </View>
+
+          <View
+            style={{
+              height: 80,
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              gap: 10,
+              
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "white",
+                height: 50,
+                width: 50,
+                borderRadius: 100,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            ></View>
+            <View>
+              <Text
+                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+              >
+                Fery Cokroaminoto Dewantoro
+              </Text>
+              <Text style={{ color: "white", fontSize: 13 }}>
+                Manager, People Developmet
+              </Text>
+            </View>
+          </View>
+        </View>
 
         <View
           style={{
-            backgroundColor: "#F3F4F6",
+            backgroundColor: "white",
             flex: 3,
             alignItems: "center",
           }}
@@ -58,15 +123,27 @@ export default function Home({ navigation }) {
               padding: 10,
             }}
           >
-            <UserStatus />
-
-            <BerandaIcons />
-
+            <View
+              style={{
+                marginTop: -100,
+                width: screenWidth,
+                paddingHorizontal: 15,
+              }}
+            >
+              <UserStatus />
+            </View>
+            <View
+              style={{
+                width: screenWidth,
+                paddingHorizontal: 15,
+              }}
+            >
+              <BerandaIcons />
+            </View>
             <Todo />
 
             <Pengumuman />
 
-            <SaldoCuti />
 
             <View style={{ height: 150 }}></View>
           </View>

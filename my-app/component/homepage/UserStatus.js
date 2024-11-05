@@ -1,13 +1,17 @@
 import React from "react";
-import { View, Text, Image, Dimensions } from "react-native";
+import { View, Text, Image, Dimensions, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useFonts } from "expo-font";
 
 import { useEffect, useState } from "react";
+import { Button } from "react-native-web";
 
 let hadir = false;
 
 export default function UserStatus() {
+  const screenWidth = Dimensions.get("window").width;
+
+
   const [date, setDate] = useState("");
   const [day, setDay] = useState("");
 
@@ -35,146 +39,46 @@ export default function UserStatus() {
   return (
     <View
       style={{
-        backgroundColor: "white",
-        height: 110,
-        width: "100%",
-        borderRadius: 10,
-        justifyContent: "space-between",
-        padding: 10,
-        flexDirection: "row",
+        backgroundColor: "#F1F8FDFF",
+        height: 190,
+        width:"100%",
+        borderRadius: 8,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.5,
         elevation: 5,
+        paddingHorizontal:20,
+        paddingBottom:15
       }}
     >
-      <View style={{ flex: 2 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            gap: 5,
-            flex: 1.5,
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              borderRadius: 100,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <AntDesign name="checkcircleo" size={30} color="#1e3a8a" />
+      <View style={{display:"flex", flexDirection:"row",alignItems:"center",justifyContent:"space-between", borderBottomWidth:1,borderColor:"#BCC1CAFF", flex:1.5, gap:40}}>
+        <Text style={{fontSize:16, fontWeight:"bold", color:"#565E6CFF", flex:1, textAlign:"center",}}>Absen masuk</Text>
+        <Text style={{fontSize:16 ,fontWeight:"bold", color:"#565E6CFF",flex:1, textAlign:"center"}}>Absen Keluar</Text>
+      </View>
+
+      <View style={{display:"flex", flexDirection:"row",justifyContent:"space-between", height:40, flex:3, gap:40}}>
+        <View style={{ fontWeight:"bold", color:"#565E6CFF", display:"flex", flex:1, alignItems:"center", justifyContent:"space-between"}}>
+          <View style={{fontSize:16,flex:1, display:"flex" , alignItems:"center", justifyContent:"center", }}>
+
+          <Text style={{fontSize:18}}>08:09:39</Text>
+          <Text style={{fontSize:12}}>Anda Terlambat</Text>
           </View>
-          <Text
-            style={{
-              fontSize: 20,
-              fontFamily: "Jakarta",
-              color: "#1e3a8a",
-              marginTop: -6,
-            }}
-          >
-            Status
-          </Text>
+
+          <Pressable style={{height:40,width:"100%", backgroundColor:"#379AE6FF", borderRadius:15, justifyContent:"center" , alignItems:"center"}}><Text style={{color:"white" , fontSize:15}}>Clock In</Text></Pressable>
         </View>
-        {hadir ? (
-          <View style={{ flex: 2 }}>
-            <Text
-              style={{
-                color: "grey",
-                fontSize: 20,
-                fontWeight: "bold",
-              }}
-            >
-              Hadir
-            </Text>
+        <View style={{ fontWeight:"bold", color:"#565E6CFF", display:"flex", flex:1, alignItems:"center", justifyContent:"space-between"}}>
+          <View style={{fontSize:16,flex:1, display:"flex" , alignItems:"center", justifyContent:"center", }}>
+
+          <Text style={{fontSize:18}}>--:--:--</Text>
+          <Text style={{fontSize:12}}>Clock Out Awal</Text>
           </View>
-        ) : (
-          <View
-            style={{
-              borderRadius: 5,
-              flex: 2,
-            }}
-          >
-            <Text
-              style={{
-                color: "grey",
-                fontSize: 20,
-                fontFamily: "Jakarta",
-              }}
-            >
-              Belum Hadir
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                gap: 5,
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{
-                  backgroundColor: "#e76050",
-                  color: "white",
-                  padding: 2,
-                  borderRadius: 5,
-                  paddingRight: 5,
-                  fontSize: 12,
-                  textAlign: "center",
-                  fontFamily: "Jakarta",
-                }}
-              >
-                Maksimal Keterlambatan
-              </Text>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  gap: 3,
-                }}
-              >
-                <Image
-                  source={require("../../assets/icons/black/clock.png")}
-                  style={{ height: 15, width: 15 }}
-                />
-                <Text style={{ fontWeight: "bold", color: "#1e3a8a" }}>
-                  09:05
-                </Text>
-              </View>
-            </View>
-          </View>
-        )}
+
+          <Pressable style={{height:40,width:"100%", backgroundColor:"#379AE6FF", borderRadius:15,justifyContent:"center" , alignItems:"center"}}><Text style={{color:"white" , fontSize:15}}>Clock Out</Text></Pressable>
+        </View>
       </View>
-      <View
-        style={{
-          height: "100%",
-          borderWidth: 1.4,
-          borderRadius: 100,
-          marginRight: 5,
-        }}
-      ></View>
-      <View
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#E6E9FF",
-          borderRadius: 5,
-          flex: 1,
-        }}
-      >
-        <Text
-          style={{
-            fontSize: 17,
-            color: "#1e3a8a",
-            fontFamily: "Jakarta",
-          }}
-        >
-          {day}
-        </Text>
-        <Text style={{ color: "#1e3a8a" }}>{date}</Text>
-      </View>
+
+           
     </View>
   );
 }

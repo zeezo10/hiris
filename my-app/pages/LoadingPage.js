@@ -1,10 +1,31 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { Text, View, StyleSheet, Dimensions ,ActivityIndicator } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+import { useFonts } from "expo-font";
 
 export default function LoadingPage() {
+
+  const screenWidth = Dimensions.get("window").width;
+
+  const [fontsLoaded] = useFonts({
+    "ABeeZee-Bold": require("../assets/font/ABeeZee Bold.ttf"),
+  });
+
+  useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync();
+    }
+    prepare();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator />;
+  } else {
+    SplashScreen.hideAsync();
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Persona</Text>
+      <Text style={styles.title}>persona</Text>
     </View>
   );
 }
@@ -18,7 +39,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    fontWeight: "bold",
+   fontFamily:"ABeeZee-Bold",
     color: "white",
   },
 });
