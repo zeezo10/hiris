@@ -27,10 +27,10 @@
       [
         "expo-font",
         {
-          "Jakarta": [
-            "./assets/font/PlusJakartaSans-Bold.ttf",
-
-            "./assets/font/PlusJakartaSans-BoldItalic.ttf"
+         
+          "ABeeZee":[
+          
+            "./assets/font/ABeeZee Bold.ttf"
           ]
         }
       ]

@@ -12,6 +12,7 @@ import {
 
 import Icon from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
@@ -29,8 +30,7 @@ export default function Login({ navigation }) {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [fontsLoaded] = useFonts({
-    Jakarta: require("../assets/font/PlusJakartaSans-Bold.ttf"),
-    "Jakarta-Italic": require("../assets/font/PlusJakartaSans-BoldItalic.ttf"),
+    "ABeeZee-Bold": require("../assets/font/ABeeZee Bold.ttf"),
   });
 
   useEffect(() => {
@@ -77,9 +77,10 @@ export default function Login({ navigation }) {
     <View style={styles.container}>
       <View style={[styles.formContainer, { width: screenWidth }]}>
         <View style={styles.welcomeTextContainer}>
-          <Text style={styles.appNameText}>Persona</Text>
+        <View style={styles.logo}></View>
+          <Text style={styles.appNameText}>persona</Text>
+          <Text style={styles.signInText}>Log into your account</Text>
         </View>
-        <Text style={styles.signInText}>Log into your account</Text>
 
         <View
           style={[
@@ -100,7 +101,6 @@ export default function Login({ navigation }) {
             onBlur={() => setIsUsernameFocused(false)}
           />
         </View>
-           
 
         <View
           style={[
@@ -123,7 +123,10 @@ export default function Login({ navigation }) {
               onFocus={() => setIsPasswordFocused(true)}
               onBlur={() => setIsPasswordFocused(false)}
             />
-            <TouchableOpacity onPress={togglePasswordVisibility} style={styles.eyeIcon}>
+            <TouchableOpacity
+              onPress={togglePasswordVisibility}
+              style={styles.eyeIcon}
+            >
               <Icon
                 name={isPasswordVisible ? "eye-off" : "eye"}
                 size={24}
@@ -132,13 +135,28 @@ export default function Login({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-          <View style={styles.forgetPassword}>
-            <Text style={styles.errorMessage}>
-              {!isPasswordValid && "Wrong password"}
-            </Text>
-            <Text style={styles.forgetPasswordText}>Forget password?</Text>
+        <View style={styles.forgetPassword}>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              gap: 5,
+              alignItems: "center",
+            }}
+          >
+            {!isPasswordValid && (
+              <>
+                <AntDesign
+                  name="exclamationcircleo"
+                  size={18}
+                  color="#c12126"
+                />
+                <Text style={styles.errorMessage}>Wrong password</Text>
+              </>
+            )}
           </View>
-
+          <Text style={styles.forgetPasswordText}>Forget password?</Text>
+        </View>
 
         <Pressable style={styles.signInButton} onPress={handleLogin}>
           <Text style={styles.signInButtonText}>Login</Text>
@@ -154,8 +172,18 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     justifyContent: "center",
   },
+  welcomeTextContainer:{
+    display:"flex",
+    alignItems:"center",
+    gap:10  
+  },
+  logo:{
+    height:100,
+    width:100,
+    backgroundColor:"pink"
+  },
   formContainer: {
-    gap: 30,
+    gap: 20,
     flex: 3,
     alignItems: "center",
     justifyContent: "center",
@@ -169,9 +197,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
   },
   appNameText: {
-    fontSize: 40,
+    fontSize: 45,
     color: "#2196F3",
-    fontWeight: "bold",
+    fontFamily: "ABeeZee-Bold",
   },
   signInText: {
     marginBottom: 25,
@@ -181,13 +209,13 @@ const styles = StyleSheet.create({
   outerInputBorder: {
     borderRadius: 17,
     padding: 3.5,
-    width: 350,
+    width: 335,
   },
   outerInputBorderFocused: {
-    backgroundColor: "#d7ebfa",
     borderRadius: 17,
+    backgroundColor: "#d7ebfa",
     padding: 3.5,
-    width: 350,
+    width: 335,
   },
   outerInputBorderError: {
     backgroundColor: "#fddede",
@@ -195,12 +223,14 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "white",
     borderWidth: 1,
-    height: 50,
+    height:50,
     fontSize: 15,
     width: "100%",
     borderRadius: 15,
     padding: 10,
     borderColor: "#f3edff",
+    paddingLeft: 44,
+    paddingRight: 16,
   },
   inputFocused: {
     borderColor: "#379ae6",
@@ -209,19 +239,19 @@ const styles = StyleSheet.create({
     borderColor: "red",
   },
 
-  forgetPassword:{
-    marginTop:-30,
-    marginTop:-30,
+  forgetPassword: {
+    marginTop: -30,
+    marginTop: -30,
     height: 40,
-    width: 350,
-    display:"flex",
+    width: 335,
+    display: "flex",
     paddingHorizontal: 10,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
-  forgetPasswordText:{
+  forgetPasswordText: {
     color: "#379ae6",
   },
 
@@ -238,7 +268,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   signInButton: {
-    width: 350,
+    width: 335,
     backgroundColor: "#379ae6",
     alignItems: "center",
     height: 50,
