@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zeezo.persona"
     },
     "android": {
       "adaptiveIcon": {
@@ -36,9 +37,15 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "bd0f1a1c-9a6f-45e2-baab-126cf5a9f694"
+        "projectId": "3b197eae-b3ed-4e84-9aa0-ccdedc094ac3"
       }
     },
-    "owner": "zeezo"
+    "owner": "zeezo",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/3b197eae-b3ed-4e84-9aa0-ccdedc094ac3"
+    }
   }
 }

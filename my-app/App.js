@@ -20,6 +20,7 @@ import Support from "./pages/Support";
 import Pengaturan from "./pages/Pengaturan";
 import LoadingPage from "./pages/LoadingPage";
 import { useEffect, useState } from "react";
+import SuccessLoginLoading from "./pages/SuccessLoginLoading";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -106,7 +107,6 @@ function MainTab() {
 }
 
 export default function App() {
-
   //// delete after ----------------
 
   const [isLoad, setLoading] = useState(true);
@@ -167,6 +167,11 @@ export default function App() {
                 elevation: 0,
               },
             }}
+          />
+          <Stack.Screen
+            name="SuccessLogin"
+            component={SuccessLoginLoading}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
