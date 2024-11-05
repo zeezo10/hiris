@@ -18,6 +18,8 @@ import PengumumanNotif from "./pages/Pangumuman&notif";
 import Laporan from "./pages/Laporan";
 import Support from "./pages/Support";
 import Pengaturan from "./pages/Pengaturan";
+import LoadingPage from "./pages/LoadingPage";
+import { useEffect, useState } from "react";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -77,7 +79,7 @@ function MainTab() {
         name="Absensi"
         component={AbsenCamera}
         options={{
-          headerTitle: "" ,
+          headerTitle: "",
           headerStyle: {
             backgroundColor: "#3171ee",
             shadowOpacity: 0,
@@ -104,16 +106,42 @@ function MainTab() {
 }
 
 export default function App() {
+
+  //// delete after ----------------
+
+  const [isLoad, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (isLoad) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isLoad]);
+
+  //// delete after ----------------
+
   return (
     <SafeAreaProvider style={{ flex: 1 }}>
       <NavigationContainer>
         <Stack.Navigator>
           {/* {!login ? ( */}
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{ headerShown: false }}
-          />
+          {isLoad ? (
+            <Stack.Screen
+              name="Laoding"
+              component={LoadingPage}
+              options={{ headerShown: false }}
+            />
+          ) : (
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+          )}
+
           {/* // ) : ( */}
           <Stack.Screen
             name="Home"
