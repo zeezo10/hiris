@@ -203,8 +203,8 @@ const styles = StyleSheet.create({
   },
   signInText: {
     marginBottom: 25,
-    fontSize: 17,
-    color: "grey",
+    fontSize: 16,
+    color: "#BCC1CAFF",
   },
   outerInputBorder: {
     borderRadius: 17,
