@@ -151,7 +151,7 @@ export default function Login({ navigation }) {
                   size={18}
                   color="#c12126"
                 />
-                <Text style={styles.errorMessage}>Wrong password</Text>
+                <Text style={styles.errorMessage}>Wrongi password</Text>
               </>
             )}
           </View>
