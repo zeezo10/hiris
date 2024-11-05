@@ -75,6 +75,9 @@ export default function Login() {
       setSuccessLogin(true);
 
       //temp ------
+     setTimeout(() => {
+         navigation.navigate("Home")
+      }, 3000);
 
       
     }
