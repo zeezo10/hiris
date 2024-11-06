@@ -21,7 +21,8 @@ export default function Info() {
       >
         <Text
           style={{
-            fontSize: 20,
+             fontSize:18,
+            fontWeight:"bold"
           }}
         >
           Info

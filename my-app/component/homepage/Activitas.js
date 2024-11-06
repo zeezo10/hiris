@@ -40,7 +40,8 @@ export default function Activitas() {
       >
         <Text
           style={{
-            fontSize: 20,
+            fontSize:18,
+            fontWeight:"bold"
           }}
         >
           Aktivitas

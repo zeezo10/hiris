@@ -62,7 +62,7 @@ export default function HomeIcons({ type }) {
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        elevation: 10,
+        elevation: 4,
         
       }}
     >
