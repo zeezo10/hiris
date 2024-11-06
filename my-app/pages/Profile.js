@@ -1,209 +1,392 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Image, Pressable, TextInput, StyleSheet } from 'react-native';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import React, { useState, useEffect, useCallback } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  Pressable,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  Button,
+} from "react-native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import TopBar from "../component/allpages/TopBar";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from "react-native-vector-icons/FontAwesome";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import PamuhunanCuti from "./PamuhunanCuti";
+import { Picker } from "@react-native-picker/picker";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function Profile({ navigation }) {
-  const [loaded, error] = useFonts({
-    Jakarta: require("../assets/font/PlusJakartaSans-Bold.ttf"),
-    'Jakarta-Italic': require('../assets/font/PlusJakartaSans-BoldItalic.ttf'),
-  });
+const DatePickerInput = () => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({
-    name: 'John Doe',
-    position: 'Software Developer',
-    department: 'IT Department',
-    email: 'john.doe@example.com',
-    phone: '+62 123 456 7890',
-  });
-
-  const [careerHistory, setCareerHistory] = useState([
-    { date: '2023', position: 'Senior Software Developer' },
-    { date: '2021', position: 'Software Developer' },
-    { date: '2019', position: 'Junior Software Developer' },
-  ]);
-
-  useEffect(() => {
-    if (loaded || error) {
-      SplashScreen.hideAsync();
+  const onChange = (event, selectedDate) => {
+    // Handle if the user canceled the selection (selectedDate will be undefined)
+    if (selectedDate) {
+      setDate(selectedDate);
     }
-  }, [loaded, error]);
-
-  if (!loaded && !error) {
-    return null;
-  }
-
-  const handleEdit = () => {
-    setIsEditing(!isEditing);
+    setShow(false); // Hide the picker after selecting
   };
 
-  const handleSave = () => {
-    // Here you would typically send the updated data to a server
-    setIsEditing(false);
+  const showDatepicker = () => {
+    setShow(true);
   };
 
   return (
-    <View style={styles.container}>
-      <TopBar />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.profileHeader}>
-          <Image
-            source={require("../assets/employee.png")}
-            style={styles.profileImage}
-          />
-          <Text style={styles.name}>{userData.name}</Text>
-          <Text style={styles.position}>{userData.position}</Text>
-        </View>
+    <View style={{ gap: 3 }}>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Tanggal Lahir</Text>
 
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Informasi Pribadi</Text>
-          {Object.entries(userData).map(([key, value]) => (
-            <View key={key} style={styles.infoRow}>
-              <Text style={styles.infoLabel}>{key.charAt(0).toUpperCase() + key.slice(1)}:</Text>
-              {isEditing && key !== 'name' && key !== 'position' ? (
-                <TextInput
-                  style={styles.input}
-                  value={value}
-                  onChangeText={(text) => setUserData({ ...userData, [key]: text })}
-                />
-              ) : (
-                <Text style={styles.infoValue}>{value}</Text>
-              )}
-            </View>
-          ))}
-        </View>
+      <Pressable
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 45,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 10,
+          paddingHorizontal: 10,
+        }}
+        onPress={showDatepicker}
+        title="Pick a Date"
+      >
+        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
 
-        <View style={styles.infoSection}>
-          <Text style={styles.sectionTitle}>Riwayat Karir & Mutasi</Text>
-          {careerHistory.map((item, index) => (
-            <View key={index} style={styles.careerItem}>
-              <Text style={styles.careerDate}>{item.date}</Text>
-              <Text style={styles.careerPosition}>{item.position}</Text>
-            </View>
-          ))}
-        </View>
+        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
+      </Pressable>
 
-        <Pressable
-          style={styles.editButton}
-          onPress={isEditing ? handleSave : handleEdit}
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode="date" // Date mode
+          display="calendar" // For Android: Use 'calendar' or 'spinner'
+          onChange={onChange}
+        />
+      )}
+    </View>
+  );
+};
+
+//---------------------------------
+
+const SimpleSelect = () => {
+  const [selectedValue, setSelectedValue] = useState("Pilih Status Pernikahan"); // Default value
+
+  return (
+    <View style={{ gap: 3 }}>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+        Status Pernikahan
+      </Text>
+
+      <View
+        style={{
+          height: 45,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 10,
+          alignItems: "center",
+          flexDirection: "row",
+        }}
+      >
+        <Picker
+          selectedValue={selectedValue}
+          onValueChange={(itemValue) => setSelectedValue(itemValue)}
+          style={styles.picker}
         >
-          <Text style={styles.editButtonText}>
-            {isEditing ? 'Simpan' : 'Edit Profil'}
+          <Picker.Item
+            label="Pilih Status Pernikahan"
+            value={null}
+            style={{ color: "#BCC1CAFF" }}
+          />
+          <Picker.Item label="Nikah" value="Nikah" />
+          <Picker.Item label="Belum Nikah" value="Belum-Nikah" />
+        </Picker>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 5,
+    overflow: "hidden",
+  },
+  picker: {
+    width: "100%",
+    height: 50,
+  },
+});
+//-------------------------------------------
+
+
+
+
+export default function Profile({ navigation }) {
+  const screenWidth = Dimensions.get("window").width;
+
+  const [date, setDate] = useState(new Date());
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveReason, setLeaveReason] = useState("");
+
+  const toggleDatePicker = useCallback(
+    (pickerType) => {
+      if (pickerType === "start") {
+        setShowStartPicker(!showStartPicker);
+      } else {
+        setShowEndPicker(!showEndPicker);
+      }
+    },
+    [showStartPicker, showEndPicker]
+  );
+
+  const onDateChange = useCallback(
+    (event, selectedDate, dateType) => {
+      if (event.type === "dismissed") {
+        toggleDatePicker(dateType);
+        return;
+      }
+
+      if (selectedDate) {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        if (dateType === "start") {
+          setStartDate(currentDate.toDateString());
+        } else {
+          setEndDate(currentDate.toDateString());
+        }
+      }
+      toggleDatePicker(dateType);
+    },
+    [date, toggleDatePicker]
+  );
+
+  return (
+    <View
+      style={{
+        width: screenWidth,
+        paddingTop: 30,
+        backgroundColor: "white",
+        paddingHorizontal: 20,
+      }}
+    >
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+      >
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderColor: "#F3F4F6FF",
+            height: 150,
+            backgroundColor: "white",
+            padding: 20,
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              flex: 1,
+              fontSize: 25,
+              fontWeight: "bold",
+              color: "#323842FF",
+            }}
+          >
+            Data Keryawan
           </Text>
-        </Pressable>
-      <View style={{height:300}}></View>
+          <View
+            style={{
+              flex: 1,
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+              }}
+            ></View>
+            <View
+              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
+            ></View>
+            <View
+              style={{
+                backgroundColor: "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+              }}
+            ></View>
+            <View
+              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
+            ></View>
+
+            <View
+              style={{
+                backgroundColor: "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+              }}
+            ></View>
+            <View
+              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
+            ></View>
+
+            <View
+              style={{
+                backgroundColor: "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+              }}
+            ></View>
+            <View
+              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
+            ></View>
+
+            <View
+              style={{
+                backgroundColor: "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+              }}
+            ></View>
+          </View>
+        </View>
+
+        {/* main ------------ - - */}
+
+        <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
+          <View style={{ paddingVertical: 15 }}>
+            <Text>Informasi Perbadi</Text>
+          </View>
+
+          <View style={{ gap: 20 }}>
+            <View style={{ gap: 3 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                nama Depan
+              </Text>
+              <TextInput
+                style={{
+                  height: 45,
+                  width: "100%",
+                  borderColor: "#BCC1CAFF",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                }}
+                placeholder="Ketik Nama Depan"
+              ></TextInput>
+            </View>
+
+            <View style={{ gap: 3 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                nama Belakang
+              </Text>
+              <TextInput
+                style={{
+                  height: 45,
+                  width: "100%",
+                  borderColor: "#BCC1CAFF",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                }}
+                placeholder="Ketik Nama Belakang"
+              ></TextInput>
+            </View>
+
+            <View style={{ gap: 3 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                Tempat Lahir
+              </Text>
+              <TextInput
+                style={{
+                  height: 45,
+                  width: "100%",
+                  borderColor: "#BCC1CAFF",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                }}
+                placeholder="Ketik Tempat Lahir"
+              ></TextInput>
+            </View>
+
+            <DatePickerInput />
+
+            <View style={{ gap: 3 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                Nomor Handphone
+              </Text>
+              <View style={{ flexDirection: "row", gap: 10 }}>
+                <TextInput
+                  style={{
+                    height: 45,
+                    flex: 1,
+                    borderColor: "#BCC1CAFF",
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    paddingHorizontal: 10,
+                  }}
+                  placeholder="+62"
+                ></TextInput>
+                <TextInput
+                  style={{
+                    height: 45,
+                    flex: 8,
+                    borderColor: "#BCC1CAFF",
+                    borderWidth: 1,
+                    borderRadius: 10,
+                    paddingHorizontal: 10,
+                  }}
+                  placeholder="Ketik Nomor Handphone"
+                ></TextInput>
+              </View>
+            </View>
+
+            <SimpleSelect />
+
+            <View style={{ gap: 3 }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                nama Belakang
+              </Text>
+              <TextInput
+                style={{
+                  height: 45,
+                  width: "100%",
+                  borderColor: "#BCC1CAFF",
+                  borderWidth: 1,
+                  borderRadius: 10,
+                  paddingHorizontal: 10,
+                }}
+                placeholder="Ketik Nama Belakang"
+              ></TextInput>
+            </View>
+          </View>
+        </View>
+
+        <View style={{ height: 400 }}></View>
       </ScrollView>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F3F4F6',
-  },
-  scrollView: {
-    padding: 20,
-  },
-  profileHeader: {
-    alignItems: 'center',
-    marginBottom: 20,
-    
-  },
-  profileImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    backgroundColor:"lightgrey"
-  },
-  name: {
-    fontFamily: 'Jakarta',
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  position: {
-    fontFamily: 'Jakarta',
-    fontSize: 18,
-    color: '#666',
-  },
-  infoSection: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 15,
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontFamily: 'Jakarta',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#3B82F6',
-  },
-  infoRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  infoLabel: {
-    fontFamily: 'Jakarta',
-    fontSize: 16,
-    color: '#666',
-  },
-  infoValue: {
-    fontFamily: 'Jakarta',
-    fontSize: 16,
-    color: '#333',
-  },
-  input: {
-    fontFamily: 'Jakarta',
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 5,
-    padding: 5,
-    flex: 1,
-    marginLeft: 10,
-  },
-  careerItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  careerDate: {
-    fontFamily: 'Jakarta',
-    fontSize: 16,
-    color: '#666',
-  },
-  careerPosition: {
-    fontFamily: 'Jakarta',
-    fontSize: 16,
-    color: '#333',
-  },
-  editButton: {
-    backgroundColor: '#3B82F6',
-    padding: 15,
-    borderRadius: 5,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  editButtonText: {
-    fontFamily: 'Jakarta',
-    color: 'white',
-    fontSize: 18,
-  },
-});

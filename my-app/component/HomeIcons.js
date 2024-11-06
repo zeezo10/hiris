@@ -57,8 +57,8 @@ export default function HomeIcons({ type }) {
       style={{
         backgroundColor: "white",
         borderRadius: 8,
-        height: 78,
-        width: 76,
+        height: 72,
+        width: 70,
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
