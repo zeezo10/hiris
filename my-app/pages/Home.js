@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { View, ScrollView, Dimensions, Text } from "react-native";
+import { View, ScrollView, Dimensions, Text, Image } from "react-native";
 
 import TopBar from "../component/allpages/TopBar";
 import { useFonts } from "expo-font";
@@ -10,6 +10,9 @@ import Todo from "../component/homepage/Todo";
 import BerandaIcons from "../component/homepage/BerandaIcons";
 import Pengumuman from "../component/homepage/Pengumuman";
 import SaldoCuti from "../component/homepage/SaldoCuti";
+import Activitas from "../component/homepage/Activitas";
+import Info from "../component/homepage/Info";
+import { Octicons } from "@expo/vector-icons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,15 +35,16 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <View style={{ width: screenWidth }}>
+    <View style={{ width: screenWidth, backgroundColor:"white"}}>
       <ScrollView>
-        {/* <UserInfo /> */}
         <View
           style={{
             backgroundColor: "#66B2ECFF",
             height: 300,
-            paddingTop: 70,
+            paddingTop: 50,
             paddingHorizontal: 20,
+            elevation:5,
+            gap:2,
           }}
         >
           <View
@@ -54,7 +58,7 @@ export default function Home({ navigation }) {
             <View
               style={{
                 height: 60,
-                gap: 2,
+                gap: 3,
                 justifyContent: "center",
               }}
             >
@@ -67,8 +71,11 @@ export default function Home({ navigation }) {
             </View>
 
             <View
-              style={{ height: 40, width: 40, backgroundColor: "red" }}
-            ></View>
+              style={{}}
+            >
+                <Octicons name="bell" size={25} color="white" />
+
+            </View>
           </View>
 
           <View
@@ -89,8 +96,14 @@ export default function Home({ navigation }) {
                 borderRadius: 100,
                 display: "flex",
                 justifyContent: "center",
+                overflow:"hidden"
               }}
-            ></View>
+            >
+               <Image
+            source={require("../assets/employee.png")}
+            style={{ height: 50, width: 50, marginTop: 4 }}
+          />
+            </View>
             <View>
               <Text
                 style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
@@ -104,9 +117,11 @@ export default function Home({ navigation }) {
           </View>
         </View>
 
+{/* white----------------------- */}
+
         <View
           style={{
-            backgroundColor: "white",
+            // backgroundColor: "white",
             flex: 3,
             alignItems: "center",
           }}
@@ -125,9 +140,9 @@ export default function Home({ navigation }) {
           >
             <View
               style={{
-                marginTop: -100,
+                marginTop: -120,
                 width: screenWidth,
-                paddingHorizontal: 15,
+                paddingHorizontal: 20,
               }}
             >
               <UserStatus />
@@ -135,19 +150,38 @@ export default function Home({ navigation }) {
             <View
               style={{
                 width: screenWidth,
-                paddingHorizontal: 15,
+                paddingHorizontal: 20,
               }}
             >
               <BerandaIcons />
             </View>
-            <Todo />
+              
+            <View
+              style={{
+                width: screenWidth,
+                paddingHorizontal: 20,
+              }}
+            >
+              <Activitas/>
 
-            <Pengumuman />
+            </View>
+
+            <View
+              style={{
+                width: screenWidth,
+                paddingHorizontal: 20,
+              }}
+            >
+
+            <Info/>
+            </View>
+            
 
 
             <View style={{ height: 150 }}></View>
           </View>
         </View>
+
       </ScrollView>
     </View>
   );

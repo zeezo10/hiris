@@ -29,7 +29,7 @@ export default function BerandaIcons() {
           <HomeIcons type={"Laporan"} />
 
           <HomeIcons type={"Pengaturan"} />
-          <HomeIcons type={"Activitas"} />
+          <HomeIcons type={"Aktivitas"} />
           <HomeIcons type={"Aset"} />
           <HomeIcons type={"Info"} />
         </View>
