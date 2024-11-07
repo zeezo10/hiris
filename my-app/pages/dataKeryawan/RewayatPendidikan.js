@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InfoPayroll({ navigation }) {
+export default function RewayatPendidikan({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
   const [tanjungan, setTnjungan] = useState(1);

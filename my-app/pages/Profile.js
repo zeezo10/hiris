@@ -10,7 +10,7 @@ import {
   Dimensions,
   Button,
 } from "react-native";
-import { useFonts } from "expo-font";
+
 import * as SplashScreen from "expo-splash-screen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -21,6 +21,7 @@ import Feather from "react-native-vector-icons/Feather";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import InfoPerkerjaan from "./dataKeryawan/InfoPerkerjaan";
 import InfoPayroll from "./dataKeryawan/InfoPayroll";
+import RewayatPendidikan from "./dataKeryawan/RewayatPendidikan";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -368,7 +369,8 @@ export default function Profile({ navigation }) {
 
        {/* <InfoPerbadi/> */}
       {/* <InfoPerkerjaan/> */}
-      <InfoPayroll/>
+      {/* <InfoPayroll/> */}
+      <RewayatPendidikan/>
 
         <View style={{ height: 50, }}></View>
       </ScrollView>
