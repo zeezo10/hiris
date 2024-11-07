@@ -12,12 +12,15 @@ import {
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import TopBar from "../component/allpages/TopBar";
 import Icon from "react-native-vector-icons/FontAwesome";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import PamuhunanCuti from "./PamuhunanCuti";
 import { Picker } from "@react-native-picker/picker";
+import InfoPerbadi from "./dataKeryawan/InfoPerbadi";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Feather from "react-native-vector-icons/Feather";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import InfoPerkerjaan from "./dataKeryawan/InfoPerkerjaan";
+import InfoPayroll from "./dataKeryawan/InfoPayroll";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -75,14 +78,12 @@ const DatePickerInput = () => {
 
 //---------------------------------
 
-const SimpleSelect = () => {
-  const [selectedValue, setSelectedValue] = useState("Pilih Status Pernikahan"); // Default value
+const SimpleSelect = ({ type, label }) => {
+  const [selectedValue, setSelectedValue] = useState("choose one");
 
   return (
     <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-        Status Pernikahan
-      </Text>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
 
       <View
         style={{
@@ -101,19 +102,70 @@ const SimpleSelect = () => {
           style={styles.picker}
         >
           <Picker.Item
-            label="Pilih Status Pernikahan"
+            label={type}
             value={null}
             style={{ color: "#BCC1CAFF" }}
           />
-          <Picker.Item label="Nikah" value="Nikah" />
-          <Picker.Item label="Belum Nikah" value="Belum-Nikah" />
+          <Picker.Item label="option 1" value="option 1" />
+          <Picker.Item label="option 2" value="option 2" />
         </Picker>
       </View>
     </View>
   );
 };
 
+//-------------------------------------------
+
+const TextArea = () => {
+  const [text, setText] = useState("");
+
+  return (
+    <View style={styles.container}>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+        Alamat Sesuai KTP
+      </Text>
+      <TextInput
+        style={styles.textArea}
+        placeholder="Type something..."
+        placeholderTextColor="gray"
+        multiline={true}
+        numberOfLines={4} // Adjust the initial number of lines
+        value={text}
+        onChangeText={setText}
+      />
+    </View>
+  );
+};
+
+const LabeledTextInput = ({ label, placeholder }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>{label}</Text>
+      <TextInput style={styles.input} placeholder={placeholder} />
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
+  //---------- text area ------------
+
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    gap: 3,
+  },
+  textArea: {
+    height: 150,
+    padding: 10,
+    width: "100%",
+    borderColor: "#BCC1CAFF",
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderRadius: 10,
+    textAlignVertical: "top", // Align text at the top
+  },
+
+  //----------Select option ----------------
   pickerContainer: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -124,11 +176,25 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 50,
   },
+
+  //---------- input ------------
+
+  container: {
+    gap: 3,
+  },
+  label: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  input: {
+    height: 45,
+    width: "100%",
+    borderColor: "#BCC1CAFF",
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+  },
 });
-//-------------------------------------------
-
-
-
 
 export default function Profile({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
@@ -221,8 +287,13 @@ export default function Profile({ navigation }) {
                 height: 35,
                 width: 35,
                 borderRadius: 100,
+                justifyContent:"center",
+                alignItems:"center"
               }}
-            ></View>
+            >
+        <FontAwesome5 name="user-alt" size={20} color="#BCC1CAFF" />
+
+            </View>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
@@ -232,8 +303,13 @@ export default function Profile({ navigation }) {
                 height: 35,
                 width: 35,
                 borderRadius: 100,
+                justifyContent:"center",
+                alignItems:"center"
               }}
-            ></View>
+            >
+        <FontAwesome5 name="briefcase" size={20} color="#BCC1CAFF" />
+
+            </View>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
@@ -244,8 +320,13 @@ export default function Profile({ navigation }) {
                 height: 35,
                 width: 35,
                 borderRadius: 100,
+                justifyContent:"center",
+                alignItems:"center"
               }}
-            ></View>
+            >
+        <FontAwesome5 name="coins" size={20} color="#BCC1CAFF" />
+
+            </View>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
@@ -256,8 +337,13 @@ export default function Profile({ navigation }) {
                 height: 35,
                 width: 35,
                 borderRadius: 100,
+                justifyContent:"center",
+                alignItems:"center"
               }}
-            ></View>
+            >
+        <FontAwesome5 name="book" size={20} color="#BCC1CAFF" />
+
+            </View>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
@@ -268,124 +354,23 @@ export default function Profile({ navigation }) {
                 height: 35,
                 width: 35,
                 borderRadius: 100,
+                justifyContent:"center",
+                alignItems:"center"
               }}
-            ></View>
+            >
+        <FontAwesome5 name="sliders-h" size={20} color="#BCC1CAFF" />
+
+            </View>
           </View>
         </View>
 
         {/* main ------------ - - */}
 
-        <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
-          <View style={{ paddingVertical: 15 }}>
-            <Text>Informasi Perbadi</Text>
-          </View>
+       {/* <InfoPerbadi/> */}
+      {/* <InfoPerkerjaan/> */}
+      <InfoPayroll/>
 
-          <View style={{ gap: 20 }}>
-            <View style={{ gap: 3 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                nama Depan
-              </Text>
-              <TextInput
-                style={{
-                  height: 45,
-                  width: "100%",
-                  borderColor: "#BCC1CAFF",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  paddingHorizontal: 10,
-                }}
-                placeholder="Ketik Nama Depan"
-              ></TextInput>
-            </View>
-
-            <View style={{ gap: 3 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                nama Belakang
-              </Text>
-              <TextInput
-                style={{
-                  height: 45,
-                  width: "100%",
-                  borderColor: "#BCC1CAFF",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  paddingHorizontal: 10,
-                }}
-                placeholder="Ketik Nama Belakang"
-              ></TextInput>
-            </View>
-
-            <View style={{ gap: 3 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Tempat Lahir
-              </Text>
-              <TextInput
-                style={{
-                  height: 45,
-                  width: "100%",
-                  borderColor: "#BCC1CAFF",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  paddingHorizontal: 10,
-                }}
-                placeholder="Ketik Tempat Lahir"
-              ></TextInput>
-            </View>
-
-            <DatePickerInput />
-
-            <View style={{ gap: 3 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Nomor Handphone
-              </Text>
-              <View style={{ flexDirection: "row", gap: 10 }}>
-                <TextInput
-                  style={{
-                    height: 45,
-                    flex: 1,
-                    borderColor: "#BCC1CAFF",
-                    borderWidth: 1,
-                    borderRadius: 10,
-                    paddingHorizontal: 10,
-                  }}
-                  placeholder="+62"
-                ></TextInput>
-                <TextInput
-                  style={{
-                    height: 45,
-                    flex: 8,
-                    borderColor: "#BCC1CAFF",
-                    borderWidth: 1,
-                    borderRadius: 10,
-                    paddingHorizontal: 10,
-                  }}
-                  placeholder="Ketik Nomor Handphone"
-                ></TextInput>
-              </View>
-            </View>
-
-            <SimpleSelect />
-
-            <View style={{ gap: 3 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                nama Belakang
-              </Text>
-              <TextInput
-                style={{
-                  height: 45,
-                  width: "100%",
-                  borderColor: "#BCC1CAFF",
-                  borderWidth: 1,
-                  borderRadius: 10,
-                  paddingHorizontal: 10,
-                }}
-                placeholder="Ketik Nama Belakang"
-              ></TextInput>
-            </View>
-          </View>
-        </View>
-
-        <View style={{ height: 400 }}></View>
+        <View style={{ height: 50, }}></View>
       </ScrollView>
     </View>
   );
