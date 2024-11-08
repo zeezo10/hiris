@@ -34,23 +34,23 @@ export default function HomeIcons({ type , page}) {
     Info:<MaterialIcons name="info" size={35} color="#379AE6FF" />,
   };
 
-  const [fontsLoaded] = useFonts({
-    Jakarta: require("../assets/font/PlusJakartaSans-Bold.ttf"),
-    "Jakarta-Italic": require("../assets/font/PlusJakartaSans-BoldItalic.ttf"),
-  });
+  // const [fontsLoaded] = useFonts({
+  //   Jakarta: require("../assets/font/PlusJakartaSans-Bold.ttf"),
+  //   "Jakarta-Italic": require("../assets/font/PlusJakartaSans-BoldItalic.ttf"),
+  // });
 
-  React.useEffect(() => {
-    async function prepare() {
-      await SplashScreen.preventAutoHideAsync();
-    }
-    prepare();
-  }, []);
+  // React.useEffect(() => {
+  //   async function prepare() {
+  //     await SplashScreen.preventAutoHideAsync();
+  //   }
+  //   prepare();
+  // }, []);
 
-  if (!fontsLoaded) {
-    return <ActivityIndicator />;
-  } else {
-    SplashScreen.hideAsync();
-  }
+  // if (!fontsLoaded) {
+  //   return <ActivityIndicator />;
+  // } else {
+  //   SplashScreen.hideAsync();
+  // }
 
   return (
     <View

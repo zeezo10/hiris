@@ -1,15 +1,10 @@
 import { useEffect } from "react";
 import { View, ScrollView, Dimensions, Text, Image } from "react-native";
 
-import TopBar from "../component/allpages/TopBar";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import UserInfo from "../component/homepage/UserInfo";
 import UserStatus from "../component/homepage/UserStatus";
-import Todo from "../component/homepage/Todo";
 import BerandaIcons from "../component/homepage/BerandaIcons";
-import Pengumuman from "../component/homepage/Pengumuman";
-import SaldoCuti from "../component/homepage/SaldoCuti";
 import Activitas from "../component/homepage/Activitas";
 import Info from "../component/homepage/Info";
 import { Octicons } from "@expo/vector-icons";

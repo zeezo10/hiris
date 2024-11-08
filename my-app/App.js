@@ -1,21 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Fontisto from "react-native-vector-icons/Fontisto";
 import Detail from "./pages/Detail";
 import "react-native-gesture-handler";
-import Pengaturan from "./pages/Pengaturan";
-import LoadingPage from "./pages/LoadingPage";
 import { useEffect, useState } from "react";
 import SuccessLoginLoading from "./pages/SuccessLoginLoading";
-import InfoPerbadi from "./pages/dataKeryawan/InfoPerbadi";
-import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import Feather from "react-native-vector-icons/Feather";
 import Persetujuan from "./pages/Persetujuan";
 import Chat from "./pages/Chat";
@@ -23,6 +16,7 @@ import Profile from "./pages/Profile";
 import Absen from "./pages/Absen/Absen";
 import FaceAbsence from "./pages/Absen/FaceAbsence";
 import Absensi from "./pages/Absen/Absensi";
+import Pengajuan from "./pages/Pengajuan/Pengajuan";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -142,22 +136,20 @@ export default function App() {
             />
           )}
 
-          {/* // ) : ( */}
           <Stack.Screen
-            name="Home"
-            component={Home}
-            // change to main tab
+            name="SuccessLogin"
+            component={SuccessLoginLoading}
             options={{ headerShown: false }}
           />
 
           <Stack.Screen
-            name="Detail"
-            component={Detail}
+            name="Pengajuan"
+            component={Pengajuan}
             options={{
-              headerTitle: "",
+              headerTitle: "Pengajuan",
 
               headerStyle: {
-                backgroundColor: "#288aff",
+                backgroundColor: "white",
 
                 shadowOpacity: 0,
                 elevation: 0,
@@ -192,7 +184,7 @@ export default function App() {
               },
             }}
           />
-          
+
           <Stack.Screen
             name="Absensi"
             component={Absensi}
@@ -206,12 +198,6 @@ export default function App() {
                 elevation: 0,
               },
             }}
-          />
-
-          <Stack.Screen
-            name="SuccessLogin"
-            component={SuccessLoginLoading}
-            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>

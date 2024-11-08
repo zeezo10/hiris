@@ -1,8 +1,9 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { useFonts } from "expo-font";
+import HomeIcons from "./HomeIcons";
 
-import HomeIcons from "../HomeIcons";
+
 
 export default function BerandaIcons() {
   return (
@@ -24,7 +25,7 @@ export default function BerandaIcons() {
           }}
         >
           <HomeIcons type={"Absensi"} page={"Absen"} />
-          <HomeIcons type={"Pengajuan"}  page={""}/>
+          <HomeIcons type={"Pengajuan"}  page={"Pengajuan"}/>
           <HomeIcons type={"Payroll"} page={""} />
           <HomeIcons type={"Laporan"} page={""}/>
 
