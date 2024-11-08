@@ -21,7 +21,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 SplashScreen.preventAutoHideAsync();
 
-export default function HomeIcons({ type }) {
+export default function HomeIcons({ type , page}) {
   const navigation = useNavigation();
   const icons = {
     Absensi: <MaterialIcons name="timer" size={35} color="#379AE6FF" />,
@@ -68,7 +68,7 @@ export default function HomeIcons({ type }) {
       }}
     >
       <Pressable
-        onPress={() => navigation.navigate("Detail", { type: `${type}` })}
+        onPress={() => navigation.navigate(page)}
         style={{
           height: 60,
           width: 60,

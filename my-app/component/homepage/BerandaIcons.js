@@ -23,15 +23,15 @@ export default function BerandaIcons() {
             rowGap:20,
           }}
         >
-          <HomeIcons type={"Absensi"} />
-          <HomeIcons type={"Pengajuan"} />
-          <HomeIcons type={"Payroll"} />
-          <HomeIcons type={"Laporan"} />
+          <HomeIcons type={"Absensi"} page={"Absen"} />
+          <HomeIcons type={"Pengajuan"}  page={""}/>
+          <HomeIcons type={"Payroll"} page={""} />
+          <HomeIcons type={"Laporan"} page={""}/>
 
-          <HomeIcons type={"Pengaturan"} />
-          <HomeIcons type={"Aktivitas"} />
-          <HomeIcons type={"Aset"} />
-          <HomeIcons type={"Info"} />
+          <HomeIcons type={"Pengaturan"} page={""} />
+          <HomeIcons type={"Aktivitas"} page={""} />
+          <HomeIcons type={"Aset"} page={""} />
+          <HomeIcons type={"Info"}  page={""}/>
         </View>
       </View>
     </View>
