@@ -258,7 +258,7 @@ export default function InfoPerbadi({ navigation }) {
             placeholder={"Ketik Tempat Lahir"}
           />
 
-          <DatePickerInput />
+          <DatePickerInput /> 
 
           <View style={{ gap: 3 }}>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>

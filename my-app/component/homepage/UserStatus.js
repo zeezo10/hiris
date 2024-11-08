@@ -42,11 +42,11 @@ export default function UserStatus() {
         height: 190,
         width: "100%",
         borderRadius: 8,
-        shadowColor: "#000",
+        shadowColor: "#6a6a6b",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 3.5,
-        elevation: 5,
+        elevation: 6,
         paddingHorizontal: 20,
         paddingBottom: 15,
       }}

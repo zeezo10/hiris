@@ -56,14 +56,15 @@ export default function HomeIcons({ type }) {
     <View
       style={{
         backgroundColor: "white",
-        borderRadius: 8,
-        height: 72,
-        width: 70,
+        borderRadius: 10,
+        height:100,
+        aspectRatio: 1,
+        width: "23%",
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        elevation: 4,
-        
+        elevation: 6,
+        shadowColor:"#6a6a6b"
       }}
     >
       <Pressable

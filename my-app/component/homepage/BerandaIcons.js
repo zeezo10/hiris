@@ -11,16 +11,16 @@ export default function BerandaIcons() {
         style={{
           height: 230,
           width: "100%",
-          justifyContent:"center"
+          justifyContent: "center",
         }}
       >
         <View
           style={{
             flexDirection: "row",
-            rowGap: 10,
             justifyContent: "space-between",
-            rowGap: 30,
             flexWrap: "wrap",
+            width: "100%",
+            rowGap:20,
           }}
         >
           <HomeIcons type={"Absensi"} />

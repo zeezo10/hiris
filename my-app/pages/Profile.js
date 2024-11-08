@@ -22,6 +22,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import InfoPerkerjaan from "./dataKeryawan/InfoPerkerjaan";
 import InfoPayroll from "./dataKeryawan/InfoPayroll";
 import RewayatPendidikan from "./dataKeryawan/RewayatPendidikan";
+import Aset from "./dataKeryawan/Aset";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -240,6 +241,12 @@ export default function Profile({ navigation }) {
     [date, toggleDatePicker]
   );
 
+  const [type, setType] = useState("InfoPerbadi");
+
+  const ChangePage = (type) => {
+    setType(type);
+  };
+
   return (
     <View
       style={{
@@ -282,97 +289,99 @@ export default function Profile({ navigation }) {
               alignItems: "center",
             }}
           >
-            <View
+            <Pressable
               style={{
-                backgroundColor: "#F3F4F6FF",
+                backgroundColor: type === "InfoPerbadi" ? "#379ae6" : "#F3F4F6FF"  ,
                 height: 35,
                 width: 35,
                 borderRadius: 100,
-                justifyContent:"center",
-                alignItems:"center"
+                justifyContent: "center",
+                alignItems: "center",
               }}
+              onPress={() => ChangePage("InfoPerbadi")}
             >
-        <FontAwesome5 name="user-alt" size={20} color="#BCC1CAFF" />
-
-            </View>
+              <FontAwesome5 name="user-alt" size={20} color={type === "InfoPerbadi" ? "white" :  "#BCC1CAFF"} />
+            </Pressable>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
-            <View
+            <Pressable
               style={{
-                backgroundColor: "#F3F4F6FF",
+                backgroundColor: type === "InfoPerkerjaan" ? "#379ae6" : "#F3F4F6FF",
                 height: 35,
                 width: 35,
                 borderRadius: 100,
-                justifyContent:"center",
-                alignItems:"center"
+                justifyContent: "center",
+                alignItems: "center",
               }}
+              onPress={() => ChangePage("InfoPerkerjaan")}
             >
-        <FontAwesome5 name="briefcase" size={20} color="#BCC1CAFF" />
-
-            </View>
-            <View
-              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
-            ></View>
-
-            <View
-              style={{
-                backgroundColor: "#F3F4F6FF",
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent:"center",
-                alignItems:"center"
-              }}
-            >
-        <FontAwesome5 name="coins" size={20} color="#BCC1CAFF" />
-
-            </View>
+              <FontAwesome5 name="briefcase" size={20}  color={type === "InfoPerkerjaan" ? "white" :  "#BCC1CAFF"} />
+            </Pressable>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
 
-            <View
+            <Pressable
               style={{
-                backgroundColor: "#F3F4F6FF",
+                backgroundColor: type === "InfoPayroll" ? "#379ae6" : "#F3F4F6FF",
                 height: 35,
                 width: 35,
                 borderRadius: 100,
-                justifyContent:"center",
-                alignItems:"center"
+                justifyContent: "center",
+                alignItems: "center",
               }}
+              onPress={() => ChangePage("InfoPayroll")}
             >
-        <FontAwesome5 name="book" size={20} color="#BCC1CAFF" />
-
-            </View>
+              <FontAwesome5 name="coins" size={20}  color={type === "InfoPayroll" ? "white" :  "#BCC1CAFF"} />
+            </Pressable>
             <View
               style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
             ></View>
 
-            <View
+            <Pressable
               style={{
-                backgroundColor: "#F3F4F6FF",
+                backgroundColor: type === "RewayatPendidikan" ? "#379ae6" : "#F3F4F6FF",
                 height: 35,
                 width: 35,
                 borderRadius: 100,
-                justifyContent:"center",
-                alignItems:"center"
+                justifyContent: "center",
+                alignItems: "center",
               }}
+              onPress={() => ChangePage("RewayatPendidikan")}
             >
-        <FontAwesome5 name="sliders-h" size={20} color="#BCC1CAFF" />
+              <FontAwesome5 name="book" size={20}  color={type === "RewayatPendidikan" ? "white" :  "#BCC1CAFF"} />
+            </Pressable>
+            <View
+              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
+            ></View>
 
-            </View>
+            <Pressable
+              style={{
+                backgroundColor: type === "Aset" ? "#379ae6" : "#F3F4F6FF",
+                height: 35,
+                width: 35,
+                borderRadius: 100,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onPress={() => ChangePage("Aset")}
+            >
+              <FontAwesome5 name="sliders-h" size={20} color={type === "Aset" ? "white" :  "#BCC1CAFF"}/>
+            </Pressable>
           </View>
         </View>
 
         {/* main ------------ - - */}
+        {type === "InfoPerbadi" && <InfoPerbadi />}
+        {type === "InfoPerkerjaan" && <InfoPerkerjaan />}
+        {type === "InfoPayroll" && <InfoPayroll />}
+        {type === "RewayatPendidikan" && <RewayatPendidikan />}
+        {type === "Aset" && <Aset />}
+        
+        
 
-       {/* <InfoPerbadi/> */}
-      {/* <InfoPerkerjaan/> */}
-      {/* <InfoPayroll/> */}
-      <RewayatPendidikan/>
-
-        <View style={{ height: 50, }}></View>
+        <View style={{ height: 50 }}></View>
       </ScrollView>
     </View>
   );

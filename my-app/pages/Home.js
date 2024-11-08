@@ -35,16 +35,17 @@ export default function Home({ navigation }) {
   }
 
   return (
-    <View style={{ width: screenWidth, backgroundColor:"white"}}>
+    <View style={{ width: screenWidth, backgroundColor: "white" }}>
       <ScrollView>
         <View
           style={{
-            backgroundColor: "#66B2ECFF",
+            backgroundColor: "#379AE6FF",
             height: 300,
             paddingTop: 50,
+            shadowColor: "#6a6a6b",
             paddingHorizontal: 20,
-            elevation:5,
-            gap:2,
+            elevation: 10,
+            gap: 2,
           }}
         >
           <View
@@ -70,11 +71,8 @@ export default function Home({ navigation }) {
               </Text>
             </View>
 
-            <View
-              style={{}}
-            >
-                <Octicons name="bell" size={25} color="white" />
-
+            <View style={{}}>
+              <Octicons name="bell" size={25} color="white" />
             </View>
           </View>
 
@@ -85,7 +83,6 @@ export default function Home({ navigation }) {
               flexDirection: "row",
               alignItems: "center",
               gap: 10,
-              
             }}
           >
             <View
@@ -96,13 +93,13 @@ export default function Home({ navigation }) {
                 borderRadius: 100,
                 display: "flex",
                 justifyContent: "center",
-                overflow:"hidden"
+                overflow: "hidden",
               }}
             >
-               <Image
-            source={require("../assets/employee.png")}
-            style={{ height: 50, width: 50, marginTop: 4 }}
-          />
+              <Image
+                source={require("../assets/employee.png")}
+                style={{ height: 50, width: 50, marginTop: 4 }}
+              />
             </View>
             <View>
               <Text
@@ -117,7 +114,7 @@ export default function Home({ navigation }) {
           </View>
         </View>
 
-{/* white----------------------- */}
+        {/* white----------------------- */}
 
         <View
           style={{
@@ -155,15 +152,14 @@ export default function Home({ navigation }) {
             >
               <BerandaIcons />
             </View>
-              
+
             <View
               style={{
                 width: screenWidth,
                 paddingHorizontal: 20,
               }}
             >
-              <Activitas/>
-
+              <Activitas />
             </View>
 
             <View
@@ -172,16 +168,12 @@ export default function Home({ navigation }) {
                 paddingHorizontal: 20,
               }}
             >
-
-            <Info/>
+              <Info />
             </View>
-            
-
 
             <View style={{ height: 150 }}></View>
           </View>
         </View>
-
       </ScrollView>
     </View>
   );

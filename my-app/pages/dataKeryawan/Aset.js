@@ -18,6 +18,57 @@ import { Picker } from "@react-native-picker/picker";
 
 SplashScreen.preventAutoHideAsync();
 
+const DatePickerInput = ({ label }) => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    // Handle if the user canceled the selection (selectedDate will be undefined)
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+    setShow(false); // Hide the picker after selecting
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
+  return (
+    <View style={{ gap: 3 }}>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
+
+      <Pressable
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 45,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 10,
+          paddingHorizontal: 10,
+        }}
+        onPress={showDatepicker}
+        title="Pick a Date"
+      >
+        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
+
+        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
+      </Pressable>
+
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode="date" // Date mode
+          display="calendar" // For Android: Use 'calendar' or 'spinner'
+          onChange={onChange}
+        />
+      )}
+    </View>
+  );
+};
 
 
 //---------------------------------
@@ -57,7 +108,6 @@ const SimpleSelect = ({ type, label }) => {
     </View>
   );
 };
-
 
 
 const UploadInput = ({ label, placeholder }) => {
@@ -123,10 +173,48 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InfoPerkerjaan({ navigation }) {
+export default function Aset({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
-  
+  const [date, setDate] = useState(new Date());
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveReason, setLeaveReason] = useState("");
+
+  const toggleDatePicker = useCallback(
+    (pickerType) => {
+      if (pickerType === "start") {
+        setShowStartPicker(!showStartPicker);
+      } else {
+        setShowEndPicker(!showEndPicker);
+      }
+    },
+    [showStartPicker, showEndPicker]
+  );
+
+  const onDateChange = useCallback(
+    (event, selectedDate, dateType) => {
+      if (event.type === "dismissed") {
+        toggleDatePicker(dateType);
+        return;
+      }
+
+      if (selectedDate) {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        if (dateType === "start") {
+          setStartDate(currentDate.toDateString());
+        } else {
+          setEndDate(currentDate.toDateString());
+        }
+      }
+      toggleDatePicker(dateType);
+    },
+    [date, toggleDatePicker]
+  );
 
   return (
     <>
@@ -134,33 +222,33 @@ export default function InfoPerkerjaan({ navigation }) {
 
       <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
         <View style={{ paddingVertical: 15 }}>
-          <Text>Informasi Perkerjaan</Text>
+          <Text>Aset</Text>
         </View>
 
         <View style={{ gap: 20 }}>
           <LabeledTextInput
-            label={"ID Keryawan"}
-            placeholder={"Ketik ID Keryawan"}
+            label={"Nomor Seri"}
+            placeholder={"Ketik Nomor Seri"}
           />
 
         
-          <SimpleSelect type={"Choose one"} label={"Jenis Keryawan"} />
-          <SimpleSelect type={"Choose one"} label={"Jenis Keryawan"} />
-          <SimpleSelect type={"Choose one"} label={"Status Keryawan"} />
-          <SimpleSelect type={"Choose one"} label={"Nama Jabatan"} />
-          <SimpleSelect type={"Choose one"} label={"Level Jabatan"} />
-          <SimpleSelect type={"Choose one"} label={"Department"} />
-          <SimpleSelect type={"Choose one"} label={"Grade"} />
-          <SimpleSelect type={"Choose one"} label={"Atasan Langsung"} />
-          <SimpleSelect type={"Choose one"} label={"Persetujuan"} />
-          <SimpleSelect type={"Choose one"} label={"Lokasi Kerja"} />
+          <SimpleSelect type={"Choose one"} label={"Kategori"} />
+          <SimpleSelect type={"Choose one"} label={"Jumlah"} />
+         
+          <DatePickerInput label={"Tanggal Serah Terima"} />
+
+          <SimpleSelect type={"Choose one"} label={"Diberikan Oleh"} />
+
+          <DatePickerInput label={"Tanggal Pengembalian"} />
+
+          <SimpleSelect type={"Choose one"} label={"Diberikan Oleh"} />
 
 
           <UploadInput  label={"CV"} placeholder={"Uplaod CV"}/>
           <UploadInput  label={"Dokumen Kontrak Kerja"} placeholder={"Upload Kontrak Kerja"}/>
 
 
-
+        
 
           <View style={{ height: 100, flexDirection: "row-reverse" }}>
             <Pressable

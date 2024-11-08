@@ -161,6 +161,7 @@ export default function InfoPayroll({ navigation }) {
                 label={`Nilai Tunjangan ${index + 1}`}
                 placeholder="Rp"
               />
+              
             ))}
 
             <Pressable

@@ -18,10 +18,101 @@ import { Picker } from "@react-native-picker/picker";
 
 SplashScreen.preventAutoHideAsync();
 
+const DatePickerInput = ({ label }) => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    // Handle if the user canceled the selection (selectedDate will be undefined)
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+    setShow(false); // Hide the picker after selecting
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
+  return (
+    <View style={{ gap: 3 }}>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
+
+      <Pressable
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 45,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 10,
+          paddingHorizontal: 10,
+        }}
+        onPress={showDatepicker}
+        title="Pick a Date"
+      >
+        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
+
+        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
+      </Pressable>
+
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode="date" // Date mode
+          display="calendar" // For Android: Use 'calendar' or 'spinner'
+          onChange={onChange}
+        />
+      )}
+    </View>
+  );
+};
+
 //---------------------------------
 
 const SimpleSelect = ({ type, label }) => {
   const [selectedValue, setSelectedValue] = useState("choose one");
+  const [date, setDate] = useState(new Date());
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveReason, setLeaveReason] = useState("");
+
+  const toggleDatePicker = useCallback(
+    (pickerType) => {
+      if (pickerType === "start") {
+        setShowStartPicker(!showStartPicker);
+      } else {
+        setShowEndPicker(!showEndPicker);
+      }
+    },
+    [showStartPicker, showEndPicker]
+  );
+
+  const onDateChange = useCallback(
+    (event, selectedDate, dateType) => {
+      if (event.type === "dismissed") {
+        toggleDatePicker(dateType);
+        return;
+      }
+
+      if (selectedDate) {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        if (dateType === "start") {
+          setStartDate(currentDate.toDateString());
+        } else {
+          setEndDate(currentDate.toDateString());
+        }
+      }
+      toggleDatePicker(dateType);
+    },
+    [date, toggleDatePicker]
+  );
 
   return (
     <View style={{ gap: 3 }}>
@@ -144,17 +235,49 @@ export default function RewayatPendidikan({ navigation }) {
 
       <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
         <View style={{ paddingVertical: 15 }}>
-          <Text>Payroll</Text>
+          <Text>Rewayat Pendidikan</Text>
         </View>
 
         <View style={{ gap: 20 }}>
-          <SimpleSelect type={"Choose one"} label={"Tipe Penggajian"} />
+          <SimpleSelect type={"Choose one"} label={"Tengkat Pendidikan"} />
 
-          <LabeledTextInput label={"Gaji Pokok"} placeholder={"Rp"} />
+          <LabeledTextInput
+            label={"Nama Institusi Pendidikan"}
+            placeholder={"Ketik Nama Insiti"}
+          />
 
-          <SimpleSelect type={"Choose one"} label={"Tipe Tunjangan"} />
+          <LabeledTextInput label={"Jurusan"} placeholder={"Ketik Jurusan"} />
+          <LabeledTextInput
+            label={"Nilai Kelulusan"}
+            placeholder={"Ketik Nilai Kelulusan"}
+          />
 
-          <View style={{ gap: 10 }}>
+          <DatePickerInput label={"Tanggal Masuk"} />
+          <DatePickerInput label={"Tanggal Keluar"} />
+
+          <Pressable
+            style={{
+              height: 30,
+              justifyContent: "center",
+              alignItems: "center",
+              width: 200,
+              borderRadius: 12,
+              backgroundColor: "#F1F8FDFF",
+            }}
+          >
+            <Pressable
+              style={{ fontSize: 10, color: "#379ae6" }}
+              onPress={() => addTanjungan()}
+            >
+              <Text style={{ color: "#379ae6" }}>
+                Tambah Riwayat Pendidikan
+              </Text>
+            </Pressable>
+          </Pressable>
+
+          <View style={{ borderTopWidth: 1, borderColor:"#F3F4F6FF" }}></View>
+
+          {/* <View style={{ gap: 10 }}>
             {Array.from({ length: tanjungan }, (_, index) => (
               <LabeledTextInput
                 key={index}
@@ -163,43 +286,51 @@ export default function RewayatPendidikan({ navigation }) {
               />
             ))}
 
-            <Pressable
-              style={{
-                height: 30,
-                justifyContent: "center",
-                alignItems: "center",
-                width: 150,
-                borderRadius: 12,
-                backgroundColor: "#F1F8FDFF",
-              }}
-            >
-              <Pressable
-                style={{ fontSize: 10, color: "#379ae6" }}
-                onPress={() => addTanjungan()}
-              >
-                <Text style={{color:"#379ae6"}}>Tambah Tunjangan</Text>
-              </Pressable>
-            </Pressable>
+            
+          </View> */}
+
+          <View style={{ paddingVertical: 15 }}>
+            <Text>Rewayat Perkarjaan</Text>
           </View>
 
-          <SimpleSelect type={"Choose one"} label={"Nama Bank"} />
-
           <LabeledTextInput
-            label={"Nomor Rekening"}
-            placeholder={"Tulis Nonor Rekening"}
+            label={"Nama Perusahaan"}
+            placeholder={"Ketik Nama Perusahaan"}
+          />
+          <LabeledTextInput label={"Jabatan"} placeholder={"Ketik Jabatan"} />
+          <LabeledTextInput
+            label={"Departemen"}
+            placeholder={"Ketik Departemen"}
+          />
+          <LabeledTextInput
+            label={"Nama Atasan Langsung"}
+            placeholder={"Ketik Nama Atasan Langsung"}
           />
 
-          <LabeledTextInput
-            label={"Nama Pemilik Rekening"}
-            placeholder={"Tulis Nama Pemilik Rekening"}
-          />
+          <DatePickerInput label={"Mulai Bekerja"} />
 
-          <SimpleSelect type={"Choose one"} label={"Status PTKP"} />
+          <DatePickerInput label={"Terakhir Bekerja"} />
 
-          <LabeledTextInput label={"PPH21"} placeholder={"Rp"} />
-          <LabeledTextInput label={"JKK"} placeholder={"Rp"} />
-          <LabeledTextInput label={"JHT"} placeholder={"Rp"} />
-          <LabeledTextInput label={"JKM"} placeholder={"Rp"} />
+          <Pressable
+            style={{
+              height: 30,
+              justifyContent: "center",
+              alignItems: "center",
+              width: 200,
+              borderRadius: 12,
+              backgroundColor: "#F1F8FDFF",
+            }}
+          >
+            <Pressable
+              style={{ fontSize: 10, color: "#379ae6" }}
+              onPress={() => addTanjungan()}
+            >
+              <Text style={{ color: "#379ae6" }}>
+                Tambah Riwayat Perkerjaan
+              </Text>
+            </Pressable>
+          </Pressable>
+
 
           <View style={{ height: 100, flexDirection: "row-reverse" }}>
             <Pressable
