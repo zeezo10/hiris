@@ -17,6 +17,7 @@ import Absen from "./pages/Absen/Absen";
 import FaceAbsence from "./pages/Absen/FaceAbsence";
 import Absensi from "./pages/Absen/Absensi";
 import Pengajuan from "./pages/Pengajuan/Pengajuan";
+import LoadingPage from "./pages/LoadingPage";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -105,15 +106,15 @@ export default function App() {
 
   const [isLoad, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   if (isLoad) {
-  //     const timer = setTimeout(() => {
-  //       setLoading(false);
-  //     }, 3000);
+    useEffect(() => {
+      if (isLoad) {
+        const timer = setTimeout(() => {
+          setLoading(false);
+        }, 3000);
 
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isLoad]);
+        return () => clearTimeout(timer);
+      }
+    }, [isLoad]);
 
   //// delete after ----------------
 
@@ -125,7 +126,7 @@ export default function App() {
           {isLoad ? (
             <Stack.Screen
               name="Laoding"
-              component={MainTab}
+              component={LoadingPage}
               options={{ headerShown: false }}
             />
           ) : (
@@ -139,6 +140,11 @@ export default function App() {
           <Stack.Screen
             name="SuccessLogin"
             component={SuccessLoginLoading}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={MainTab}
             options={{ headerShown: false }}
           />
 
