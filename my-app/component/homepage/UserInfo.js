@@ -36,10 +36,7 @@ export default function UserInfo() {
             elevation: 25,
           }}
         >
-          <Image
-            source={require("../../assets/employee.png")}
-            style={{ height: 100, width: 100, marginTop: 4 }}
-          />
+        
         </View>
         <View style={{ alignItems: "center" }}>
           <Text style={{ fontSize: 25, fontFamily: "Jakarta" }}>Abdulaziz</Text>

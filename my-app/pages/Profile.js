@@ -15,14 +15,17 @@ import * as SplashScreen from "expo-splash-screen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import InfoPerbadi from "./dataKeryawan/InfoPerbadi";
+import InfoPerbadi from "./dataKeryawan/InfoPribadi";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Feather from "react-native-vector-icons/Feather";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Entypo from "react-native-vector-icons/Entypo";
 import InfoPerkerjaan from "./dataKeryawan/InfoPerkerjaan";
 import InfoPayroll from "./dataKeryawan/InfoPayroll";
 import RewayatPendidikan from "./dataKeryawan/RewayatPendidikan";
 import Aset from "./dataKeryawan/Aset";
+import DataBtn from "../component/profile/DataBtn";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -241,7 +244,7 @@ export default function Profile({ navigation }) {
     [date, toggleDatePicker]
   );
 
-  const [type, setType] = useState("InfoPerbadi");
+  const [type, setType] = useState("InfoPribadi");
 
   const ChangePage = (type) => {
     setType(type);
@@ -251,9 +254,8 @@ export default function Profile({ navigation }) {
     <View
       style={{
         width: screenWidth,
-        paddingTop: 30,
+        paddingTop: 80,
         backgroundColor: "white",
-        paddingHorizontal: 20,
       }}
     >
       <ScrollView
@@ -262,126 +264,98 @@ export default function Profile({ navigation }) {
       >
         <View
           style={{
-            borderBottomWidth: 1,
-            borderColor: "#F3F4F6FF",
-            height: 150,
-            backgroundColor: "white",
-            padding: 20,
             alignItems: "center",
+            gap: 15,
+            paddingVertical: 10,
           }}
         >
-          <Text
-            style={{
-              flex: 1,
-              fontSize: 25,
-              fontWeight: "bold",
-              color: "#323842FF",
-            }}
-          >
-            Data Keryawan
-          </Text>
           <View
             style={{
-              flex: 1,
-              width: "100%",
-              flexDirection: "row",
-              justifyContent: "center",
+              height: 100,
+              width: 100,
+              backgroundColor: "pink",
+              borderRadius: 100,
+            }}
+          ></View>
+
+          <View
+            style={{
               alignItems: "center",
             }}
           >
-            <Pressable
-              style={{
-                backgroundColor: type === "InfoPerbadi" ? "#379ae6" : "#F3F4F6FF"  ,
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={() => ChangePage("InfoPerbadi")}
-            >
-              <FontAwesome5 name="user-alt" size={20} color={type === "InfoPerbadi" ? "white" :  "#BCC1CAFF"} />
-            </Pressable>
-            <View
-              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
-            ></View>
-            <Pressable
-              style={{
-                backgroundColor: type === "InfoPerkerjaan" ? "#379ae6" : "#F3F4F6FF",
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={() => ChangePage("InfoPerkerjaan")}
-            >
-              <FontAwesome5 name="briefcase" size={20}  color={type === "InfoPerkerjaan" ? "white" :  "#BCC1CAFF"} />
-            </Pressable>
-            <View
-              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
-            ></View>
-
-            <Pressable
-              style={{
-                backgroundColor: type === "InfoPayroll" ? "#379ae6" : "#F3F4F6FF",
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={() => ChangePage("InfoPayroll")}
-            >
-              <FontAwesome5 name="coins" size={20}  color={type === "InfoPayroll" ? "white" :  "#BCC1CAFF"} />
-            </Pressable>
-            <View
-              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
-            ></View>
-
-            <Pressable
-              style={{
-                backgroundColor: type === "RewayatPendidikan" ? "#379ae6" : "#F3F4F6FF",
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={() => ChangePage("RewayatPendidikan")}
-            >
-              <FontAwesome5 name="book" size={20}  color={type === "RewayatPendidikan" ? "white" :  "#BCC1CAFF"} />
-            </Pressable>
-            <View
-              style={{ backgroundColor: "#F3F4F6FF", height: 5, width: 30 }}
-            ></View>
-
-            <Pressable
-              style={{
-                backgroundColor: type === "Aset" ? "#379ae6" : "#F3F4F6FF",
-                height: 35,
-                width: 35,
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={() => ChangePage("Aset")}
-            >
-              <FontAwesome5 name="sliders-h" size={20} color={type === "Aset" ? "white" :  "#BCC1CAFF"}/>
-            </Pressable>
+            <Text style={{ fontWeight: "bold" }}>Jennifer Lopez</Text>
+            <Text style={{ color: "#565E6CFF", fontWeight: "200" }}>
+              Manager People Development
+            </Text>
           </View>
         </View>
 
-        {/* main ------------ - - */}
-        {type === "InfoPerbadi" && <InfoPerbadi />}
-        {type === "InfoPerkerjaan" && <InfoPerkerjaan />}
-        {type === "InfoPayroll" && <InfoPayroll />}
-        {type === "RewayatPendidikan" && <RewayatPendidikan />}
-        {type === "Aset" && <Aset />}
-        
-        
+        <View
+          style={{
+            paddingTop: 50,
+            paddingBottom: 10,
+            paddingHorizontal: 20,
+            gap: 10,
+          }}
+        >
+          {/* <Pressable
+            style={{
+              backgroundColor: "white",
+              height: 70,
+              borderRadius: 10,
+              borderWidth:0.3,
+              borderColor:"#BCC1CAFF",
+              flexDirection:"row",
+              alignItems:"center",
+              padding:15,
+            }}
+            onPress={() => navigation.navigate("InfoPerbadi")}
+          >
 
-        <View style={{ height: 50 }}></View>
+          <View style={{backgroundColor:"#DAECFAFF" , height:40, width:40, borderRadius:100, justifyContent:"center" ,alignItems:"center"}}>
+
+          <FontAwesome5 name="user-alt" size={15} color="#379AE6FF" />
+          </View>
+
+           <Text style={{flex:1, paddingHorizontal:10 ,fontSize:15 }}>Informasi Pribadi</Text> 
+
+           <View style={{ height:40, width:40, borderRadius:100, justifyContent:"center" ,alignItems:"center"}}>
+           <EvilIcons name="chevron-right" size={35} color="#9095A0FF" />
+
+           </View>
+
+          </Pressable>
+          */}
+
+          <DataBtn type={"InfoPribadi"} navigation={navigation} />
+
+          <DataBtn type={"InfoPekerjaan"} navigation={navigation} />
+
+          <DataBtn type={"Payroll"} navigation={navigation} />
+
+          <DataBtn type={"RewayatPendidikan"} navigation={navigation} />
+
+          <DataBtn type={"RewayatPekerjaan"} navigation={navigation} />
+
+          <DataBtn type={"Aset"} navigation={navigation} />
+        </View>
+
+        <View
+          style={{
+            height: 200,
+            backgroundColor: "white",
+            justifyContent: "center",
+            paddingBottom: 55,
+            paddingHorizontal: 40,
+          }}
+        >
+          <View style={{ gap: 10 }}>
+            <Text>V 1.1</Text>
+            <Pressable>
+              <Text style={{ color: "red" }}>Log out</Text>
+            </Pressable>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );

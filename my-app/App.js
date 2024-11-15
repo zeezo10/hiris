@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Text, View } from "react-native";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -18,6 +18,7 @@ import FaceAbsence from "./pages/Absen/FaceAbsence";
 import Absensi from "./pages/Absen/Absensi";
 import Pengajuan from "./pages/Pengajuan/Pengajuan";
 import LoadingPage from "./pages/LoadingPage";
+import InfoPribadi from "./pages/dataKeryawan/InfoPribadi";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -33,12 +34,10 @@ function MainTab() {
 
           if (route.name === "Beranda") {
             iconName = "home";
-          } else if (route.name === "Persetujuan") {
-            iconName = "inbox";
-          } else if (route.name === "Chat") {
-            iconName = "message-square";
           } else if (route.name === "Profil") {
             iconName = "user";
+          } else if (route.name === "settings") {
+            iconName = "settings";
           }
 
           return (
@@ -77,22 +76,15 @@ function MainTab() {
         }}
       />
       <Tab.Screen
-        name="Persetujuan"
-        component={Persetujuan}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
         name="Profil"
         component={Profile}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="settings"
+        component={Persetujuan}
         options={{
           headerShown: false,
         }}
@@ -106,15 +98,15 @@ export default function App() {
 
   const [isLoad, setLoading] = useState(true);
 
-    useEffect(() => {
-      if (isLoad) {
-        const timer = setTimeout(() => {
-          setLoading(false);
-        }, 3000);
+  // useEffect(() => {
+  //   if (isLoad) {
+  //     const timer = setTimeout(() => {
+  //       setLoading(false);
+  //     }, 3000);
 
-        return () => clearTimeout(timer);
-      }
-    }, [isLoad]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isLoad]);
 
   //// delete after ----------------
 
@@ -126,7 +118,7 @@ export default function App() {
           {isLoad ? (
             <Stack.Screen
               name="Laoding"
-              component={LoadingPage}
+              component={MainTab}
               options={{ headerShown: false }}
             />
           ) : (
@@ -147,6 +139,34 @@ export default function App() {
             component={MainTab}
             options={{ headerShown: false }}
           />
+          {/* ---------------------------  profile -------------------------------- */}
+
+          <Stack.Screen
+            name="InfoPribadi"
+            component={InfoPribadi}
+            options={{
+              headerTitle: () => (
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    flex: 1,
+                    textAlignVertical: "center",
+                  }}
+                >
+                  Informasi Pribadi
+                </Text>
+              ),
+              headerTitleAlign: "center",
+              headerStyle: {
+                backgroundColor: "white",
+                shadowOpacity: 0,
+                elevation: 0,
+              },
+            }}
+          />
+
+          {/* ----------------------------------------------------------------------------- */}
 
           <Stack.Screen
             name="Pengajuan"
