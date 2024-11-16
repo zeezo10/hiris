@@ -18,6 +18,8 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import { setFalse, setTrue } from "../../redux/counter";
+import { useDispatch } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -274,7 +276,7 @@ const ModalKirim = () => {
               >
                 <Text style={{ color: "#379AE6FF", fontSize: 16 }}>Batal</Text>
               </TouchableOpacity>
-           <ModalKirimSuccess setVisibleKirim={setVisible}/>
+              <ModalKirimSuccess setVisibleKirim={setVisible} />
             </View>
           </View>
         </View>
@@ -283,120 +285,118 @@ const ModalKirim = () => {
   );
 };
 
-
-const ModalKirimSuccess = ({setVisibleKirim}) =>{
+const ModalKirimSuccess = ({ setVisibleKirim }) => {
+  const dispatch = useDispatch();
 
   const [visible2, setVisible2] = useState(false);
 
   function handleOpen() {
     setVisible2(!visible2);
   }
-  
-  function handleBackToBeranda (){
-    setVisibleKirim(false)
+
+  function handleBackToBeranda() {
+    setVisibleKirim(false);
+    dispatch(setTrue({ type: "InfoPribadi" }));
   }
-  return(
+  return (
     <>
-    <TouchableOpacity
-      style={{
-        flex: 1,
-        backgroundColor: "#379AE6FF",
-        height: 40,
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 7,
-      }}
-      onPress={() => handleOpen()}
-    >
-      <Text style={{color: "white", fontSize: 16 }}>
-        Kirim
-      </Text>
-    </TouchableOpacity>
-
-    <Modal animationType="fade" transparent={true} visible={visible2}>
-      <View
+      <TouchableOpacity
         style={{
-          height: "100%",
-          width: "100%",
-
+          flex: 1,
+          backgroundColor: "#379AE6FF",
+          height: 40,
           justifyContent: "center",
           alignItems: "center",
+          borderRadius: 7,
         }}
+        onPress={() => handleOpen()}
       >
+        <Text style={{ color: "white", fontSize: 16 }}>Kirim</Text>
+      </TouchableOpacity>
+
+      <Modal animationType="fade" transparent={true} visible={visible2}>
         <View
           style={{
-            position: "absolute",
-            backgroundColor: "black",
             height: "100%",
             width: "100%",
-            opacity: 0.5,
-          }}
-        ></View>
-        <View
-          style={{
-            height: 270,
-            width: "80%",
-            backgroundColor: "white",
-            borderRadius: 5,
+
+            justifyContent: "center",
             alignItems: "center",
-            padding: 25,
-            justifyContent: "space-between",
           }}
         >
           <View
             style={{
-              backgroundColor: "#379AE6FF",
-              height: 40,
-              width: "40",
-              borderRadius: 100,
-              justifyContent: "center",
-              alignItems: "center",
+              position: "absolute",
+              backgroundColor: "black",
+              height: "100%",
+              width: "100%",
+              opacity: 0.5,
             }}
-          >
-            <FontAwesome5Icon
-              name="check"
-              size={20}
-              color="white"
-              style={{ position: "absolute" }}
-            />
-          </View>
-          <View
-            style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
-          >
-           
-            <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-            Informasi Pribadi berhasil dikirim 
-            dan menunggu persetujuan HRD
-            </Text>
-          </View>
+          ></View>
           <View
             style={{
-              width: "100%",
-              flexDirection: "row",
+              height: 270,
+              width: "80%",
+              backgroundColor: "white",
+              borderRadius: 5,
+              alignItems: "center",
+              padding: 25,
               justifyContent: "space-between",
             }}
           >
-            <TouchableOpacity
-              onPress={() => handleBackToBeranda()}
+            <View
               style={{
-                flex: 1,
                 backgroundColor: "#379AE6FF",
                 height: 40,
+                width: "40",
+                borderRadius: 100,
                 justifyContent: "center",
                 alignItems: "center",
-                borderRadius: 7,
               }}
             >
-              <Text style={{ color: "white", fontSize: 16 }}>Kembali ke Beranda</Text>
-            </TouchableOpacity>
-           
+              <FontAwesome5Icon
+                name="check"
+                size={20}
+                color="white"
+                style={{ position: "absolute" }}
+              />
+            </View>
+            <View
+              style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
+            >
+              <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
+                Informasi Pribadi berhasil dikirim dan menunggu persetujuan HRD
+              </Text>
+            </View>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => handleBackToBeranda()}
+                style={{
+                  flex: 1,
+                  backgroundColor: "#379AE6FF",
+                  height: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 7,
+                }}
+              >
+                <Text style={{ color: "white", fontSize: 16 }}>
+                  Kembali ke Beranda
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </Modal>
-  </>
-  )
-}
+      </Modal>
+    </>
+  );
+};
 
 const styles = StyleSheet.create({
   //---------- text area ------------
@@ -488,6 +488,33 @@ export default function InfoPribadi({ navigation }) {
   const [leaveType, setLeaveType] = useState("");
   const [leaveReason, setLeaveReason] = useState("");
 
+  // ---------------------------inputs------------------------------
+
+  const [namaLengkap, setNameLengkap] = useState("");
+  const [tempatLahir, setTempatLahir] = useState("");
+  const [tanggalLahir, setTanggalLahir] = useState("");
+  const [nomorHandphone, setNomorHandphone] = useState("");
+  const [statusPerkawinan, setStatusPerkawinan] = useState("");
+  const [jenisKelamin, setJenisKelamin] = useState("");
+  const [agama, setAgama] = useState("");
+  const [email, setEmail] = useState("");
+  const [dolonganDarah, setGolonganDarah] = useState("");
+  const [NIK_NPWP, setNIK_NPWP] = useState("");
+  const [noBPJSKetenagakerjaan, setNoBPJSKetenagakerjaan] = useState("");
+  const [nomorBPJSKesehatan, setnomorBPJSKesehatan] = useState("");
+  const [namaKontakDarurat, setNamaKontakDarura] = useState("");
+  const [alamatSesuaiKTP_1, setAlamatSesuaiKTP_1] = useState("");
+  const [samaDenganAlamatdomisili, setSamaDenganAlamatdomisili] =
+    useState(false);
+  const [kota_1, setKota_1] = useState("");
+  const [provinsi_1, setProvinsi_1] = useState("");
+  const [kodePos_1, setKodePos_1] = useState("");
+  const [alamatSesuaiKTP_2, setAlamatSesuaiKTP_2] = useState("");
+  const [kota_2, setKota_2] = useState("");
+  const [provinsi_2, setProvinsi_2] = useState("");
+  const [kodePos_2, setKodePos_2] = useState("");
+
+  // ---------------------------------------------------------
   const toggleDatePicker = useCallback(
     (pickerType) => {
       if (pickerType === "start") {
@@ -522,7 +549,7 @@ export default function InfoPribadi({ navigation }) {
 
   return (
     <>
-      {/* main ------------ - - */}
+      
 
       <ScrollView
         style={{

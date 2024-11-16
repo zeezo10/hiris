@@ -26,6 +26,7 @@ import InfoPayroll from "./dataKeryawan/InfoPayroll";
 import RewayatPendidikan from "./dataKeryawan/RewayatPendidikan";
 import Aset from "./dataKeryawan/Aset";
 import DataBtn from "../component/profile/DataBtn";
+import { useDispatch, useSelector } from "react-redux";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -204,6 +205,19 @@ const styles = StyleSheet.create({
 export default function Profile({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
+  const dispatch = useDispatch();
+
+  const Pribadi = useSelector((state) => state.dataBtn.InfoPribadi);
+  const Pekerjaan = useSelector((state) => state.dataBtn.InfoPekerjaan);
+  const Payroll = useSelector((state) => state.dataBtn.Payroll);
+  const RewayatPendidikan = useSelector(
+    (state) => state.dataBtn.RewayatPendidikan
+  );
+  const RewayatPekerjaan = useSelector(
+    (state) => state.dataBtn.RewayatPekerjaan
+  );
+  const Aset = useSelector((state) => state.dataBtn.Aset);
+
   const [date, setDate] = useState(new Date());
   const [showStartPicker, setShowStartPicker] = useState(false);
   const [showEndPicker, setShowEndPicker] = useState(false);
@@ -288,6 +302,7 @@ export default function Profile({ navigation }) {
               Manager People Development
             </Text>
           </View>
+
         </View>
 
         <View
@@ -298,46 +313,12 @@ export default function Profile({ navigation }) {
             gap: 10,
           }}
         >
-          {/* <Pressable
-            style={{
-              backgroundColor: "white",
-              height: 70,
-              borderRadius: 10,
-              borderWidth:0.3,
-              borderColor:"#BCC1CAFF",
-              flexDirection:"row",
-              alignItems:"center",
-              padding:15,
-            }}
-            onPress={() => navigation.navigate("InfoPerbadi")}
-          >
-
-          <View style={{backgroundColor:"#DAECFAFF" , height:40, width:40, borderRadius:100, justifyContent:"center" ,alignItems:"center"}}>
-
-          <FontAwesome5 name="user-alt" size={15} color="#379AE6FF" />
-          </View>
-
-           <Text style={{flex:1, paddingHorizontal:10 ,fontSize:15 }}>Informasi Pribadi</Text> 
-
-           <View style={{ height:40, width:40, borderRadius:100, justifyContent:"center" ,alignItems:"center"}}>
-           <EvilIcons name="chevron-right" size={35} color="#9095A0FF" />
-
-           </View>
-
-          </Pressable>
-          */}
-
-          <DataBtn type={"InfoPribadi"} navigation={navigation} />
-
-          <DataBtn type={"InfoPekerjaan"} navigation={navigation} />
-
-          <DataBtn type={"Payroll"} navigation={navigation} />
-
-          <DataBtn type={"RewayatPendidikan"} navigation={navigation} />
-
-          <DataBtn type={"RewayatPekerjaan"} navigation={navigation} />
-
-          <DataBtn type={"Aset"} navigation={navigation} />
+          <DataBtn type={"InfoPribadi"} navigation={navigation} active={true} />
+          <DataBtn type={"InfoPekerjaan"} navigation={navigation} active={Pribadi} />
+          <DataBtn type={"Payroll"} navigation={navigation} active={Pekerjaan} />
+          <DataBtn type={"RewayatPendidikan"} navigation={navigation} active={Payroll} />
+          <DataBtn type={"RewayatPekerjaan"} navigation={navigation} active={RewayatPendidikan} />
+          <DataBtn type={"Aset"} navigation={navigation} active={RewayatPekerjaan} />
         </View>
 
         <View

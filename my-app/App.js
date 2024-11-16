@@ -19,6 +19,9 @@ import Absensi from "./pages/Absen/Absensi";
 import Pengajuan from "./pages/Pengajuan/Pengajuan";
 import LoadingPage from "./pages/LoadingPage";
 import InfoPribadi from "./pages/dataKeryawan/InfoPribadi";
+import store from "./redux/store";
+import { Provider } from "react-redux";
+import InfoPerkerjaan from "./pages/dataKeryawan/InfoPerkerjaan";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -111,122 +114,148 @@ export default function App() {
   //// delete after ----------------
 
   return (
-    <SafeAreaProvider style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          {/* {!login ? ( */}
-          {isLoad ? (
+    <Provider store={store}>
+      <SafeAreaProvider style={{ flex: 1 }}>
+        <NavigationContainer>
+          <Stack.Navigator>
+            {/* {!login ? ( */}
+            {isLoad ? (
+              <Stack.Screen
+                name="Laoding"
+                component={MainTab}
+                options={{ headerShown: false }}
+              />
+            ) : (
+              <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+              />
+            )}
+
             <Stack.Screen
-              name="Laoding"
+              name="SuccessLogin"
+              component={SuccessLoginLoading}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Home"
               component={MainTab}
               options={{ headerShown: false }}
             />
-          ) : (
+            {/* ---------------------------  profile -------------------------------- */}
+
             <Stack.Screen
-              name="Login"
-              component={Login}
-              options={{ headerShown: false }}
+              name="InfoPribadi"
+              component={InfoPribadi}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Informasi Pribadi
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
             />
-          )}
+            <Stack.Screen
+              name="InfoPekerjaan"
+              component={InfoPerkerjaan}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Informasi Pekerjaan
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
 
-          <Stack.Screen
-            name="SuccessLogin"
-            component={SuccessLoginLoading}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={MainTab}
-            options={{ headerShown: false }}
-          />
-          {/* ---------------------------  profile -------------------------------- */}
+            {/* ----------------------------------------------------------------------------- */}
 
-          <Stack.Screen
-            name="InfoPribadi"
-            component={InfoPribadi}
-            options={{
-              headerTitle: () => (
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "bold",
-                    flex: 1,
-                    textAlignVertical: "center",
-                  }}
-                >
-                  Informasi Pribadi
-                </Text>
-              ),
-              headerTitleAlign: "center",
-              headerStyle: {
-                backgroundColor: "white",
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
+            <Stack.Screen
+              name="Pengajuan"
+              component={Pengajuan}
+              options={{
+                headerTitle: "Pengajuan",
 
-          {/* ----------------------------------------------------------------------------- */}
+                headerStyle: {
+                  backgroundColor: "white",
 
-          <Stack.Screen
-            name="Pengajuan"
-            component={Pengajuan}
-            options={{
-              headerTitle: "Pengajuan",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Absen"
+              component={Absen}
+              options={{
+                headerTitle: "",
 
-              headerStyle: {
-                backgroundColor: "white",
+                headerStyle: {
+                  backgroundColor: "white",
 
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="Absen"
-            component={Absen}
-            options={{
-              headerTitle: "",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="FaceAbsence"
+              component={FaceAbsence}
+              options={{
+                headerTitle: "",
 
-              headerStyle: {
-                backgroundColor: "white",
+                headerStyle: {
+                  backgroundColor: "white",
 
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-          <Stack.Screen
-            name="FaceAbsence"
-            component={FaceAbsence}
-            options={{
-              headerTitle: "",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
 
-              headerStyle: {
-                backgroundColor: "white",
+            <Stack.Screen
+              name="Absensi"
+              component={Absensi}
+              options={{
+                headerTitle: "",
 
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
+                headerStyle: {
+                  backgroundColor: "white",
 
-          <Stack.Screen
-            name="Absensi"
-            component={Absensi}
-            options={{
-              headerTitle: "",
-
-              headerStyle: {
-                backgroundColor: "white",
-
-                shadowOpacity: 0,
-                elevation: 0,
-              },
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </SafeAreaProvider>
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
+    </Provider>
   );
 }
