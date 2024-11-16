@@ -19,7 +19,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useDispatch } from "react-redux";
-import { setFalse, setTrue } from "../../redux/counter";
+import { setTrue } from "../../redux/counter";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -79,6 +79,45 @@ const DatePickerInput = ({ label }) => {
 
 const SimpleSelect = ({ type, label }) => {
   const [selectedValue, setSelectedValue] = useState("choose one");
+  const [date, setDate] = useState(new Date());
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveReason, setLeaveReason] = useState("");
+
+  const toggleDatePicker = useCallback(
+    (pickerType) => {
+      if (pickerType === "start") {
+        setShowStartPicker(!showStartPicker);
+      } else {
+        setShowEndPicker(!showEndPicker);
+      }
+    },
+    [showStartPicker, showEndPicker]
+  );
+
+  const onDateChange = useCallback(
+    (event, selectedDate, dateType) => {
+      if (event.type === "dismissed") {
+        toggleDatePicker(dateType);
+        return;
+      }
+
+      if (selectedDate) {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        if (dateType === "start") {
+          setStartDate(currentDate.toDateString());
+        } else {
+          setEndDate(currentDate.toDateString());
+        }
+      }
+      toggleDatePicker(dateType);
+    },
+    [date, toggleDatePicker]
+  );
 
   return (
     <View style={{ gap: 3 }}>
@@ -132,18 +171,11 @@ const UploadInput = ({ label, placeholder }) => {
           <View
             style={{
               height: 30,
-              borderWidth: 1,
-              borderColor: "#BCC1CAFF",
+              backgroundColor: "pink",
               width: 70,
               borderRadius: 10,
-              justifyContent: "center",
-              alignItems: "center",
             }}
-          >
-            <Text style={{ color: "#BCC1CAFF", fontSize: 11 }}>
-              Choose file
-            </Text>
-          </View>
+          ></View>
         </View>
       </View>
     </View>
@@ -193,7 +225,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ModalKirim = ({navigation}) => {
+const ModalKirim = ({ navigation }) => {
   const [visible, setVisible] = useState(false);
 
   function handleOpen() {
@@ -219,23 +251,85 @@ const ModalKirim = ({navigation}) => {
       </TouchableOpacity>
 
       <Modal animationType="fade" transparent={true} visible={visible}>
-        <View style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
-          <View style={{ position: "absolute", backgroundColor: "black", height: "100%", width: "100%", opacity: 0.5 }}></View>
-          <View style={{ height: 270, width: "80%", backgroundColor: "white", borderRadius: 5, alignItems: "center", padding: 25, justifyContent: "space-between" }}>
-            <View style={{ backgroundColor: "#379AE6FF", height: 40, width: "40", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-              <FontAwesome5Icon name="user-alt" size={20} color="white" style={{ position: "absolute" }} />
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              position: "absolute",
+              backgroundColor: "black",
+              height: "100%",
+              width: "100%",
+              opacity: 0.5,
+            }}
+          />
+          <View
+            style={{
+              height: 270,
+              width: "80%",
+              backgroundColor: "white",
+              borderRadius: 5,
+              alignItems: "center",
+              padding: 25,
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#379AE6FF",
+                height: 40,
+                width: 40,
+                borderRadius: 100,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FontAwesome5Icon
+                name="user-alt"
+                size={20}
+                color="white"
+                style={{ position: "absolute" }}
+              />
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center", gap: 5 }}>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>Aset</Text>
+            <View
+              style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
+            >
+              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                Riwayat Pendidikan
+              </Text>
               <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-                Apakah anda yakin ingin mengirim Aset? Jika anda ingin mengubahnya setelah dikirim, anda perlu mengajukan permintaan kepada HRD
+                Apakah anda yakin ingin mengirim Riwayat Pendidikan? Jika anda
+                ingin mengubahnya setelah dikirim, anda perlu mengajukan
+                permintaan kepada HRD
               </Text>
             </View>
-            <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between" }}>
-              <TouchableOpacity onPress={() => handleOpen()} style={{ flex: 1, height: 40, justifyContent: "center", alignItems: "center" }}>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <TouchableOpacity
+                onPress={() => handleOpen()}
+                style={{
+                  flex: 1,
+                  height: 40,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 <Text style={{ color: "#379AE6FF", fontSize: 16 }}>Batal</Text>
               </TouchableOpacity>
-              <ModalKirimSuccess setVisibleKirim={setVisible} navigation={navigation} />
+              <ModalKirimSuccess
+                setVisibleKirim={setVisible}
+                navigation={navigation}
+              />
             </View>
           </View>
         </View>
@@ -254,7 +348,7 @@ const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
 
   function handleBackToBeranda() {
     setVisibleKirim(false);
-    dispatch(setTrue({ type: "Aset" }));
+    dispatch(setTrue({ type: "RiwayatPekerjaan" }));
     if (navigation) {
       navigation.navigate("Home");
     } else {
@@ -279,18 +373,65 @@ const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
       </TouchableOpacity>
 
       <Modal animationType="fade" transparent={true} visible={visible2}>
-        <View style={{ height: "100%", width: "100%", justifyContent: "center", alignItems: "center" }}>
-          <View style={{ position: "absolute", backgroundColor: "black", height: "100%", width: "100%", opacity: 0.5 }}></View>
-          <View style={{ height: 270, width: "80%", backgroundColor: "white", borderRadius: 5, alignItems: "center", padding: 25, justifyContent: "space-between" }}>
-            <View style={{ backgroundColor: "#379AE6FF", height: 40, width: "40", borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-              <FontAwesome5Icon name="check" size={20} color="white" style={{ position: "absolute" }} />
+        <View
+          style={{
+            height: "100%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              position: "absolute",
+              backgroundColor: "black",
+              height: "100%",
+              width: "100%",
+              opacity: 0.5,
+            }}
+          />
+          <View
+            style={{
+              height: 270,
+              width: "80%",
+              backgroundColor: "white",
+              borderRadius: 5,
+              alignItems: "center",
+              padding: 25,
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "#379AE6FF",
+                height: 40,
+                width: 40,
+                borderRadius: 100,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FontAwesome5Icon
+                name="check"
+                size={20}
+                color="white"
+                style={{ position: "absolute" }}
+              />
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center", gap: 5 }}>
+            <View
+              style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
+            >
               <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-                Aset berhasil dikirim dan menunggu persetujuan HRD
+                Riwayat Pendidikan berhasil dikirim dan menunggu persetujuan HRD
               </Text>
             </View>
-            <View style={{ width: "100%", flexDirection: "row", justifyContent: "space-between" }}>
+            <View
+              style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
               <TouchableOpacity
                 onPress={() => handleBackToBeranda()}
                 style={{
@@ -302,7 +443,9 @@ const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
                   borderRadius: 7,
                 }}
               >
-                <Text style={{ color: "white", fontSize: 16 }}>Kembali ke Beranda</Text>
+                <Text style={{ color: "white", fontSize: 16 }}>
+                  Kembali ke Beranda
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -312,48 +455,14 @@ const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
   );
 };
 
-export default function Aset({ navigation }) {
+export default function RiwayatPekerjaan({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
-  const [date, setDate] = useState(new Date());
-  const [showStartPicker, setShowStartPicker] = useState(false);
-  const [showEndPicker, setShowEndPicker] = useState(false);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [leaveType, setLeaveType] = useState("");
-  const [leaveReason, setLeaveReason] = useState("");
+  const [tanjungan, setTnjungan] = useState(1);
 
-  const toggleDatePicker = useCallback(
-    (pickerType) => {
-      if (pickerType === "start") {
-        setShowStartPicker(!showStartPicker);
-      } else {
-        setShowEndPicker(!showEndPicker);
-      }
-    },
-    [showStartPicker, showEndPicker]
-  );
-
-  const onDateChange = useCallback(
-    (event, selectedDate, dateType) => {
-      if (event.type === "dismissed") {
-        toggleDatePicker(dateType);
-        return;
-      }
-
-      if (selectedDate) {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-        if (dateType === "start") {
-          setStartDate(currentDate.toDateString());
-        } else {
-          setEndDate(currentDate.toDateString());
-        }
-      }
-      toggleDatePicker(dateType);
-    },
-    [date, toggleDatePicker]
-  );
+  const addTanjungan = () => {
+    setTnjungan(tanjungan + 1);
+  };
 
   return (
     <>
@@ -366,35 +475,57 @@ export default function Aset({ navigation }) {
         }}
       >
         <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
-          <View style={{ paddingVertical: 15 }}>
-            <Text>Aset</Text>
-          </View>
-
           <View style={{ gap: 20 }}>
+            <View style={{ paddingVertical: 15 }}>
+              <Text>Riwayat Perkarjaan</Text>
+            </View>
+
             <LabeledTextInput
-              label={"Nomor Seri"}
-              placeholder={"Ketik Nomor Seri"}
+              label={"Nama Perusahaan"}
+              placeholder={"Ketik Nama Perusahaan"}
+            />
+            <LabeledTextInput label={"Jabatan"} placeholder={"Ketik Jabatan"} />
+            <LabeledTextInput
+              label={"Departemen"}
+              placeholder={"Ketik Departemen"}
+            />
+            <LabeledTextInput
+              label={"Nama Atasan Langsung"}
+              placeholder={"Ketik Nama Atasan Langsung"}
             />
 
-            <SimpleSelect type={"Choose one"} label={"Kategori"} />
-            <SimpleSelect type={"Choose one"} label={"Jumlah"} />
+            <DatePickerInput label={"Mulai Bekerja"} />
 
-            <DatePickerInput label={"Tanggal Serah Terima"} />
+            <DatePickerInput label={"Terakhir Bekerja"} />
 
-            <SimpleSelect type={"Choose one"} label={"Diberikan Oleh"} />
+            <Pressable
+              style={{
+                height: 30,
+                justifyContent: "center",
+                alignItems: "center",
+                width: 200,
+                borderRadius: 12,
+                backgroundColor: "#F1F8FDFF",
+              }}
+            >
+              <Pressable
+                style={{ fontSize: 10, color: "#379ae6" }}
+                onPress={() => addTanjungan()}
+              >
+                <Text style={{ color: "#379ae6" }}>
+                  Tambah Riwayat Pekerjaan
+                </Text>
+              </Pressable>
+            </Pressable>
 
-            <DatePickerInput label={"Tanggal Pengembalian"} />
-
-            <SimpleSelect type={"Choose one"} label={"Diberikan Oleh"} />
-
-            <UploadInput label={"CV"} placeholder={"Uplaod CV"} />
-            <UploadInput
-              label={"Dokumen Kontrak Kerja"}
-              placeholder={"Upload Kontrak Kerja"}
-            />
-
-            <View style={{ height: 100, flexDirection: "row-reverse" }}>
-              <ModalKirim navigation={navigation}/>
+            <View
+              style={{
+                height: 150,
+                flexDirection: "row-reverse",
+                marginTop: 15,
+              }}
+            >
+              <ModalKirim navigation={navigation} />
             </View>
           </View>
         </View>

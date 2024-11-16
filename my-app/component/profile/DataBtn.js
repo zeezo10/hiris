@@ -11,25 +11,25 @@ export default function DataBtn({ type, navigation, active }) {
 
   if (type === "InfoPribadi") {
     name = "user-alt";
-    title = "Info Perbadi";
+    title = "Informasi Perbadi";
   } else if (type === "InfoPekerjaan") {
     name = "briefcase";
-    title = "Info Pekerjaan";
-  } else if (type === "Payroll") {
+    title = "Informasi Pekerjaan";
+  } else if (type === "InfoPayroll") {
     name = "coins";
-    title = "Payroll";
-  } else if (type === "RewayatPendidikan") {
+    title = "Informasi Payroll";
+  } else if (type === "RiwayatPendidikan") {
     name = "book";
-    title = "Rewayat Pendidikan";
-  } else if (type === "RewayatPekerjaan") {
+    title = "Riwayat Pendidikan";
+  } else if (type === "RiwayatPekerjaan") {
     name = "office-building";
-    title = "Rewayat Pekerjaan";
+    title = "Riwayat Pekerjaan";
   } else if (type === "Aset") {
     name = "grid";
     title = "Aset";
   }
 
-  const [modalVisible , setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handlePress = () => {
     if (!active) {
@@ -112,7 +112,7 @@ export default function DataBtn({ type, navigation, active }) {
         >
           {type === "Aset" ? (
             <Entypo name={name} size={20} color="#379AE6FF" />
-          ) : type === "RewayatPekerjaan" ? (
+          ) : type === "RiwayatPekerjaan" ? (
             <MaterialCommunityIcons name={name} size={20} color="#379AE6FF" />
           ) : (
             <FontAwesome5 name={name} size={15} color="#379AE6FF" />

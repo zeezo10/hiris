@@ -174,7 +174,7 @@ const LabeledTextInput = ({ label, placeholder }) => {
 
 // -----------------------------------------------
 
-const ModalKirim = () => {
+const ModalKirim = ({navigation}) => {
   const [visible, setVisible] = useState(false);
 
   function handleOpen() {
@@ -276,7 +276,7 @@ const ModalKirim = () => {
               >
                 <Text style={{ color: "#379AE6FF", fontSize: 16 }}>Batal</Text>
               </TouchableOpacity>
-              <ModalKirimSuccess setVisibleKirim={setVisible} />
+              <ModalKirimSuccess setVisibleKirim={setVisible} navigation={navigation} />
             </View>
           </View>
         </View>
@@ -285,7 +285,7 @@ const ModalKirim = () => {
   );
 };
 
-const ModalKirimSuccess = ({ setVisibleKirim }) => {
+const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
   const dispatch = useDispatch();
 
   const [visible2, setVisible2] = useState(false);
@@ -297,6 +297,11 @@ const ModalKirimSuccess = ({ setVisibleKirim }) => {
   function handleBackToBeranda() {
     setVisibleKirim(false);
     dispatch(setTrue({ type: "InfoPribadi" }));
+    if (navigation) {
+      navigation.navigate("Home");
+    } else {
+      console.warn("Navigation prop is not available");
+    }
   }
   return (
     <>
@@ -724,7 +729,7 @@ export default function InfoPribadi({ navigation }) {
           <View
             style={{ height: 150, flexDirection: "row-reverse", marginTop: 15 }}
           >
-            <ModalKirim />
+            <ModalKirim navigation={navigation}/>
           </View>
         </View>
         <View style={{ height: 50 }}></View>

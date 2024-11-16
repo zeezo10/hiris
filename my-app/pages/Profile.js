@@ -21,9 +21,9 @@ import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import InfoPerkerjaan from "./dataKeryawan/InfoPerkerjaan";
+import InfoPekerjaan from "./dataKeryawan/InfoPekerjaan";
 import InfoPayroll from "./dataKeryawan/InfoPayroll";
-import RewayatPendidikan from "./dataKeryawan/RewayatPendidikan";
+import RiwayatPendidikan from "./dataKeryawan/RiwayatPendidikan";
 import Aset from "./dataKeryawan/Aset";
 import DataBtn from "../component/profile/DataBtn";
 import { useDispatch, useSelector } from "react-redux";
@@ -209,12 +209,12 @@ export default function Profile({ navigation }) {
 
   const Pribadi = useSelector((state) => state.dataBtn.InfoPribadi);
   const Pekerjaan = useSelector((state) => state.dataBtn.InfoPekerjaan);
-  const Payroll = useSelector((state) => state.dataBtn.Payroll);
-  const RewayatPendidikan = useSelector(
-    (state) => state.dataBtn.RewayatPendidikan
+  const Payroll = useSelector((state) => state.dataBtn.InfoPayroll);
+  const RiwayatPendidikan = useSelector(
+    (state) => state.dataBtn.RiwayatPendidikan
   );
-  const RewayatPekerjaan = useSelector(
-    (state) => state.dataBtn.RewayatPekerjaan
+  const RiwayatPekerjaan = useSelector(
+    (state) => state.dataBtn.RiwayatPekerjaan
   );
   const Aset = useSelector((state) => state.dataBtn.Aset);
 
@@ -303,6 +303,7 @@ export default function Profile({ navigation }) {
             </Text>
           </View>
 
+          {/* <Text>{`${Aset}`}</Text> */}
         </View>
 
         <View
@@ -314,11 +315,31 @@ export default function Profile({ navigation }) {
           }}
         >
           <DataBtn type={"InfoPribadi"} navigation={navigation} active={true} />
-          <DataBtn type={"InfoPekerjaan"} navigation={navigation} active={Pribadi} />
-          <DataBtn type={"Payroll"} navigation={navigation} active={Pekerjaan} />
-          <DataBtn type={"RewayatPendidikan"} navigation={navigation} active={Payroll} />
-          <DataBtn type={"RewayatPekerjaan"} navigation={navigation} active={RewayatPendidikan} />
-          <DataBtn type={"Aset"} navigation={navigation} active={RewayatPekerjaan} />
+          <DataBtn
+            type={"InfoPekerjaan"}
+            navigation={navigation}
+            active={Pribadi}
+          />
+          <DataBtn
+            type={"InfoPayroll"}
+            navigation={navigation}
+            active={Pekerjaan}
+          />
+          <DataBtn
+            type={"RiwayatPendidikan"}
+            navigation={navigation}
+            active={Payroll}
+          />
+          <DataBtn
+            type={"RiwayatPekerjaan"}
+            navigation={navigation}
+            active={RiwayatPendidikan}
+          />
+          <DataBtn
+            type={"Aset"}
+            navigation={navigation}
+            active={RiwayatPekerjaan}
+          />
         </View>
 
         <View

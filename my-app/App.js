@@ -21,7 +21,11 @@ import LoadingPage from "./pages/LoadingPage";
 import InfoPribadi from "./pages/dataKeryawan/InfoPribadi";
 import store from "./redux/store";
 import { Provider } from "react-redux";
-import InfoPerkerjaan from "./pages/dataKeryawan/InfoPerkerjaan";
+import InfoPekerjaan from "./pages/dataKeryawan/InfoPekerjaan";
+import InfoPayroll from "./pages/dataKeryawan/InfoPayroll";
+import RiwayatPendidikan from "./pages/dataKeryawan/RiwayatPendidikan";
+import Aset from "./pages/dataKeryawan/Aset";
+import RiwayatPekerjaan from "./pages/dataKeryawan/RiwayatPekerjaan";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -171,7 +175,7 @@ export default function App() {
             />
             <Stack.Screen
               name="InfoPekerjaan"
-              component={InfoPerkerjaan}
+              component={InfoPekerjaan}
               options={{
                 headerTitle: () => (
                   <Text
@@ -183,6 +187,102 @@ export default function App() {
                     }}
                   >
                     Informasi Pekerjaan
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="InfoPayroll"
+              component={InfoPayroll}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Informasi Payroll
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="RiwayatPendidikan"
+              component={RiwayatPendidikan}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Riwayat Pendidikan
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="RiwayatPekerjaan"
+              component={RiwayatPekerjaan}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Riwayat Pekerjaan
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Aset"
+              component={Aset}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Aset
                   </Text>
                 ),
                 headerTitleAlign: "center",
