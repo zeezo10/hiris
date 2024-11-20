@@ -24,7 +24,7 @@ export default function BerandaIcons() {
             rowGap:20,
           }}
         >
-          <HomeIcons type={"Absensi"} page={"Absen"} />
+          <HomeIcons type={"Absensi"} page={"Absensi"} />
           <HomeIcons type={"Pengajuan"}  page={"Pengajuan"}/>
           <HomeIcons type={"Payroll"} page={""} />
           <HomeIcons type={"Laporan"} page={""}/>

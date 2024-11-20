@@ -16,10 +16,12 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Picker } from "@react-native-picker/picker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { setFalse, setTrue } from "../../redux/counter";
 import { useDispatch } from "react-redux";
+import SelectOption from "../../component/global/SelectOption";
+import LabeledTextInput from "../../component/global/LabeledTextInput";
+import ModalKirim from "../../component/global/ModalKirim";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -49,13 +51,16 @@ const RadioButtonExample = () => {
 // ---------------------------------
 
 const DatePickerInput = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(null); // Initialize with null
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
-    // Handle if the user canceled the selection (selectedDate will be undefined)
+    if (event.type === "dismissed") {
+      setShow(false); // Hide the picker if dismissed
+      return;
+    }
     if (selectedDate) {
-      setDate(selectedDate);
+      setDate(selectedDate); // Set the selected date
     }
     setShow(false); // Hide the picker after selecting
   };
@@ -83,57 +88,19 @@ const DatePickerInput = () => {
         onPress={showDatepicker}
         title="Pick a Date"
       >
-        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
+        <Text style={{ fontSize: 14, color:date ? "" : "#9095A0FF" }}>{date ? date.toLocaleDateString() : "Pilih Tanggal Lahir"}</Text>
 
         <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
       </Pressable>
 
       {show && (
         <DateTimePicker
-          value={date}
-          mode="date" // Date mode
-          display="calendar" // For Android: Use 'calendar' or 'spinner'
+          value={date || new Date()} // Use current date if no date is selected
+          mode="date"
+          display="calendar"
           onChange={onChange}
         />
       )}
-    </View>
-  );
-};
-
-//---------------------------------
-
-const SimpleSelect = ({ type, label }) => {
-  const [selectedValue, setSelectedValue] = useState("choose one");
-
-  return (
-    <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
-
-      <View
-        style={{
-          height: 45,
-          width: "100%",
-          borderColor: "#BCC1CAFF",
-          borderWidth: 1,
-          borderRadius: 10,
-          alignItems: "center",
-          flexDirection: "row",
-        }}
-      >
-        <Picker
-          selectedValue={selectedValue}
-          onValueChange={(itemValue) => setSelectedValue(itemValue)}
-          style={styles.picker}
-        >
-          <Picker.Item
-            label={type}
-            value={null}
-            style={{ color: "#BCC1CAFF" }}
-          />
-          <Picker.Item label="option 1" value="option 1" />
-          <Picker.Item label="option 2" value="option 2" />
-        </Picker>
-      </View>
     </View>
   );
 };
@@ -163,245 +130,8 @@ const TextArea = () => {
 
 // ------------------------------------------
 
-const LabeledTextInput = ({ label, placeholder }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} placeholder={placeholder} />
-    </View>
-  );
-};
 
-// -----------------------------------------------
 
-const ModalKirim = ({navigation}) => {
-  const [visible, setVisible] = useState(false);
-
-  function handleOpen() {
-    setVisible(!visible);
-  }
-
-  return (
-    <>
-      <TouchableOpacity
-        style={{
-          height: 45,
-          backgroundColor: "#379ae6",
-          width: "100%",
-          borderRadius: 8,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        onPress={() => handleOpen()}
-      >
-        <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
-          Kirim
-        </Text>
-      </TouchableOpacity>
-
-      <Modal animationType="fade" transparent={true} visible={visible}>
-        <View
-          style={{
-            height: "100%",
-            width: "100%",
-
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              position: "absolute",
-              backgroundColor: "black",
-              height: "100%",
-              width: "100%",
-              opacity: 0.5,
-            }}
-          ></View>
-          <View
-            style={{
-              height: 270,
-              width: "80%",
-              backgroundColor: "white",
-              borderRadius: 5,
-              alignItems: "center",
-              padding: 25,
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#379AE6FF",
-                height: 40,
-                width: "40",
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome5Icon
-                name="user-alt"
-                size={20}
-                color="white"
-                style={{ position: "absolute" }}
-              />
-            </View>
-            <View
-              style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
-            >
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-                Informasi Pribadi
-              </Text>
-              <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-                Apakah anda yakin ingin mengirim Informasi Pribadi? Jika anda
-                ingin mengubahnya setelah dikirim, anda perlu mengajukan
-                permintaan kepada HRD
-              </Text>
-            </View>
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => handleOpen()}
-                style={{
-                  flex: 1,
-                  height: 40,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ color: "#379AE6FF", fontSize: 16 }}>Batal</Text>
-              </TouchableOpacity>
-              <ModalKirimSuccess setVisibleKirim={setVisible} navigation={navigation} />
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </>
-  );
-};
-
-const ModalKirimSuccess = ({ setVisibleKirim, navigation }) => {
-  const dispatch = useDispatch();
-
-  const [visible2, setVisible2] = useState(false);
-
-  function handleOpen() {
-    setVisible2(!visible2);
-  }
-
-  function handleBackToBeranda() {
-    setVisibleKirim(false);
-    dispatch(setTrue({ type: "InfoPribadi" }));
-    if (navigation) {
-      navigation.navigate("Home");
-    } else {
-      console.warn("Navigation prop is not available");
-    }
-  }
-  return (
-    <>
-      <TouchableOpacity
-        style={{
-          flex: 1,
-          backgroundColor: "#379AE6FF",
-          height: 40,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 7,
-        }}
-        onPress={() => handleOpen()}
-      >
-        <Text style={{ color: "white", fontSize: 16 }}>Kirim</Text>
-      </TouchableOpacity>
-
-      <Modal animationType="fade" transparent={true} visible={visible2}>
-        <View
-          style={{
-            height: "100%",
-            width: "100%",
-
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <View
-            style={{
-              position: "absolute",
-              backgroundColor: "black",
-              height: "100%",
-              width: "100%",
-              opacity: 0.5,
-            }}
-          ></View>
-          <View
-            style={{
-              height: 270,
-              width: "80%",
-              backgroundColor: "white",
-              borderRadius: 5,
-              alignItems: "center",
-              padding: 25,
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "#379AE6FF",
-                height: 40,
-                width: "40",
-                borderRadius: 100,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome5Icon
-                name="check"
-                size={20}
-                color="white"
-                style={{ position: "absolute" }}
-              />
-            </View>
-            <View
-              style={{ justifyContent: "center", alignItems: "center", gap: 5 }}
-            >
-              <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-                Informasi Pribadi berhasil dikirim dan menunggu persetujuan HRD
-              </Text>
-            </View>
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => handleBackToBeranda()}
-                style={{
-                  flex: 1,
-                  backgroundColor: "#379AE6FF",
-                  height: 40,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 7,
-                }}
-              >
-                <Text style={{ color: "white", fontSize: 16 }}>
-                  Kembali ke Beranda
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </>
-  );
-};
 
 const styles = StyleSheet.create({
   //---------- text area ------------
@@ -480,6 +210,77 @@ const styles = StyleSheet.create({
   radioText: {
     fontSize: 16,
   },
+
+  modalContainer: {
+    height: "100%",
+    width: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalBackground: {
+    position: "absolute",
+    backgroundColor: "black",
+    height: "100%",
+    width: "100%",
+    opacity: 0.5,
+  },
+  modalContent: {
+    height: 270,
+    width: "80%",
+    backgroundColor: "white",
+    borderRadius: 5,
+    alignItems: "center",
+    padding: 25,
+    justifyContent: "space-between",
+  },
+  modalIconContainer: {
+    backgroundColor: "#379AE6FF",
+    height: 40,
+    width: 40,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalTextContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  modalDescription: {
+    textAlign: "center",
+    paddingHorizontal: 5,
+  },
+  modalButtonContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  modalCancelButton: {
+    flex: 1,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalCancelButtonText: {
+    color: "#379AE6FF",
+    fontSize: 16,
+  },
+  modalConfirmButton: {
+    flex: 1,
+    backgroundColor: "#379AE6FF",
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 7,
+  },
+  modalConfirmButtonText: {
+    color: "white",
+    fontSize: 16,
+  },
 });
 
 export default function InfoPribadi({ navigation }) {
@@ -552,10 +353,15 @@ export default function InfoPribadi({ navigation }) {
     [date, toggleDatePicker]
   );
 
+  // -------- Batal Modal ------------------------------------
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const handleBack = () => {
+    setModalVisible(true);
+  };
+
   return (
     <>
-      
-
       <ScrollView
         style={{
           backgroundColor: "white",
@@ -655,13 +461,30 @@ export default function InfoPribadi({ navigation }) {
             </View>
           </View>
 
-          <SimpleSelect type={"Choose one"} label={"Status Pernikahan"} />
-          <SimpleSelect type={"Choose one"} label={"Jenis Kelamin"} />
-          <SimpleSelect type={"Choose one"} label={"Agama"} />
+          <SelectOption
+            name={"Status Perkawinan"}
+            items={["Belum Kawin", "Kawin", "Cerai Hidup", "Cerai Mati"]}
+          />
+
+          <SelectOption
+            name={"Jenis Kelamin"}
+            items={["Laki-laki", "Perempuan"]}
+          />
+          <SelectOption
+            name={"Agama"}
+            items={[
+              "Islam",
+              "Kristen Protestan",
+              "Kristen Katolik",
+              "Hindu",
+              "Buddha",
+              "Konghucu",
+            ]}
+          />
 
           <LabeledTextInput label={"Email"} placeholder={"Ketik Email"} />
 
-          <SimpleSelect type={"Choose one"} label={"Golongan Darah"} />
+          <SelectOption name={"Golongan Darah"} items={["A", "B", "AB", "O"]} />
 
           <LabeledTextInput
             label={"NIK & NPWP"}
@@ -716,24 +539,88 @@ export default function InfoPribadi({ navigation }) {
           <TextArea />
           <RadioButtonExample />
 
-          <SimpleSelect type={"Choose one"} label={"Pilih Kota"} />
-          <SimpleSelect type={"Choose one"} label={"Pilih Provisi"} />
-          <SimpleSelect type={"Choose one"} label={"Pilih Kode Pos"} />
+          <SelectOption name={"Kota"} items={["Kota A", "Kota B", "Kota C"]} />
+          <SelectOption
+            name={"Provinsi"}
+            items={["Provinsi A", "Provinsi B", "Provinsi C"]}
+          />
+          <SelectOption
+            name={"Kode Pos"}
+            items={["Kode Pos A", "Kode Pos B", "Kode Pos C"]}
+          />
 
           <TextArea />
 
-          <SimpleSelect type={"Choose one"} label={"Pilih Kota"} />
-          <SimpleSelect type={"Choose one"} label={"Pilih Provisi"} />
-          <SimpleSelect type={"Choose one"} label={"Pilih Kode Pos"} />
+          <SelectOption name={"Kota"} items={["Kota A", "Kota B", "Kota C"]} />
+          <SelectOption
+            name={"Provinsi"}
+            items={["Provinsi A", "Provinsi B", "Provinsi C"]}
+          />
+          <SelectOption
+            name={"Kode Pos"}
+            items={["Kode Pos A", "Kode Pos B", "Kode Pos C"]}
+          />
 
-          <View
-            style={{ height: 150, flexDirection: "row-reverse", marginTop: 15 }}
-          >
-            <ModalKirim navigation={navigation}/>
+          <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
+            <Pressable
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onPress={handleBack}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 16,
+                  color: "#379AE6FF",
+                }}
+              >
+                Batal
+              </Text>
+            </Pressable>
+            <ModalKirim navigation={navigation} title={"Informasi Pribadi"}  name={"InfoPribadi"}/>
           </View>
         </View>
-        <View style={{ height: 50 }}></View>
+
+        <View style={{ height: 100 }}></View>
       </ScrollView>
+
+      <Modal animationType="fade" transparent={true} visible={modalVisible}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalBackground}></View>
+          <View style={styles.modalContent}>
+            <View style={styles.modalIconContainer}>
+              <FontAwesome5Icon name="exclamation" size={20} color="white" />
+            </View>
+            <View style={styles.modalTextContainer}>
+              <Text style={styles.modalTitle}>Peringatan</Text>
+              <Text style={styles.modalDescription}>
+                Apakah anda yakin ingin membatalkan pengisian data?
+              </Text>
+            </View>
+            <View style={styles.modalButtonContainer}>
+              <TouchableOpacity
+                onPress={() => setModalVisible(false)}
+                style={styles.modalCancelButton}
+              >
+                <Text style={styles.modalCancelButtonText}>Tidak</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(false);
+                  navigation.navigate("Home");
+                }}
+                style={styles.modalConfirmButton}
+              >
+                <Text style={styles.modalConfirmButtonText}>Ya</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 }

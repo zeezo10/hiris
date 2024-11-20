@@ -1,0 +1,63 @@
+[
+    {
+      "date": "Kamis, 17 Desember 2029",
+      "clockIn": "09:05",
+      "clockOut": "17:10",
+      "attendanceStatus": "Terlambat",
+      "approval": "Disetujui oleh Christiano Ronaldo",
+      "overtime": {
+        "time": "18:00 - 21:00",
+        "hours": 3
+      },
+      "recordedTime": "08:05:36"
+    },
+    {
+      "date": "Kamis, 17 Desember 2029",
+      "clockIn": "09:05",
+      "clockOut": "17:10",
+      "attendanceStatus": "Hadir",
+      "approval": "Disetujui oleh Christiano Ronaldo",
+      "overtime": {
+        "time": "18:00 - 21:00",
+        "hours": 3
+      },
+      "recordedTime": "08:05:36"
+    },
+    {
+      "date": "Kamis, 17 Desember 2029",
+      "clockIn": "09:05",
+      "clockOut": "17:10",
+      "attendanceStatus": "Cuti Tahunan",
+      "approval": "Disetujui oleh Fery Cokroaminoto Dewantoro",
+      "overtime": {
+        "time": "-",
+        "hours": 0
+      },
+      "recordedTime": "08:05:36"
+    },
+    {
+      "date": "Kamis, 17 Desember 2029",
+      "clockIn": "09:05",
+      "clockOut": "17:10",
+      "attendanceStatus": "Izin",
+      "approval": "Disetujui oleh Ahmadan Harapan Bangsa",
+      "overtime": {
+        "time": "-",
+        "hours": 0
+      },
+      "recordedTime": "08:05:36"
+    },
+    {
+      "date": "Kamis, 17 Desember 2029",
+      "clockIn": "09:05",
+      "clockOut": "17:10",
+      "attendanceStatus": "Hadir",
+      "approval": "Disetujui oleh Christiano Ronaldo",
+      "overtime": {
+        "time": "18:00 - 21:00",
+        "hours": 7
+      },
+      "recordedTime": "08:05:36"
+    }
+  ]
+  

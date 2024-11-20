@@ -1,0 +1,66 @@
+[
+    {
+      "category": "Tepat Waktu",
+      "count": "20",
+      "days": "+5",
+      "difference": "hari dari bulan lalu",
+      "icon": "clock"
+    },
+    {
+      "category": "Terlambat",
+      "count": "3",
+      "days": "-5",
+      "difference": "hari dari bulan lalu",
+      "icon": "late"
+    },
+    {
+      "category": "Tidak Hadir",
+      "count": "3",
+      "days": "+6",
+      "difference": "hari dari bulan lalu",
+      "icon": "absent"
+    },
+    {
+      "category": "Tidak Clock In",
+      "count": "3",
+      "days": "+1",
+      "difference": "hari dari bulan lalu",
+      "icon": "clock-in-missing"
+    },
+    {
+      "category": "Tidak Clock Out",
+      "count": "3",
+      "days": "+5",
+      "difference": "hari dari bulan lalu",
+      "icon": "clock-out-missing"
+    },
+    {
+      "category": "Izin",
+      "count": "3",
+      "days": "-1",
+      "difference": "hari dari bulan lalu",
+      "icon": "permission"
+    },
+    {
+      "category": "Cuti",
+      "count": "3",
+      "days": "+5",
+      "difference": "hari dari bulan lalu",
+      "icon": "leave"
+    },
+    {
+      "category": "Sakit",
+      "count": "3",
+      "days": "+5",
+      "difference": "hari dari bulan lalu",
+      "icon": "sick"
+    },
+    {
+      "category": "Lembur",
+      "count": "14 jam 35 menit",
+      "days": "+5h 35m",
+      "difference": "dari bulan lalu",
+      "icon": "overtime"
+    }
+  ]
+  

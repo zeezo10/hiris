@@ -1,176 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
   ScrollView,
+  Image,
   Pressable,
   TextInput,
   StyleSheet,
   Dimensions,
+  Button,
   TouchableOpacity,
   Modal,
 } from "react-native";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { Picker } from "@react-native-picker/picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import { setFalse, setTrue } from "../../redux/counter";
 import { useDispatch } from "react-redux";
-import { setTrue } from "../../redux/counter";
-import { useNavigation } from "@react-navigation/native";
+import SelectOption from "../../component/global/SelectOption";
+import UploadFile from "../../component/global/UploadFile";
+import LabeledTextInput from "../../component/global/LabeledTextInput";
+import ModalKirim from "../../component/global/ModalKirim";
 
-const SimpleSelect = ({ type, label }) => {
-  const [selectedValue, setSelectedValue] = useState("choose one");
+SplashScreen.preventAutoHideAsync();
+
+
+// ---------------------------------
+
+const DatePickerInput = ({name}) => {
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    // Handle if the user canceled the selection (selectedDate will be undefined)
+    if (selectedDate) {
+      setDate(selectedDate);
+    }
+    setShow(false); // Hide the picker after selecting
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
 
   return (
     <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
-      <View style={styles.pickerContainer}>
-        <Picker
-          selectedValue={selectedValue}
-          onValueChange={(itemValue) => setSelectedValue(itemValue)}
-          style={styles.picker}
-        >
-          <Picker.Item
-            label={type}
-            value={null}
-            style={{ color: "#BCC1CAFF" }}
-          />
-          <Picker.Item label="option 1" value="option 1" />
-          <Picker.Item label="option 2" value="option 2" />
-        </Picker>
-      </View>
+      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+
+      <Pressable
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 45,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 10,
+          paddingHorizontal: 10,
+        }}
+        onPress={showDatepicker}
+        title="Pick a Date"
+      >
+        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
+
+        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
+      </Pressable>
+
+      {show && (
+        <DateTimePicker
+          value={date}
+          mode="date" // Date mode
+          display="calendar" // For Android: Use 'calendar' or 'spinner'
+          onChange={onChange}
+        />
+      )}
     </View>
   );
 };
 
-const UploadInput = ({ label, placeholder }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View style={[styles.input, styles.uploadInput]}>
-          <Text style={{ color: "grey" }}>{placeholder}</Text>
-          <View style={styles.chooseFileButton}>
-            <Text style={{ color: "#BCC1CAFF", fontSize: 11 }}>
-              Choose file
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
 
-const LabeledTextInput = ({ label, placeholder }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} placeholder={placeholder} />
-    </View>
-  );
-};
+// ------------------------------------------
 
-const ModalKirim = () => {
-  const [visible, setVisible] = useState(false);
 
-  const handleOpen = () => {
-    setVisible(!visible);
-  };
 
-  return (
-    <>
-      <TouchableOpacity style={styles.kirimButton} onPress={handleOpen}>
-        <Text style={styles.kirimButtonText}>Kirim</Text>
-      </TouchableOpacity>
-
-      <Modal animationType="fade" transparent={true} visible={visible}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalBackground}></View>
-          <View style={styles.modalContent}>
-            <View style={styles.modalIconContainer}>
-              <FontAwesome5Icon name="user-alt" size={20} color="white" />
-            </View>
-            <View style={styles.modalTextContainer}>
-              <Text style={styles.modalTitle}>Informasi Pekerjaan</Text>
-              <Text style={styles.modalDescription}>
-                Apakah anda yakin ingin mengirim Informasi Pekerjaan? Jika anda
-                ingin mengubahnya setelah dikirim, anda perlu mengajukan
-                permintaan kepada HRD
-              </Text>
-            </View>
-            <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                onPress={handleOpen}
-                style={styles.modalCancelButton}
-              >
-                <Text style={styles.modalCancelButtonText}>Batal</Text>
-              </TouchableOpacity>
-              <ModalKirimSuccess setVisibleKirim={setVisible} />
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </>
-  );
-};
-
-const ModalKirimSuccess = ({ setVisibleKirim }) => {
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const [visible2, setVisible2] = useState(false);
-
-  const handleOpen = () => {
-    setVisible2(!visible2);
-  };
-
-  const handleBackToBeranda = () => {
-    setVisibleKirim(false);
-    dispatch(setTrue({ type: "InfoPekerjaan" }));
-    navigation.navigate("Home");
-  };
-
-  return (
-    <>
-      <TouchableOpacity style={styles.kirimButton} onPress={handleOpen}>
-        <Text style={styles.kirimButtonText}>Kirim</Text>
-      </TouchableOpacity>
-
-      <Modal animationType="fade" transparent={true} visible={visible2}>
-        <View style={styles.modalContainer}>
-          <View style={styles.modalBackground}></View>
-          <View style={styles.modalContent}>
-            <View style={styles.modalIconContainer}>
-              <FontAwesome5Icon name="check" size={20} color="white" />
-            </View>
-            <View style={styles.modalTextContainer}>
-              <Text style={styles.modalDescription}>
-                Informasi Pekerjaan berhasil dikirim dan menunggu persetujuan
-                HRD
-              </Text>
-            </View>
-            <View style={styles.modalButtonContainer}>
-              <TouchableOpacity
-                onPress={handleBackToBeranda}
-                style={styles.modalConfirmButton}
-              >
-                <Text style={styles.modalConfirmButtonText}>
-                  Kembali ke Beranda
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-    </>
-  );
-};
 
 const styles = StyleSheet.create({
+  //---------- text area ------------
+
   container: {
     flex: 1,
     justifyContent: "center",
     gap: 3,
   },
+  textArea: {
+    height: 150,
+    padding: 10,
+    width: "100%",
+    borderColor: "#BCC1CAFF",
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderRadius: 10,
+    textAlignVertical: "top", // Align text at the top
+  },
+
+  //----------Select option ----------------
   pickerContainer: {
     borderWidth: 1,
     borderColor: "#ddd",
@@ -180,6 +116,12 @@ const styles = StyleSheet.create({
   picker: {
     width: "100%",
     height: 50,
+  },
+
+  //---------- input ------------
+
+  container: {
+    gap: 3,
   },
   label: {
     fontSize: 18,
@@ -193,33 +135,36 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
   },
-  uploadInput: {
+
+  // --------------- radio -----------
+
+  // container: {
+  //   margin: 20,
+  // },
+  radioContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    gap: 10,
   },
-  chooseFileButton: {
-    height: 30,
+  radioCircle: {
+    height: 20,
+    width: 20,
+    borderRadius: 5,
     borderWidth: 1,
     borderColor: "#BCC1CAFF",
-    width: 70,
-    borderRadius: 10,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
-  kirimButton: {
-    height: 45,
+  selectedCircle: {
+    height: 15,
+    width: 15,
+    borderRadius: 3,
     backgroundColor: "#379ae6",
-    width: "100%",
-    borderRadius: 8,
-    justifyContent: "center",
-    alignItems: "center",
   },
-  kirimButtonText: {
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 18,
+  radioText: {
+    fontSize: 16,
   },
+
   modalContainer: {
     height: "100%",
     width: "100%",
@@ -292,9 +237,53 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InfoPekerjaan({ navigation }) {
+export default function InfoPribadi({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
+  const [date, setDate] = useState(new Date());
+  const [showStartPicker, setShowStartPicker] = useState(false);
+  const [showEndPicker, setShowEndPicker] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [leaveType, setLeaveType] = useState("");
+  const [leaveReason, setLeaveReason] = useState("");
+
+  // ---------------------------inputs------------------------------
+
+  // ---------------------------------------------------------
+  const toggleDatePicker = useCallback(
+    (pickerType) => {
+      if (pickerType === "start") {
+        setShowStartPicker(!showStartPicker);
+      } else {
+        setShowEndPicker(!showEndPicker);
+      }
+    },
+    [showStartPicker, showEndPicker]
+  );
+
+  const onDateChange = useCallback(
+    (event, selectedDate, dateType) => {
+      if (event.type === "dismissed") {
+        toggleDatePicker(dateType);
+        return;
+      }
+
+      if (selectedDate) {
+        const currentDate = selectedDate || date;
+        setDate(currentDate);
+        if (dateType === "start") {
+          setStartDate(currentDate.toDateString());
+        } else {
+          setEndDate(currentDate.toDateString());
+        }
+      }
+      toggleDatePicker(dateType);
+    },
+    [date, toggleDatePicker]
+  );
+
+  // -------- Batal Modal ------------------------------------
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleBack = () => {
@@ -310,47 +299,101 @@ export default function InfoPekerjaan({ navigation }) {
           paddingHorizontal: 15,
         }}
       >
-        <Pressable onPress={handleBack} style={{ marginBottom: 10 }}>
-          <AntDesign name="arrowleft" size={24} color="black" />
-        </Pressable>
+        <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 15,
+            paddingVertical: 10,
+            flexDirection: "row",
+          }}
+        ></View>
 
-        <View style={{ backgroundColor: "white", paddingVertical: 15 }}>
-          <View style={{ paddingVertical: 15 }}>
-            <Text>Informasi Pekerjaan</Text>
-          </View>
+        <View style={{ gap: 20 }}>
+          <LabeledTextInput
+            label={"ID Karyawan"}
+            placeholder={"Ketik ID Karyawanp"}
+          />
 
-          <View style={{ gap: 20 }}>
-            <LabeledTextInput
-              label={"ID Keryawan"}
-              placeholder={"Ketik ID Keryawan"}
+          <SelectOption
+            name={"Jenis Karyawan"}
+            items={["Karyawan Tetap (PKWTT)", "Karyawan Kontrak (PKWT)", "Karyawan Harian Lepas","Karyawan Paruh Waktu (Part-Time)","Karyawan Freelance (Pekerja Lepas)","Karyawan Outsourcing","Karyawan Magang (Internship)"]}
+          />
+
+          <SelectOption
+            name={"Status Karyawan"}
+            items={["Aktif", "Tidak Aktif", "Cuti", "Pensiun", "Mengundurkan Diri (Resign)", "Diberhentikan (PHK)", "Meninggal Dunia", "Tugas Belajar", "Skorsing"]}
+          />
+
+          <SelectOption
+            name={"Nama Jabatan"}
+            items={["Software Engineer", "Front-End Developer", "Back-End Developer" , "Full Stack Developer", "Mobile Developer", "DevOps Engineer", "System Administrator", "Network Engineer", "Data Engineer"]}
+          />
+
+          <SelectOption
+            name={"Level Jabatan"}
+            items={["Entry Level (Junior / Staff / Pelaksana)", "Associate / Officer", "Senior Staff / Senior Associate", "Supervisor / Koordinator" , "Assistant Manager", "Manager", "Senior Manager", "General Manager", "Director", "Vice President (VP)", "Executive Level (C-Level)", "Komisaris"]}
+          />
+
+          <SelectOption
+            name={"Departemen"}
+            items={["Product Development", "Engineering Development", "IT Security & Infrastructure", "Design UI/UX", "Data & Analytics", "Marketing & Sales", "Customer Support & Technical Support"]}
+          />
+
+          <SelectOption name={"Grade"} items={["Grade A (Pemula / Entry)", "Grade B (Pelaksana / Operator)", "Grade C (Terampil / Skilled)", "Grade D (Profesional)", "Grade E (Ahli / Senior Specialist)", "Grade F (Koordinator / Project Lead)", "Grade G (Eksekutif Junior)", "Grade H (Eksekutif Senior / Pengawas Utama)", "Grade I (Top Level / Eksekutif Puncak)"]} />
+
+          <LabeledTextInput
+            label={"Atasan Langsung"}
+            placeholder={"Ketik Atasan Langsung"}
+          />
+
+          <LabeledTextInput
+            label={"Persetujuan"}
+            placeholder={"Ketik Persetujuan"}
+          />
+
+          <SelectOption name={"Lokasi Kerja"} items={["Kantor Pusat", "Cabang Makassar", "Remote", "Cabang Batam", "Cabang Pembantu Batam Center", "Pabrik Gunung Putri 1", "Pabrik Gunung Putri 2"]} />
+
+
+          <DatePickerInput name={"Mulai Bekerja"} />
+
+          <DatePickerInput name={"Terakhir Bekerja"} />
+
+          <UploadFile
+              label={"CV"}
+              placeholder={"Upload CV"}
             />
-            <SimpleSelect type={"Choose one"} label={"Jenis Keryawan"} />
-            <SimpleSelect type={"Choose one"} label={"Status Keryawan"} />
-            <SimpleSelect type={"Choose one"} label={"Nama Jabatan"} />
-            <SimpleSelect type={"Choose one"} label={"Level Jabatan"} />
-            <SimpleSelect type={"Choose one"} label={"Department"} />
-            <SimpleSelect type={"Choose one"} label={"Grade"} />
-            <SimpleSelect type={"Choose one"} label={"Atasan Langsung"} />
-            <SimpleSelect type={"Choose one"} label={"Persetujuan"} />
-            <SimpleSelect type={"Choose one"} label={"Lokasi Kerja"} />
-            <UploadInput label={"CV"} placeholder={"Upload CV"} />
-            <UploadInput
+
+          <UploadFile
               label={"Dokumen Kontrak Kerja"}
               placeholder={"Upload Kontrak Kerja"}
             />
-            <View
+
+          <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
+            <Pressable
               style={{
-                height: 150,
-                flexDirection: "row-reverse",
-                marginTop: 15,
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
               }}
+              onPress={handleBack}
             >
-              <ModalKirim />
-            </View>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 16,
+                  color: "#379AE6FF",
+                }}
+              >
+                Batal
+              </Text>
+            </Pressable>
+            <ModalKirim navigation={navigation} title={"Informasi Pekerjaan"} name={"InfoPekerjaan"} />
           </View>
         </View>
 
-        <View style={{ height: 50 }}></View>
+        <View style={{ height: 100 }}></View>
       </ScrollView>
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>

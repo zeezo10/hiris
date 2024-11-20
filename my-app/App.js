@@ -343,11 +343,21 @@ export default function App() {
               name="Absensi"
               component={Absensi}
               options={{
-                headerTitle: "",
-
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Absensi
+                  </Text>
+                ),
+                headerTitleAlign: "center",
                 headerStyle: {
                   backgroundColor: "white",
-
                   shadowOpacity: 0,
                   elevation: 0,
                 },
