@@ -3,12 +3,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const dataBtnSlice = createSlice({
   name: "dataBtn",
   initialState: {
-    InfoPribadi: true,
-    InfoPekerjaan: true,
-    InfoPayroll: true,
-    RiwayatPendidikan: true,
-    RiwayatPekerjaan: true,
-    Aset: true,
+    InfoPribadi: false,
+    InfoPekerjaan: false,
+    InfoPayroll: false,
+    RiwayatPendidikan: false,
+    RiwayatPekerjaan: false,
+    Aset: false,
   },
   reducers: {
     setTrue: (state, action) => {

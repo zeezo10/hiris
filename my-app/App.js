@@ -26,6 +26,8 @@ import InfoPayroll from "./pages/dataKeryawan/InfoPayroll";
 import RiwayatPendidikan from "./pages/dataKeryawan/RiwayatPendidikan";
 import Aset from "./pages/dataKeryawan/Aset";
 import RiwayatPekerjaan from "./pages/dataKeryawan/RiwayatPekerjaan";
+import Profile_InfoPribadi from "./pages/profile/Profile_InfoPribadi";
+import Profile_InfoPekerjaan from "./pages/profile/Profile_InfoPekerjaan";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -147,7 +149,7 @@ export default function App() {
               component={MainTab}
               options={{ headerShown: false }}
             />
-            {/* ---------------------------  profile -------------------------------- */}
+            {/* ---------------------------Edit Profile -------------------------------- */}
 
             <Stack.Screen
               name="InfoPribadi"
@@ -295,6 +297,73 @@ export default function App() {
             />
 
             {/* ----------------------------------------------------------------------------- */}
+            {/* ---------------------------------- Profile Data ---------------------------------- */}
+
+
+            <Stack.Screen
+              name="InfoPribadi-Profile"
+              component={Profile_InfoPribadi}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Informasi Pribadi
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="Profile_InfoPekerjaan"
+              component={Profile_InfoPekerjaan}
+              options={{
+                headerTitle: () => (
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontWeight: "bold",
+                      flex: 1,
+                      textAlignVertical: "center",
+                    }}
+                  >
+                    Informasi Pribadi
+                  </Text>
+                ),
+                headerTitleAlign: "center",
+                headerStyle: {
+                  backgroundColor: "white",
+                  shadowOpacity: 0,
+                  elevation: 0,
+                },
+              }}
+            />
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
 
             <Stack.Screen
               name="Pengajuan"

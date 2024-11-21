@@ -303,7 +303,7 @@ export default function Profile({ navigation }) {
             </Text>
           </View>
 
-          {/* <Text>{`${Aset}`}</Text> */}
+          {/* --------------------------------------------------------- */}
         </View>
 
         <View
@@ -314,12 +314,33 @@ export default function Profile({ navigation }) {
             gap: 10,
           }}
         >
-          <DataBtn type={"InfoPribadi"} navigation={navigation} active={true} />
-          <DataBtn
-            type={"InfoPekerjaan"}
-            navigation={navigation}
-            active={Pribadi}
-          />
+          {Pribadi ? (
+            <DataBtn
+              type={"InfoPribadi-Profile"}
+              navigation={navigation}
+              active={true}
+            />
+          ) : (
+            <DataBtn
+              type={"InfoPribadi"}
+              navigation={navigation}
+              active={true}
+            />
+          )}
+          {Pekerjaan ? (
+            <DataBtn
+              type={"Profile_InfoPekerjaan"}
+              navigation={navigation}
+              active={true}
+            />
+          ) : (
+            <DataBtn
+              type={"InfoPekerjaan"}
+              navigation={navigation}
+              active={Pribadi}
+            />
+          )}
+
           <DataBtn
             type={"InfoPayroll"}
             navigation={navigation}

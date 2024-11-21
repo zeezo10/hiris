@@ -11,7 +11,7 @@ export default function DataBtn({ type, navigation, active }) {
 
   if (type === "InfoPribadi") {
     name = "user-alt";
-    title = "Informasi Perbadi";
+    title = "Informasi Pribadi";
   } else if (type === "InfoPekerjaan") {
     name = "briefcase";
     title = "Informasi Pekerjaan";
@@ -27,6 +27,15 @@ export default function DataBtn({ type, navigation, active }) {
   } else if (type === "Aset") {
     name = "grid";
     title = "Aset";
+  }
+  // -----------------------------------------------------
+   else if (type === "InfoPribadi-Profile"){
+    name = "user-alt";
+    title = "Informasi Pribadi";
+  }
+   else if (type === "Profile_InfoPekerjaan"){
+    name = "user-alt";
+    title = "Informasi Pekerjaan";
   }
 
   const [modalVisible, setModalVisible] = useState(false);
