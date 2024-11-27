@@ -17,12 +17,12 @@ import * as SplashScreen from "expo-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
-import { setFalse, setTrue } from "../../redux/counter";
+import { setFalse, setTrue } from "../../../redux/counter";
 import { useDispatch } from "react-redux";
-import SelectOption from "../../component/global/SelectOption";
-import UploadFile from "../../component/global/UploadFile";
-import LabeledTextInput from "../../component/global/LabeledTextInput";
-import ModalKirim from "../../component/global/ModalKirim";
+import SelectOption from "../../../component/global/SelectOption";
+import UploadFile from "../../../component/global/UploadFile";
+import LabeledTextInput from "../../../component/global/LabeledTextInput";
+import ModalKirim from "../../../component/global/ModalKirim";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -47,7 +47,7 @@ const DatePickerInput = ({name}) => {
 
   return (
     <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+      <Text style={{ fontSize: 14, fontWeight: "bold", color:"#424955FF" }}>{name}</Text>
 
       <Pressable
         style={{
@@ -58,13 +58,13 @@ const DatePickerInput = ({name}) => {
           width: "100%",
           borderColor: "#BCC1CAFF",
           borderWidth: 1,
-          borderRadius: 10,
+          borderRadius: 6,
           paddingHorizontal: 10,
         }}
         onPress={showDatepicker}
         title="Pick a Date"
       >
-        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
+        <Text style={{ fontSize: 14  }}>{date.toLocaleDateString()}</Text>
 
         <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
       </Pressable>
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InfoPribadi({ navigation }) {
+export default function DataPekerjaan({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
   const [date, setDate] = useState(new Date());

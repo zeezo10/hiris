@@ -2,12 +2,12 @@ import React from "react";
 import { View, ScrollView, Dimensions, Text, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Activitas() {
+export default function AbsensiHari() {
   const data = [
     {
       id: 1,
       type:"Clock In",
-      time: "08:06 AM",
+      time: "08:06",
       status: "terlambat +5m",
       date: "Kamis, 23 Des 2024",
     },
@@ -15,7 +15,7 @@ export default function Activitas() {
       id: 2,
       type:"Clock Out",
 
-      time: "08:10 AM",
+      time: "08:10",
       status: "terlambat +9m",
       date: "Jumat, 24 Des 2024",
     },
@@ -23,38 +23,39 @@ export default function Activitas() {
       id: 3,
       type:"Lembur",
 
-      time: "08:15 AM - 22:00 PM",
+      time: "08:15 - 22:00",
       status: "terlambat +15m",
       date: "Sabtu, 25 Des 2024",
     },
   ];
 
   return (
-    <View style={{ gap: 10, width: "100%" }}>
+    <View style={{ gap: 10, width: "100%", marginBottom:10}}>
       <View
         style={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          
         }}
       >
         <Text
           style={{
-            fontSize:18,
-            fontWeight:"bold"
+            fontSize:14,
+            fontWeight:"700",
           }}
         >
-          Aktivitas
+          Absensi Hari Ini
         </Text>
         <Pressable>
-          <Text style={{color:"#9095A0FF"}}>Lihat Detail</Text>
+          <Text style={{color:"#9095A0FF", fontSize:11}}>Lihat Detail</Text>
         </Pressable>
       </View>
 
       <View
         style={{
-          height: 230,
           width: "100%",
+     
         }}
       >
         <View>
@@ -68,7 +69,7 @@ export default function Activitas() {
                 flexDirection: "row",
                 gap: 10,
                 justifyContent: "space-between",
-                marginBottom: 10, // space between items
+              
               }}
             >
               <View
@@ -78,10 +79,10 @@ export default function Activitas() {
                   alignItems: "center",
                 }}
               >
-                <AntDesign name="clockcircleo" size={34} color="black" />
+                <AntDesign name="clockcircleo" size={30} color="black" />
               </View>
               <View style={{ flex: 4 }}>
-                <Text style={{ fontSize: 15, fontWeight: "bold" }}>
+                <Text style={{ fontSize: 14, fontWeight: "bold", color:"#323842FF" }}>
                   {item.type}
                 </Text>
                 <Text
@@ -101,8 +102,8 @@ export default function Activitas() {
                   color: "grey",
                 }}
               >
-                <Text style={{ textAlign: "right", fontWeight:"bold" }}>{item.time}</Text>
-                <Text style={{ textAlign: "right", color: "#9095A0FF" }}>
+                <Text style={{ textAlign: "right", fontWeight:"bold" ,fontSize: 14 ,color:"#323842FF" }}>{item.time}</Text>
+                <Text style={{ textAlign: "right", color: "#9095A0FF" ,fontSize: 12, }}>
                   {item.status}
                 </Text>
               </View>

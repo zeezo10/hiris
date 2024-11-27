@@ -17,11 +17,12 @@ import * as SplashScreen from "expo-splash-screen";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
-import { setFalse, setTrue } from "../../redux/counter";
+import { setFalse, setTrue } from "../../../redux/counter";
 import { useDispatch } from "react-redux";
-import SelectOption from "../../component/global/SelectOption";
-import LabeledTextInput from "../../component/global/LabeledTextInput";
-import ModalKirim from "../../component/global/ModalKirim";
+import SelectOption from "../../../component/global/SelectOption";
+import LabeledTextInput from "../../../component/global/LabeledTextInput";
+import ModalKirim from "../../../component/global/ModalKirim";
+import TextArea from "../../../component/global/TextArea";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -71,7 +72,9 @@ const DatePickerInput = () => {
 
   return (
     <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>Tanggal Lahir</Text>
+      <Text style={{ fontSize: 14, fontWeight: "bold", color: "#424955FF" }}>
+        Tanggal Lahir
+      </Text>
 
       <Pressable
         style={{
@@ -88,7 +91,9 @@ const DatePickerInput = () => {
         onPress={showDatepicker}
         title="Pick a Date"
       >
-        <Text style={{ fontSize: 14, color:date ? "" : "#9095A0FF" }}>{date ? date.toLocaleDateString() : "Pilih Tanggal Lahir"}</Text>
+        <Text style={{ fontSize: 14, color: date ? "" : "#BCC1CAFF" }}>
+          {date ? date.toLocaleDateString() : "Pilih Tanggal Lahir"}
+        </Text>
 
         <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
       </Pressable>
@@ -107,31 +112,7 @@ const DatePickerInput = () => {
 
 //-------------------------------------------
 
-const TextArea = () => {
-  const [text, setText] = useState("");
-
-  return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-        Alamat Sesuai KTP
-      </Text>
-      <TextInput
-        style={styles.textArea}
-        placeholder="Type something..."
-        placeholderTextColor="gray"
-        multiline={true}
-        numberOfLines={4} // Adjust the initial number of lines
-        value={text}
-        onChangeText={setText}
-      />
-    </View>
-  );
-};
-
 // ------------------------------------------
-
-
-
 
 const styles = StyleSheet.create({
   //---------- text area ------------
@@ -208,7 +189,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#379ae6",
   },
   radioText: {
-    fontSize: 16,
+    fontSize: 14,
   },
 
   modalContainer: {
@@ -283,7 +264,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function InfoPribadi({ navigation }) {
+export default function DataPribadi({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
 
   const [date, setDate] = useState(new Date());
@@ -365,7 +346,7 @@ export default function InfoPribadi({ navigation }) {
       <ScrollView
         style={{
           backgroundColor: "white",
-          paddingVertical: 15,
+
           paddingHorizontal: 15,
         }}
       >
@@ -373,15 +354,14 @@ export default function InfoPribadi({ navigation }) {
           style={{
             alignItems: "center",
             justifyContent: "center",
-            gap: 15,
-            paddingVertical: 10,
+            paddingVertical: 20,
             flexDirection: "row",
           }}
         >
           <View
             style={{
-              height: 100,
-              width: 100,
+              height: 88,
+              width: 88,
               backgroundColor: "#9095A0FF",
               borderRadius: 100,
               justifyContent: "center",
@@ -394,27 +374,28 @@ export default function InfoPribadi({ navigation }) {
               color="white"
               style={{ position: "absolute" }}
             />
-          </View>
 
-          <View
-            style={{
-              height: 40,
-              width: 40,
-              backgroundColor: "#379AE6FF",
-              position: "absolute",
-              top: 20,
-              left: 190,
-              borderRadius: 20,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <FontAwesome5Icon
-              name="pen"
-              size={15}
-              color="white"
-              style={{ position: "absolute" }}
-            />
+            <View
+              style={{
+                height: 32,
+                width: 32,
+                backgroundColor: "#379AE6FF",
+                // position: "absolute",
+
+                bottom: 20,
+                left: 45,
+                borderRadius: 20,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <FontAwesome5Icon
+                name="pen"
+                size={15}
+                color="white"
+                style={{ position: "absolute" }}
+              />
+            </View>
           </View>
         </View>
 
@@ -432,7 +413,9 @@ export default function InfoPribadi({ navigation }) {
           <DatePickerInput />
 
           <View style={{ gap: 3 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            <Text
+              style={{ fontSize: 14, fontWeight: "bold", color: "#424955FF" }}
+            >
               Nomor Handphone
             </Text>
             <View style={{ flexDirection: "row", gap: 10 }}>
@@ -442,21 +425,26 @@ export default function InfoPribadi({ navigation }) {
                   flex: 1,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,
-                  borderRadius: 10,
+                  borderRadius: 6,
                   paddingHorizontal: 10,
+                  flexDirection: "row",
+
+                  textAlign: "center",
                 }}
                 placeholder="+62"
+                placeholderTextColor="#BCC1CAFF"
               ></TextInput>
               <TextInput
                 style={{
                   height: 45,
-                  flex: 8,
+                  flex: 5,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,
-                  borderRadius: 10,
+                  borderRadius: 6,
                   paddingHorizontal: 10,
                 }}
                 placeholder="Ketik Nomor Handphone"
+                placeholderTextColor="#BCC1CAFF"
               ></TextInput>
             </View>
           </View>
@@ -507,7 +495,7 @@ export default function InfoPribadi({ navigation }) {
           />
 
           <View style={{ gap: 3 }}>
-            <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+            <Text style={{ fontSize: 14, fontWeight: "bold" }}>
               Nomor Kontak Darurat
             </Text>
             <View style={{ flexDirection: "row", gap: 10 }}>
@@ -521,6 +509,7 @@ export default function InfoPribadi({ navigation }) {
                   paddingHorizontal: 10,
                 }}
                 placeholder="+62"
+                placeholderTextColor="#BCC1CAFF"
               ></TextInput>
               <TextInput
                 style={{
@@ -532,32 +521,39 @@ export default function InfoPribadi({ navigation }) {
                   paddingHorizontal: 10,
                 }}
                 placeholder="Ketik Nomor Handphone"
+                placeholderTextColor="#BCC1CAFF"
               ></TextInput>
             </View>
           </View>
 
-          <TextArea />
+          <TextArea label={"Alamat Sesuai KTP"} />
           <RadioButtonExample />
 
-          <SelectOption name={"Kota"} items={["Kota A", "Kota B", "Kota C"]} />
           <SelectOption
-            name={"Provinsi"}
+            name={"Pilih Kota"}
+            items={["Kota A", "Kota B", "Kota C"]}
+          />
+          <SelectOption
+            name={"Pilih Provinsi"}
             items={["Provinsi A", "Provinsi B", "Provinsi C"]}
           />
           <SelectOption
-            name={"Kode Pos"}
+            name={"Pilih Kode Pos"}
             items={["Kode Pos A", "Kode Pos B", "Kode Pos C"]}
           />
 
-          <TextArea />
+          <TextArea label={"Alamat Sesuai KTP"} />
 
-          <SelectOption name={"Kota"} items={["Kota A", "Kota B", "Kota C"]} />
           <SelectOption
-            name={"Provinsi"}
+            name={"Pilih Kota"}
+            items={["Kota A", "Kota B", "Kota C"]}
+          />
+          <SelectOption
+            name={"Pilih Provinsi"}
             items={["Provinsi A", "Provinsi B", "Provinsi C"]}
           />
           <SelectOption
-            name={"Kode Pos"}
+            name={"Pilih Kode Pos"}
             items={["Kode Pos A", "Kode Pos B", "Kode Pos C"]}
           />
 
@@ -574,14 +570,18 @@ export default function InfoPribadi({ navigation }) {
               <Text
                 style={{
                   textAlign: "center",
-                  fontSize: 16,
+                  fontSize: 14,
                   color: "#379AE6FF",
                 }}
               >
                 Batal
               </Text>
             </Pressable>
-            <ModalKirim navigation={navigation} title={"Informasi Pribadi"}  name={"InfoPribadi"}/>
+            <ModalKirim
+              navigation={navigation}
+              title={"Data Pribadi"}
+              name={"InfoPribadi"}
+            />
           </View>
         </View>
 

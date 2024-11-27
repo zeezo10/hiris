@@ -19,7 +19,8 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useDispatch } from "react-redux";
-import { setFalse, setTrue } from "../../redux/counter";
+import { setFalse ,setTrue} from "../../../redux/counter";
+
 
 SplashScreen.preventAutoHideAsync();
 

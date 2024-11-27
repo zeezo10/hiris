@@ -1,18 +1,18 @@
 import React, { useState } from "react"; // Added useState import
 import { View, Text, TextInput, StyleSheet } from "react-native"; // Added necessary imports
 
-export default function TextArea() {
+export default function TextArea({label}) {
   const [text, setText] = useState("");
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-        Alamat Sesuai KTP
+      <Text style={{ fontSize: 14, fontWeight: "bold" ,color:"#424955FF"}}>
+        {label}
       </Text>
       <TextInput
         style={styles.textArea}
         placeholder="Type something..."
-        placeholderTextColor="gray"
+        placeholderTextColor="#BCC1CAFF"
         multiline={true}
         numberOfLines={4} // Adjust the initial number of lines
         value={text}
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({ // Wrapped styles in StyleSheet.create
     borderColor: "#BCC1CAFF",
     borderWidth: 1,
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 6,
     textAlignVertical: "top", // Align text at the top
   },
 });

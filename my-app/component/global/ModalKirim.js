@@ -28,14 +28,14 @@ export default function ModalKirim  ({ navigation ,title, name }) {
           style={{
             flex: 1,
             backgroundColor: "#379AE6FF",
-            height: 40,
+            height: 40  ,
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: 7,
+            borderRadius:6,
           }}
           onPress={handleOpen}
         >
-          <Text style={{ color: "white", fontSize: 16 }}>Kirim</Text>
+          <Text style={{ color: "white", fontSize: 14 }}>Kirim</Text>
         </TouchableOpacity>
   
         <Modal animationType="fade" transparent={true} visible={visible}>
@@ -51,6 +51,7 @@ export default function ModalKirim  ({ navigation ,title, name }) {
               style={{
                 position: "absolute",
                 backgroundColor: "black",
+                backdropFilter: 'blur(19px)',                
                 height: "100%",
                 width: "100%",
                 opacity: 0.5,
@@ -58,8 +59,8 @@ export default function ModalKirim  ({ navigation ,title, name }) {
             ></View>
             <View
               style={{
-                height: 270,
-                width: "80%",
+                height: 260,
+                width: 280,
                 backgroundColor: "white",
                 borderRadius: 5,
                 alignItems: "center",
@@ -91,29 +92,31 @@ export default function ModalKirim  ({ navigation ,title, name }) {
                   {title}
                 </Text>
 
-                <Text style={{ textAlign: "center", paddingHorizontal: 5 }}>
-                  Informasi Pribadi berhasil dikirim dan menunggu persetujuan HRD
+                <Text style={{ textAlign: "center", paddingHorizontal: 5, fontSize:12 ,  }}>
+                Data Pribadi berhasil dikirim 
+                dan menunggu persetujuan HRD
                 </Text>
               </View>
               <View
                 style={{
                   width: "100%",
                   flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                 }}
               >
                 <TouchableOpacity
                   onPress={handleBackToBeranda}
                   style={{
-                    flex: 1,
+                    
                     backgroundColor: "#379AE6FF",
-                    height: 40,
+                    height: 32,
                     justifyContent: "center",
                     alignItems: "center",
-                    borderRadius: 7,
+                    borderRadius: 6,
+                    width:175
                   }}
                 >
-                  <Text style={{ color: "white", fontSize: 16 }}>
+                  <Text style={{ color: "white", fontSize: 12, fontWeight:"400" }}>
                     Kembali ke Beranda
                   </Text>
                 </TouchableOpacity>

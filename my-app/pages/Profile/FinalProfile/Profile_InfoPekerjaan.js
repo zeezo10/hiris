@@ -11,6 +11,7 @@ import {
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import {AntDesign} from "react-native-vector-icons";
 import {Feather} from "react-native-vector-icons";
+import { useSelector } from "react-redux";
 
 export default function Profile_InfoPekerjaan({navigation}) {
   const screenWidth = Dimensions.get("window").width;
@@ -19,6 +20,9 @@ export default function Profile_InfoPekerjaan({navigation}) {
     {name :"Surat Kontrak .pdf" , size :"1,5 MB  Download"},
     {name :"Perintah Kerja.pdf" , size :"1,5 MB  Download"}
   ]
+
+  const Pekerjaan = useSelector((state) => state.dataBtn.InfoPekerjaan);
+
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleKirim, setModalVisibleKirim] = useState(false);
@@ -56,7 +60,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>ID Karyawan</Text>
-              <Text>IT-2022-0123</Text>
+              <Text>{Pekerjaan ? (<>IT-2022-0123</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -67,7 +71,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Jenis Karyawan</Text>
-              <Text>Karyawan Tetap (PKWTT)</Text>
+              <Text>{Pekerjaan ? (<>Karyawan Tetap (PKWTT)</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -78,7 +82,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Status Karyawan</Text>
-              <Text>Aktif</Text>
+              <Text>{Pekerjaan ? (<>Aktif</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -89,7 +93,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Nama Jabatan</Text>
-              <Text>Full Stack Engineer</Text>
+              <Text>{Pekerjaan ? (<>Full Stack Engineer</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -100,7 +104,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Level Jabatan</Text>
-              <Text>Manager</Text>
+              <Text>{Pekerjaan ? (<>Manager</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -111,7 +115,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Departemen</Text>
-              <Text>IT Security & Infrastructure</Text>
+              <Text>{Pekerjaan ? (<>IT Security & Infrastructure</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -122,7 +126,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Grade</Text>
-              <Text>Grade H (Eksekutif Senior)</Text>
+              <Text>{Pekerjaan ? (<>Grade H (Eksekutif Senior)</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -133,7 +137,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Atasan Langsung</Text>
-              <Text>Pep Guardiola</Text>
+              <Text>{Pekerjaan ? (<>Pep Guardiola</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -144,7 +148,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Persetujuan</Text>
-              <Text>Pep Guardiola</Text>
+              <Text>{Pekerjaan ? (<>Pep Guardiola</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -155,7 +159,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Lokasi Kerja</Text>
-              <Text>Cabang Manado</Text>
+              <Text>{Pekerjaan ? (<>Cabang Manado</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -166,7 +170,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               }}
             >
               <Text style={{ color: "#9095A0FF" }}>Mulai Bekerja</Text>
-              <Text>23 Desember 2026</Text>
+              <Text>{Pekerjaan ? (<>23 Desember 2026</>):(<>-</>)}</Text>
             </View>
             <View
               style={{
@@ -179,7 +183,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
               <Text style={{ color: "#9095A0FF" }}>
               Terakhir Bekerja
               </Text>
-              <Text>14 Oktober 2029</Text>
+              <Text>{Pekerjaan ? (<>14 Oktober 2029</>) : (<>-</>)}</Text>
             </View>
         
             
@@ -194,17 +198,23 @@ export default function Profile_InfoPekerjaan({navigation}) {
               <View style={{flexDirection:"row", alignItems:"center", gap:5}}>
               <Feather name="paperclip" size={15} />
 
-              <Text style={{color:"#9095A0FF"}}>Lampiran ({pdf.length}) </Text>
+              <Text style={{color:"#9095A0FF"}}>Lampiran {Pekerjaan ? (<>{pdf.length}</>) : (<>0</>)} </Text>
               </View>
-              {pdf.map((item, index) => (
-                <View key={index} style={{flexDirection:"row",alignItems:"center", gap:5, padding:10}}>
-                  <AntDesign name="pdffile1" size={30} color="red" />
-                  <View>
-                    <Text style={{}}>{item.name}</Text>
-                    <Text style={{color:"#7A7A8DFF", fontSize:12}}>{item.size}</Text>
+
+              {Pekerjaan ? (
+                <>
+                {pdf.map((item, index) => (
+                  <View key={index} style={{flexDirection:"row",alignItems:"center", gap:5, padding:10}}>
+                    <AntDesign name="pdffile1" size={30} color="red" />
+                    <View>
+                      <Text style={{}}>{item.name}</Text>
+                      <Text style={{color:"#7A7A8DFF", fontSize:12}}>{item.size}</Text>
+                    </View>
                   </View>
-                </View>
-              ))}
+                ))}
+
+                    </>
+              ):(<></>)}
               
             </View>
           </View>
@@ -218,42 +228,74 @@ export default function Profile_InfoPekerjaan({navigation}) {
               alignItems: "center",
             }}
           >
-            <Pressable
-              style={{
-                height: 40,
-                flex: 1,
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-              onPress={handleBack}
-            >
-              <Text
-                style={{
-                  color: "#379AE6FF",
-                  textAlign: "center",
-                  fontSize: 16,
-                }}
-              >
-                Batal
-              </Text>
-            </Pressable>
-            <Pressable
-              style={{
-                backgroundColor: "#379AE6FF",
-                height: 40,
-                flex: 3,
-                justifyContent: "center",
-                alignContent: "center",
-                borderRadius: 7,
-              }}
-              onPress={handleBackKirim}
-            >
-              <Text
-                style={{ color: "white", textAlign: "center", fontSize: 16 }}
-              >
-                Ajukan Perubahan Data Pribadi
-              </Text>
-            </Pressable>
+            {Pekerjaan ? (
+              <>
+                <Pressable
+                  style={{
+                    height: 40,
+                    flex: 1,
+                    justifyContent: "center",
+                    alignContent: "center",
+                  }}
+                  onPress={handleBack}
+                >
+                  <Text
+                    style={{
+                      color: "#379AE6FF",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Batal
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={{
+                    backgroundColor: "#379AE6FF",
+                    height: 40,
+                    flex: 3,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    borderRadius: 7,
+                  }}
+                  onPress={handleBackKirim}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Ajukan Perubahan Data Pribadi
+                  </Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <Pressable
+                  style={{
+                    backgroundColor: "#379AE6FF",
+                    height: 40,
+                    flex: 1,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    borderRadius: 7,
+                  }}
+                  onPress={() => navigation.navigate("DataPekerjaan")}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Buat Informasi Pribadi
+                  </Text>
+                </Pressable>
+              </>
+            )}
           </View>
           <View style={{ height: 50 }}></View>
         </ScrollView>
@@ -292,7 +334,9 @@ export default function Profile_InfoPekerjaan({navigation}) {
           </View>
         </View>
       </Modal>
+
       {/* -------------------------- modal 2 -------------------- */}
+ 
       <Modal animationType="fade" transparent={true} visible={modalVisibleKirim}>
         <View style={styles.modalContainer}>
           <View style={styles.modalBackground}></View>
@@ -322,6 +366,7 @@ export default function Profile_InfoPekerjaan({navigation}) {
           </View>
         </View>
       </Modal>
+       
     </>
   );
 }

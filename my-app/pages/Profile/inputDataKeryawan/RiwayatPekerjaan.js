@@ -19,9 +19,9 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useDispatch } from "react-redux";
-import { setTrue } from "../../redux/counter";
-import LabeledTextInput from "../../component/global/LabeledTextInput";
-import ModalKirim from "../../component/global/ModalKirim";
+import { setTrue } from "../../../redux/counter";
+import LabeledTextInput from "../../../component/global/LabeledTextInput";
+import ModalKirim from "../../../component/global/ModalKirim";
 
 SplashScreen.preventAutoHideAsync();
 

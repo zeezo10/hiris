@@ -16,7 +16,7 @@ export default function UploadFile({ label, placeholder }) {
             },
           ]}
         >
-          <Text style={{ color: "grey" }}>{placeholder}</Text>
+          <Text style={{ color: "#BCC1CAFF" }}>{placeholder}</Text>
           <View
             style={{
               height: 30,
@@ -43,16 +43,16 @@ const styles = {
     gap: 3,
   },
   label: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "bold",
-    color: "#333", // Added color for better visibility
+    color:"#424955FF" // Added color for better visibility
   },
   input: {
     height: 45,
     width: "100%",
     borderColor: "#BCC1CAFF",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 6,
     paddingHorizontal: 10,
     backgroundColor: "#FFFFFF", // Added background color for input
   },

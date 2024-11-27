@@ -15,16 +15,16 @@ import * as SplashScreen from "expo-splash-screen";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
-import InfoPerbadi from "./dataKeryawan/InfoPribadi";
+import InfoPerbadi from "./Profile/inputDataKeryawan/DataPribadi";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Entypo from "react-native-vector-icons/Entypo";
-import InfoPekerjaan from "./dataKeryawan/InfoPekerjaan";
-import InfoPayroll from "./dataKeryawan/InfoPayroll";
-import RiwayatPendidikan from "./dataKeryawan/RiwayatPendidikan";
-import Aset from "./dataKeryawan/Aset";
+import InfoPekerjaan from "./Profile/inputDataKeryawan/DataPekerjaan";
+import InfoPayroll from "./Profile/inputDataKeryawan/InfoPayroll";
+import RiwayatPendidikan from "./Profile/inputDataKeryawan/RiwayatPendidikan";
+import Aset from "./Profile/inputDataKeryawan/Aset";
 import DataBtn from "../component/profile/DataBtn";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -314,32 +314,17 @@ export default function Profile({ navigation }) {
             gap: 10,
           }}
         >
-          {Pribadi ? (
-            <DataBtn
-              type={"InfoPribadi-Profile"}
-              navigation={navigation}
-              active={true}
-            />
-          ) : (
-            <DataBtn
-              type={"InfoPribadi"}
-              navigation={navigation}
-              active={true}
-            />
-          )}
-          {Pekerjaan ? (
-            <DataBtn
-              type={"Profile_InfoPekerjaan"}
-              navigation={navigation}
-              active={true}
-            />
-          ) : (
-            <DataBtn
-              type={"InfoPekerjaan"}
-              navigation={navigation}
-              active={Pribadi}
-            />
-          )}
+          <DataBtn
+            type={"InfoPribadi-Profile"}
+            navigation={navigation}
+            active={true}
+          />
+
+          <DataBtn
+            type={"Profile_InfoPekerjaan"}
+            navigation={navigation}
+            active={true}
+          />
 
           <DataBtn
             type={"InfoPayroll"}

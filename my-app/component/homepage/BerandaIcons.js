@@ -27,10 +27,10 @@ export default function BerandaIcons() {
           <HomeIcons type={"Absensi"} page={"Absensi"} />
           <HomeIcons type={"Pengajuan"}  page={"Pengajuan"}/>
           <HomeIcons type={"Payroll"} page={""} />
-          <HomeIcons type={"Laporan"} page={""}/>
+          <HomeIcons type={"Tugas"} page={""}/>
 
-          <HomeIcons type={"Pengaturan"} page={""} />
-          <HomeIcons type={"Aktivitas"} page={""} />
+          <HomeIcons type={"Performa"} page={""} />
+          <HomeIcons type={"Riwayat"} page={""} />
           <HomeIcons type={"Aset"} page={""} />
           <HomeIcons type={"Info"}  page={""}/>
         </View>

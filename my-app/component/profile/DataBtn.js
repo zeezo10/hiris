@@ -29,7 +29,7 @@ export default function DataBtn({ type, navigation, active }) {
     title = "Aset";
   }
   // -----------------------------------------------------
-   else if (type === "InfoPribadi-Profile"){
+    if (type === "InfoPribadi-Profile"){
     name = "user-alt";
     title = "Informasi Pribadi";
   }

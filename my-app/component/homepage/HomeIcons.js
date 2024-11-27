@@ -18,6 +18,7 @@ import { useFonts } from "expo-font";
 import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -27,9 +28,9 @@ export default function HomeIcons({ type , page}) {
     Absensi: <MaterialIcons name="timer" size={35} color="#379AE6FF" />,
     Pengajuan:<MaterialCommunityIcons name="dots-grid" size={35} color="#379AE6FF" />,
     Payroll:<MaterialIcons name="payments" size={35} color="#379AE6FF" />,
-    Laporan:<MaterialIcons name="text-snippet" size={35} color="#379AE6FF" />,
-    Pengaturan:<MaterialIcons name="settings" size={35} color="#379AE6FF" />,
-    Aktivitas:<FontAwesome6 name="user-check" size={30} color="#379AE6FF" />,
+    Tugas:<MaterialIcons name="assignment" size={35} color="#379AE6FF" />,
+    Performa:<Ionicons name="speedometer-outline" size={35} color="#379AE6FF" />,
+    Riwayat:<MaterialCommunityIcons name="history" size={40} color="#379AE6FF" />,
     Aset:<MaterialIcons name="wallet" size={35} color="#379AE6FF" />,
     Info:<MaterialIcons name="info" size={35} color="#379AE6FF" />,
   };

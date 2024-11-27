@@ -24,14 +24,14 @@ export default function SelectOption({ name, items }) {
   return (
     <>
       <View style={{ gap: 3 }}>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{name}</Text>
+        <Text style={{ fontSize: 14, fontWeight: "bold",color:"#424955FF" }}>{name}</Text>
         <TouchableOpacity
           style={{
             height: 45,
             width: "100%",
             borderColor: "#BCC1CAFF",
             borderWidth: 1,
-            borderRadius: 10,
+            borderRadius: 6,
             alignItems: "center",
             flexDirection: "row",
             padding: 10,

@@ -9,12 +9,35 @@ import {
   View,
 } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function Profile_InfoPribadi({navigation}) {
+
+export default function Profile_InfoPribadi({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
+  const dispatch = useDispatch();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVisibleKirim, setModalVisibleKirim] = useState(false);
+
+  const Pribadi = useSelector((state) => state.dataBtn.InfoPribadi);
+
+  // State for all input fields
+  const fullName = "useSelector((state) => state.DataPribadi.namaLengkap);"
+  const tempatLahir = "useSelector((state) => state.InfoPribadi.tempatLahir);"
+  const birthDate = "useSelector((state) => state.InfoPribadi.tanggalLahir);"
+  const phoneNumber = "useSelector((state) => state.InfoPribadi.nomorHandphone);"
+  const maritalStatus = "useSelector((state) => state.InfoPribadi.statusPerkawinan);"
+  const gender = "useSelector((state) => state.InfoPribadi.jenisKelamin);"
+  const religion = "useSelector((state) => state.InfoPribadi.agama);"
+  const email =" useSelector((state) => state.InfoPribadi.email);"
+  const bloodType = "useSelector((state) => state.InfoPribadi.golonganDarah);"
+  const nikNpwp = "useSelector((state) => state.InfoPribadi.NIK_NPWP);"
+  const bpjsKetenagakerjaan = "useSelector((state) => state.InfoPribadi.noBPJSKetenagakerjaan );"
+  const bpjsKesehatan = "useSelector((state) => state.InfoPribadi.nomorBPJSKesehatan);"
+  const emergencyContactName = "useSelector((state) => state.InfoPribadi.namaKontakDarurat);"
+  const emergencyContactNumber = "useSelector((state) => state.InfoPribadi.nomorKontakDarurat);"
+  const addressKTP = "useSelector(  (state) => state.InfoPribadi.alamatSesuaiKTP_1 );"
+  const domicileAddress = "useSelector(  (state) => state.InfoPribadi.alamatSesuaiKTP_2  );"
 
   const handleBack = () => {
     setModalVisible(true);
@@ -63,8 +86,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Nama Lengkap</Text>
-              <Text>Los Angeles, Amerika Serikat</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Nama Lengkap
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Gibran Rakabuming Pangarep</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -74,8 +101,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Tanggal Lahir</Text>
-              <Text>17 September 1981</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Tempat Lahir
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Los Angeles, Amerika Serikat</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -85,8 +116,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Nomor Handphone</Text>
-              <Text>+62 81280807676</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Tanggal Lahir
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>17 September 1981</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -96,8 +131,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Status Perkawinan</Text>
-              <Text>Kawin</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Nomor Handphone
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>+62 81280807676</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -107,8 +146,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Jenis Kelamin</Text>
-              <Text>Laki Laki</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Status Perkawinan
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Kawin</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -118,8 +161,10 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Nama Lengkap</Text>
-              <Text>Gibran Rakabuming Pangarep</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Jenis Kelamin
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>{Pribadi ? (<>Laki Laki</>):(<>-</>) }</Text>
             </View>
             <View
               style={{
@@ -129,8 +174,10 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Agama</Text>
-              <Text>Islam</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>Agama</Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Islam</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -140,8 +187,8 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Email</Text>
-              <Text>gibran.rakabuming@gmail.com</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>Email</Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>{Pribadi ? (<>gibran.rakabuming@gmail.com</>):(<>-</>) }</Text>
             </View>
             <View
               style={{
@@ -151,8 +198,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Nama Lengkap</Text>
-              <Text>Gibran Rakabuming Pangarep</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Golongan Darah
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>AB</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -162,8 +213,12 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Golongan Darah</Text>
-              <Text>AB</Text>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                NIK & NPWP
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>8063853891323668</>):(<>-</>) }
+              </Text>
             </View>
             <View
               style={{
@@ -173,67 +228,11 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>NIK & NPWP</Text>
-              <Text>8063853891323668</Text>
-            </View>
-            <View
-              style={{
-                gap: 3,
-                borderWidth: 0.3,
-                borderColor: "#ebebeb",
-                padding: 15,
-              }}
-            >
-              <Text style={{ color: "#9095A0FF" }}>
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
                 No BPJS Ketenagakerjaan
               </Text>
-              <Text>0000 1234 5678 90</Text>
-            </View>
-            <View
-              style={{
-                gap: 3,
-                borderWidth: 0.3,
-                borderColor: "#ebebeb",
-                padding: 15,
-              }}
-            >
-              <Text style={{ color: "#9095A0FF" }}>No BPJS Kesehatan</Text>
-              <Text>0000 1234 5678</Text>
-            </View>
-            <View
-              style={{
-                gap: 3,
-                borderWidth: 0.3,
-                borderColor: "#ebebeb",
-                padding: 15,
-              }}
-            >
-              <Text style={{ color: "#9095A0FF" }}>Nama Kontak Darurat</Text>
-              <Text>Christiano Ronaldo</Text>
-            </View>
-            <View
-              style={{
-                gap: 3,
-                borderWidth: 0.3,
-                borderColor: "#ebebeb",
-                padding: 15,
-              }}
-            >
-              <Text style={{ color: "#9095A0FF" }}>Nomor Kontak Darurat</Text>
-              <Text>+62 858656513131</Text>
-            </View>
-            <View
-              style={{
-                gap: 3,
-                borderWidth: 0.3,
-                borderColor: "#ebebeb",
-                padding: 15,
-              }}
-            >
-              <Text style={{ color: "#9095A0FF" }}>Alamat Sesuai KTP</Text>
-              <Text>
-                Jl. Raya Merdeka No. 45 RT/RW: 003/004, Sukamaju, Cilandak
-                Jakarta Selatan, DKI Jakarta, 12130
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>0000 1234 5678 90</>):(<>-</>) }
               </Text>
             </View>
             <View
@@ -244,10 +243,75 @@ export default function Profile_InfoPribadi({navigation}) {
                 padding: 15,
               }}
             >
-              <Text style={{ color: "#9095A0FF" }}>Alamat Domisili</Text>
-              <Text>
-                Jl. Pahlawan No. 17 RT/RW: 005/010, Mandalika, Mataram, Nusa
-                Tenggara Barat, 45398
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                No BPJS Kesehatan
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>0000 1234 5678</>):(<>-</>) }
+              </Text>
+            </View>
+            <View
+              style={{
+                gap: 3,
+                borderWidth: 0.3,
+                borderColor: "#ebebeb",
+                padding: 15,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Nama Kontak Darurat
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Christiano Ronaldo</>):(<>-</>) }
+              </Text>
+            </View>
+            <View
+              style={{
+                gap: 3,
+                borderWidth: 0.3,
+                borderColor: "#ebebeb",
+                padding: 15,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Nomor Kontak Darurat
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>+62 858656513131</>):(<>-</>) }
+              </Text>
+            </View>
+            <View
+              style={{
+                gap: 3,
+                borderWidth: 0.3,
+                borderColor: "#ebebeb",
+                padding: 15,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Alamat Sesuai KTP
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Jl. Raya Merdeka No. 45
+RT/RW: 003/004, Sukamaju, Cilandak
+Jakarta Selatan, DKI Jakarta, 12130</>):(<>-</>) }
+              </Text>
+            </View>
+            <View
+              style={{
+                gap: 3,
+                borderWidth: 0.3,
+                borderColor: "#ebebeb",
+                padding: 15,
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+                Alamat Domisili
+              </Text>
+              <Text style={{ fontSize: 14, color: "#171A1FFF" }}>
+                {Pribadi ? (<>Jl. Pahlawan No. 17
+RT/RW: 005/010, Mandalika, Mataram, 
+Nusa Tenggara Barat, 45398</>):(<>-</>) }
               </Text>
             </View>
           </View>
@@ -261,46 +325,80 @@ export default function Profile_InfoPribadi({navigation}) {
               alignItems: "center",
             }}
           >
-            <Pressable
-              style={{
-                height: 40,
-                flex: 1,
-                justifyContent: "center",
-                alignContent: "center",
-              }}
-              onPress={handleBack}
-            >
-              <Text
-                style={{
-                  color: "#379AE6FF",
-                  textAlign: "center",
-                  fontSize: 16,
-                }}
-              >
-                Batal
-              </Text>
-            </Pressable>
-            <Pressable
-              style={{
-                backgroundColor: "#379AE6FF",
-                height: 40,
-                flex: 3,
-                justifyContent: "center",
-                alignContent: "center",
-                borderRadius: 7,
-              }}
-              onPress={handleBackKirim}
-            >
-              <Text
-                style={{ color: "white", textAlign: "center", fontSize: 16 }}
-              >
-                Ajukan Perubahan Data Pribadi
-              </Text>
-            </Pressable>
+            {Pribadi ? (
+              <>
+                <Pressable
+                  style={{
+                    height: 40,
+                    flex: 1,
+                    justifyContent: "center",
+                    alignContent: "center",
+                  }}
+                  onPress={handleBack}
+                >
+                  <Text
+                    style={{
+                      color: "#379AE6FF",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Batal
+                  </Text>
+                </Pressable>
+                <Pressable
+                  style={{
+                    backgroundColor: "#379AE6FF",
+                    height: 40,
+                    flex: 3,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    borderRadius: 7,
+                  }}
+                  onPress={handleBackKirim}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Ajukan Perubahan Data Pribadi
+                  </Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <Pressable
+                  style={{
+                    backgroundColor: "#379AE6FF",
+                    height: 40,
+                    flex: 1,
+                    justifyContent: "center",
+                    alignContent: "center",
+                    borderRadius: 7,
+                  }}
+                  onPress={() => navigation.navigate("DataPribadi")}
+                >
+                  <Text
+                    style={{
+                      color: "white",
+                      textAlign: "center",
+                      fontSize: 14,
+                    }}
+                  >
+                    Buat Informasi Pribadi
+                  </Text>
+                </Pressable>
+              </>
+            )}
           </View>
           <View style={{ height: 50 }}></View>
         </ScrollView>
       </View>
+
+      {/* ---------------------------------- modal 1 --------------------- */}
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.modalContainer}>
@@ -335,8 +433,13 @@ export default function Profile_InfoPribadi({navigation}) {
           </View>
         </View>
       </Modal>
+
       {/* -------------------------- modal 2 -------------------- */}
-      <Modal animationType="fade" transparent={true} visible={modalVisibleKirim}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisibleKirim}
+      >
         <View style={styles.modalContainer}>
           <View style={styles.modalBackground}></View>
           <View style={styles.modalContent}>
@@ -344,14 +447,13 @@ export default function Profile_InfoPribadi({navigation}) {
               <FontAwesome5Icon name="check" size={20} color="white" />
             </View>
             <View style={styles.modalTextContainer}>
-              <Text style={styles.modalTitle}>Informasi Pribadi</Text>
+              <Text style={styles.modalTitle}>Data Pribadi</Text>
               <Text style={styles.modalDescription}>
                 Pengajuan Perubahan Data Pribadi berhasil dikirim dan menunggu
-                persetujuan HRD?
+                persetujuan HRD
               </Text>
             </View>
             <View style={styles.modalButtonContainer}>
-             
               <TouchableOpacity
                 onPress={() => {
                   setModalVisible(false);
@@ -359,7 +461,9 @@ export default function Profile_InfoPribadi({navigation}) {
                 }}
                 style={styles.modalConfirmButton}
               >
-                <Text style={styles.modalConfirmButtonText}>Kembali ke Beranda</Text>
+                <Text style={styles.modalConfirmButtonText}>
+                  Kembali ke Beranda
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

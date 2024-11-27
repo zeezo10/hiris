@@ -5,7 +5,7 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import UserStatus from "../component/homepage/UserStatus";
 import BerandaIcons from "../component/homepage/BerandaIcons";
-import Activitas from "../component/homepage/Activitas";
+import Activitas from "../component/homepage/AbsensiHari";
 import Info from "../component/homepage/Info";
 import { Octicons } from "@expo/vector-icons";
 

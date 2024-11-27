@@ -1,10 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
-import dataBtnReducer from "./counter";
+import { dataBtnReducer } from "./counter";
+import { infoPribadiReducer } from "./counter";
 
-const store = configureStore({
+// First store
+const store1 = configureStore({
   reducer: {
     dataBtn: dataBtnReducer,
   },
 });
 
-export default store;
+// Second store
+const store2 = configureStore({
+  reducer: {
+    DataPribadi: infoPribadiReducer,
+  },
+});
+
+// Export both stores
+export { store1, store2 };
+
