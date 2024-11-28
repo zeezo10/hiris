@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // Added useState import
 import { View, Text, TextInput, StyleSheet } from "react-native"; // Added necessary imports
 
-export default function TextArea({label}) {
+export default function TextArea({label , placeholder}) {
   const [text, setText] = useState("");
 
   return (
@@ -11,10 +11,10 @@ export default function TextArea({label}) {
       </Text>
       <TextInput
         style={styles.textArea}
-        placeholder="Type something..."
+        placeholder={placeholder || "Type something..."}
         placeholderTextColor="#BCC1CAFF"
         multiline={true}
-        numberOfLines={4} // Adjust the initial number of lines
+        numberOfLines={4} // Adjust the initial number of  lines
         value={text}
         onChangeText={setText}
       />
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({ // Wrapped styles in StyleSheet.create
     gap: 3,
   },
   textArea: {
-    height: 150,
+    height: 95,
     padding: 10,
     width: "100%",
     borderColor: "#BCC1CAFF",

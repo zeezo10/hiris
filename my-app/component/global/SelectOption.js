@@ -27,7 +27,7 @@ export default function SelectOption({ name, items }) {
         <Text style={{ fontSize: 14, fontWeight: "bold",color:"#424955FF" }}>{name}</Text>
         <TouchableOpacity
           style={{
-            height: 45,
+            height: 40,
             width: "100%",
             borderColor: "#BCC1CAFF",
             borderWidth: 1,

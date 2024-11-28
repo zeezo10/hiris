@@ -30,6 +30,11 @@ import Profile_InfoPribadi from "./pages/Profile/FinalProfile/Profile_InfoPribad
 import Profile_InfoPekerjaan from "./pages/Profile/FinalProfile/Profile_InfoPekerjaan";
 import DataPribadi from "./pages/Profile/inputDataKeryawan/DataPribadi";
 import DataPekerjaan from "./pages/Profile/inputDataKeryawan/DataPekerjaan";
+import Reimbursement from "./pages/Pengajuan/inputPengajuan/ReimbursementComp/Reimbursement";
+import Lembur from "./pages/Pengajuan/inputPengajuan/Lembur";
+import Cuti from "./pages/Pengajuan/inputPengajuan/Cuti";
+import Sakit from "./pages/Pengajuan/inputPengajuan/Sakit";
+import Izin from "./pages/Pengajuan/inputPengajuan/Izin";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -351,21 +356,164 @@ export default function App() {
                   },
                 }}
               />
+              {/* ---------------------------------- Profile Data ---------------------------------- */}
+              {/* ---------------------------------- Pengajuan ---------------------------------- */}
 
               <Stack.Screen
                 name="Pengajuan"
                 component={Pengajuan}
                 options={{
-                  headerTitle: "Pengajuan",
-
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Pengajuan
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
                   headerStyle: {
                     backgroundColor: "white",
-
                     shadowOpacity: 0,
                     elevation: 0,
                   },
                 }}
               />
+              {/* ---------------------------------- Pengajuan input ---------------------------------- */}
+
+              
+              <Stack.Screen
+                name="Reimbursement"
+                component={Reimbursement}
+                options={{
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Reimbursement
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "white",
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              
+              <Stack.Screen
+                name="Lembur"
+                component={Lembur}
+                options={{
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Lembur
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "white",
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              
+              <Stack.Screen
+                name="Cuti"
+                component={Cuti}
+                options={{
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Cuti
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "white",
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              
+              <Stack.Screen
+                name="Sakit"
+                component={Sakit}
+                options={{
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Sakit
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "white",
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              
+              <Stack.Screen
+                name="Izin"
+                component={Izin}
+                options={{
+                  headerTitle: () => (
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        flex: 1,
+                        textAlignVertical: "center",
+                      }}
+                    >
+                    Izin
+                    </Text>
+                  ),
+                  headerTitleAlign: "center",
+                  headerStyle: {
+                    backgroundColor: "white",
+                    shadowOpacity: 0,
+                    elevation: 0,
+                  },
+                }}
+              />
+              {/* ---------------------------------- Pengajuan input ---------------------------------- */}
+
+              {/* ---------------------------------- Pengajuan ---------------------------------- */}
+
               <Stack.Screen
                 name="Absen"
                 component={Absen}

@@ -48,7 +48,7 @@ const styles = {
     color:"#424955FF" // Added color for better visibility
   },
   input: {
-    height: 45,
+    height: 40,
     width: "100%",
     borderColor: "#BCC1CAFF",
     borderWidth: 1,

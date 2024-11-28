@@ -23,6 +23,7 @@ import SelectOption from "../../../component/global/SelectOption";
 import LabeledTextInput from "../../../component/global/LabeledTextInput";
 import ModalKirim from "../../../component/global/ModalKirim";
 import TextArea from "../../../component/global/TextArea";
+import DatePickerInput from "../../../component/global/DatePickerInput";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -51,64 +52,6 @@ const RadioButtonExample = () => {
 
 // ---------------------------------
 
-const DatePickerInput = () => {
-  const [date, setDate] = useState(null); // Initialize with null
-  const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    if (event.type === "dismissed") {
-      setShow(false); // Hide the picker if dismissed
-      return;
-    }
-    if (selectedDate) {
-      setDate(selectedDate); // Set the selected date
-    }
-    setShow(false); // Hide the picker after selecting
-  };
-
-  const showDatepicker = () => {
-    setShow(true);
-  };
-
-  return (
-    <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 14, fontWeight: "bold", color: "#424955FF" }}>
-        Tanggal Lahir
-      </Text>
-
-      <Pressable
-        style={{
-          justifyContent: "space-between",
-          flexDirection: "row",
-          alignItems: "center",
-          height: 45,
-          width: "100%",
-          borderColor: "#BCC1CAFF",
-          borderWidth: 1,
-          borderRadius: 10,
-          paddingHorizontal: 10,
-        }}
-        onPress={showDatepicker}
-        title="Pick a Date"
-      >
-        <Text style={{ fontSize: 14, color: date ? "" : "#BCC1CAFF" }}>
-          {date ? date.toLocaleDateString() : "Pilih Tanggal Lahir"}
-        </Text>
-
-        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
-      </Pressable>
-
-      {show && (
-        <DateTimePicker
-          value={date || new Date()} // Use current date if no date is selected
-          mode="date"
-          display="calendar"
-          onChange={onChange}
-        />
-      )}
-    </View>
-  );
-};
 
 //-------------------------------------------
 
@@ -155,7 +98,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   input: {
-    height: 45,
+    height: 40,
     width: "100%",
     borderColor: "#BCC1CAFF",
     borderWidth: 1,
@@ -302,37 +245,7 @@ export default function DataPribadi({ navigation }) {
   const [kodePos_2, setKodePos_2] = useState("");
 
   // ---------------------------------------------------------
-  const toggleDatePicker = useCallback(
-    (pickerType) => {
-      if (pickerType === "start") {
-        setShowStartPicker(!showStartPicker);
-      } else {
-        setShowEndPicker(!showEndPicker);
-      }
-    },
-    [showStartPicker, showEndPicker]
-  );
-
-  const onDateChange = useCallback(
-    (event, selectedDate, dateType) => {
-      if (event.type === "dismissed") {
-        toggleDatePicker(dateType);
-        return;
-      }
-
-      if (selectedDate) {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-        if (dateType === "start") {
-          setStartDate(currentDate.toDateString());
-        } else {
-          setEndDate(currentDate.toDateString());
-        }
-      }
-      toggleDatePicker(dateType);
-    },
-    [date, toggleDatePicker]
-  );
+ 
 
   // -------- Batal Modal ------------------------------------
   const [modalVisible, setModalVisible] = useState(false);
@@ -347,7 +260,7 @@ export default function DataPribadi({ navigation }) {
         style={{
           backgroundColor: "white",
 
-          paddingHorizontal: 15,
+          paddingHorizontal: 20,
         }}
       >
         <View
@@ -410,7 +323,8 @@ export default function DataPribadi({ navigation }) {
             placeholder={"Ketik Tempat Lahir"}
           />
 
-          <DatePickerInput />
+<DatePickerInput label={"Tanggal Transaksi"} placeholder={"Pilih Tanggal Transaksi"} />
+
 
           <View style={{ gap: 3 }}>
             <Text
@@ -421,7 +335,7 @@ export default function DataPribadi({ navigation }) {
             <View style={{ flexDirection: "row", gap: 10 }}>
               <TextInput
                 style={{
-                  height: 45,
+                  height: 40,
                   flex: 1,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,
@@ -436,7 +350,7 @@ export default function DataPribadi({ navigation }) {
               ></TextInput>
               <TextInput
                 style={{
-                  height: 45,
+                  height: 40,
                   flex: 5,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,
@@ -501,7 +415,7 @@ export default function DataPribadi({ navigation }) {
             <View style={{ flexDirection: "row", gap: 10 }}>
               <TextInput
                 style={{
-                  height: 45,
+                  height: 40,
                   flex: 1,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,
@@ -513,7 +427,7 @@ export default function DataPribadi({ navigation }) {
               ></TextInput>
               <TextInput
                 style={{
-                  height: 45,
+                  height: 40,
                   flex: 8,
                   borderColor: "#BCC1CAFF",
                   borderWidth: 1,

@@ -23,69 +23,13 @@ import SelectOption from "../../../component/global/SelectOption";
 import UploadFile from "../../../component/global/UploadFile";
 import LabeledTextInput from "../../../component/global/LabeledTextInput";
 import ModalKirim from "../../../component/global/ModalKirim";
+import DatePickerInput from "../../../component/global/DatePickerInput";
 
 SplashScreen.preventAutoHideAsync();
 
-
 // ---------------------------------
 
-const DatePickerInput = ({name}) => {
-  const [date, setDate] = useState(new Date());
-  const [show, setShow] = useState(false);
-
-  const onChange = (event, selectedDate) => {
-    // Handle if the user canceled the selection (selectedDate will be undefined)
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-    setShow(false); // Hide the picker after selecting
-  };
-
-  const showDatepicker = () => {
-    setShow(true);
-  };
-
-  return (
-    <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 14, fontWeight: "bold", color:"#424955FF" }}>{name}</Text>
-
-      <Pressable
-        style={{
-          justifyContent: "space-between",
-          flexDirection: "row",
-          alignItems: "center",
-          height: 45,
-          width: "100%",
-          borderColor: "#BCC1CAFF",
-          borderWidth: 1,
-          borderRadius: 6,
-          paddingHorizontal: 10,
-        }}
-        onPress={showDatepicker}
-        title="Pick a Date"
-      >
-        <Text style={{ fontSize: 14  }}>{date.toLocaleDateString()}</Text>
-
-        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
-      </Pressable>
-
-      {show && (
-        <DateTimePicker
-          value={date}
-          mode="date" // Date mode
-          display="calendar" // For Android: Use 'calendar' or 'spinner'
-          onChange={onChange}
-        />
-      )}
-    </View>
-  );
-};
-
-
 // ------------------------------------------
-
-
-
 
 const styles = StyleSheet.create({
   //---------- text area ------------
@@ -251,37 +195,7 @@ export default function DataPekerjaan({ navigation }) {
   // ---------------------------inputs------------------------------
 
   // ---------------------------------------------------------
-  const toggleDatePicker = useCallback(
-    (pickerType) => {
-      if (pickerType === "start") {
-        setShowStartPicker(!showStartPicker);
-      } else {
-        setShowEndPicker(!showEndPicker);
-      }
-    },
-    [showStartPicker, showEndPicker]
-  );
 
-  const onDateChange = useCallback(
-    (event, selectedDate, dateType) => {
-      if (event.type === "dismissed") {
-        toggleDatePicker(dateType);
-        return;
-      }
-
-      if (selectedDate) {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-        if (dateType === "start") {
-          setStartDate(currentDate.toDateString());
-        } else {
-          setEndDate(currentDate.toDateString());
-        }
-      }
-      toggleDatePicker(dateType);
-    },
-    [date, toggleDatePicker]
-  );
 
   // -------- Batal Modal ------------------------------------
   const [modalVisible, setModalVisible] = useState(false);
@@ -296,7 +210,7 @@ export default function DataPekerjaan({ navigation }) {
         style={{
           backgroundColor: "white",
           paddingVertical: 15,
-          paddingHorizontal: 15,
+          paddingHorizontal: 20,
         }}
       >
         <View
@@ -317,30 +231,92 @@ export default function DataPekerjaan({ navigation }) {
 
           <SelectOption
             name={"Jenis Karyawan"}
-            items={["Karyawan Tetap (PKWTT)", "Karyawan Kontrak (PKWT)", "Karyawan Harian Lepas","Karyawan Paruh Waktu (Part-Time)","Karyawan Freelance (Pekerja Lepas)","Karyawan Outsourcing","Karyawan Magang (Internship)"]}
+            items={[
+              "Karyawan Tetap (PKWTT)",
+              "Karyawan Kontrak (PKWT)",
+              "Karyawan Harian Lepas",
+              "Karyawan Paruh Waktu (Part-Time)",
+              "Karyawan Freelance (Pekerja Lepas)",
+              "Karyawan Outsourcing",
+              "Karyawan Magang (Internship)",
+            ]}
           />
 
           <SelectOption
             name={"Status Karyawan"}
-            items={["Aktif", "Tidak Aktif", "Cuti", "Pensiun", "Mengundurkan Diri (Resign)", "Diberhentikan (PHK)", "Meninggal Dunia", "Tugas Belajar", "Skorsing"]}
+            items={[
+              "Aktif",
+              "Tidak Aktif",
+              "Cuti",
+              "Pensiun",
+              "Mengundurkan Diri (Resign)",
+              "Diberhentikan (PHK)",
+              "Meninggal Dunia",
+              "Tugas Belajar",
+              "Skorsing",
+            ]}
           />
 
           <SelectOption
             name={"Nama Jabatan"}
-            items={["Software Engineer", "Front-End Developer", "Back-End Developer" , "Full Stack Developer", "Mobile Developer", "DevOps Engineer", "System Administrator", "Network Engineer", "Data Engineer"]}
+            items={[
+              "Software Engineer",
+              "Front-End Developer",
+              "Back-End Developer",
+              "Full Stack Developer",
+              "Mobile Developer",
+              "DevOps Engineer",
+              "System Administrator",
+              "Network Engineer",
+              "Data Engineer",
+            ]}
           />
 
           <SelectOption
             name={"Level Jabatan"}
-            items={["Entry Level (Junior / Staff / Pelaksana)", "Associate / Officer", "Senior Staff / Senior Associate", "Supervisor / Koordinator" , "Assistant Manager", "Manager", "Senior Manager", "General Manager", "Director", "Vice President (VP)", "Executive Level (C-Level)", "Komisaris"]}
+            items={[
+              "Entry Level (Junior / Staff / Pelaksana)",
+              "Associate / Officer",
+              "Senior Staff / Senior Associate",
+              "Supervisor / Koordinator",
+              "Assistant Manager",
+              "Manager",
+              "Senior Manager",
+              "General Manager",
+              "Director",
+              "Vice President (VP)",
+              "Executive Level (C-Level)",
+              "Komisaris",
+            ]}
           />
 
           <SelectOption
             name={"Departemen"}
-            items={["Product Development", "Engineering Development", "IT Security & Infrastructure", "Design UI/UX", "Data & Analytics", "Marketing & Sales", "Customer Support & Technical Support"]}
+            items={[
+              "Product Development",
+              "Engineering Development",
+              "IT Security & Infrastructure",
+              "Design UI/UX",
+              "Data & Analytics",
+              "Marketing & Sales",
+              "Customer Support & Technical Support",
+            ]}
           />
 
-          <SelectOption name={"Grade"} items={["Grade A (Pemula / Entry)", "Grade B (Pelaksana / Operator)", "Grade C (Terampil / Skilled)", "Grade D (Profesional)", "Grade E (Ahli / Senior Specialist)", "Grade F (Koordinator / Project Lead)", "Grade G (Eksekutif Junior)", "Grade H (Eksekutif Senior / Pengawas Utama)", "Grade I (Top Level / Eksekutif Puncak)"]} />
+          <SelectOption
+            name={"Grade"}
+            items={[
+              "Grade A (Pemula / Entry)",
+              "Grade B (Pelaksana / Operator)",
+              "Grade C (Terampil / Skilled)",
+              "Grade D (Profesional)",
+              "Grade E (Ahli / Senior Specialist)",
+              "Grade F (Koordinator / Project Lead)",
+              "Grade G (Eksekutif Junior)",
+              "Grade H (Eksekutif Senior / Pengawas Utama)",
+              "Grade I (Top Level / Eksekutif Puncak)",
+            ]}
+          />
 
           <LabeledTextInput
             label={"Atasan Langsung"}
@@ -352,22 +328,35 @@ export default function DataPekerjaan({ navigation }) {
             placeholder={"Ketik Persetujuan"}
           />
 
-          <SelectOption name={"Lokasi Kerja"} items={["Kantor Pusat", "Cabang Makassar", "Remote", "Cabang Batam", "Cabang Pembantu Batam Center", "Pabrik Gunung Putri 1", "Pabrik Gunung Putri 2"]} />
+          <SelectOption
+            name={"Lokasi Kerja"}
+            items={[
+              "Kantor Pusat",
+              "Cabang Makassar",
+              "Remote",
+              "Cabang Batam",
+              "Cabang Pembantu Batam Center",
+              "Pabrik Gunung Putri 1",
+              "Pabrik Gunung Putri 2",
+            ]}
+          />
 
+          <DatePickerInput
+            label={"Mulai Bekerja"}
+            placeholder={"Pilih Tanggal Mulai Bekerja"}
+          />
 
-          <DatePickerInput name={"Mulai Bekerja"} />
+          <DatePickerInput
+            label={"Terakhir Bekerja"}
+            placeholder={"Pilih Tanggal Terakhir Bekerja"}
+          />
 
-          <DatePickerInput name={"Terakhir Bekerja"} />
+          <UploadFile label={"CV"} placeholder={"Upload CV"} />
 
           <UploadFile
-              label={"CV"}
-              placeholder={"Upload CV"}
-            />
-
-          <UploadFile
-              label={"Dokumen Kontrak Kerja"}
-              placeholder={"Upload Kontrak Kerja"}
-            />
+            label={"Dokumen Kontrak Kerja"}
+            placeholder={"Upload Kontrak Kerja"}
+          />
 
           <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
             <Pressable
@@ -389,7 +378,11 @@ export default function DataPekerjaan({ navigation }) {
                 Batal
               </Text>
             </Pressable>
-            <ModalKirim navigation={navigation} title={"Informasi Pekerjaan"} name={"InfoPekerjaan"} />
+            <ModalKirim
+              navigation={navigation}
+              title={"Informasi Pekerjaan"}
+              name={"InfoPekerjaan"}
+            />
           </View>
         </View>
 

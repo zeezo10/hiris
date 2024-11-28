@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Dimensions,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -17,283 +18,107 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import Aksi from "./Aksi";
 import RekapPengajuan from "./RekapPengajuan";
+import EvilIcons from  "react-native-vector-icons/EvilIcons";
+import {FontAwesome5} from  "react-native-vector-icons/";
+
+
 
 SplashScreen.preventAutoHideAsync();
 
-const DatePickerInput = ({ label }) => {
-  const [date, setDate] = useState(new Date());
-  const [show, setShow] = useState(false);
 
-  const onChange = (event, selectedDate) => {
-    // Handle if the user canceled the selection (selectedDate will be undefined)
-    if (selectedDate) {
-      setDate(selectedDate);
-    }
-    setShow(false); // Hide the picker after selecting
-  };
+const ReimbursementCard = ({title , navigation}) => {
 
-  const showDatepicker = () => {
-    setShow(true);
+  let icon = ""
+
+  if(title  === "Reimbursement" ){
+    icon = "coins"
+  }else if (title === "Lembur"){
+    icon = "moon"
+
+  }else if (title === "Cuti"){
+    icon = "arrow-left"
+
+  }else if (title === "Sakit"){
+    icon = "frown-open"
+
+  }else if (title === "Izin"){
+    icon = "user-clock"
+
+  }
+  
+
+  const handlePress = () => {
+
+      navigation.navigate(title);
+    
   };
 
   return (
-    <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
-
-      <Pressable
-        style={{
-          justifyContent: "space-between",
-          flexDirection: "row",
-          alignItems: "center",
-          height: 45,
-          width: "100%",
-          borderColor: "#BCC1CAFF",
-          borderWidth: 1,
-          borderRadius: 10,
-          paddingHorizontal: 10,
-        }}
-        onPress={showDatepicker}
-        title="Pick a Date"
-      >
-        <Text style={{ fontSize: 18 }}>{date.toLocaleDateString()}</Text>
-
-        <AntDesign name="calendar" size={20} color="#BCC1CAFF" />
-      </Pressable>
-
-      {show && (
-        <DateTimePicker
-          value={date}
-          mode="date" // Date mode
-          display="calendar" // For Android: Use 'calendar' or 'spinner'
-          onChange={onChange}
-        />
-      )}
-    </View>
-  );
-};
-
-//---------------------------------
-
-const SimpleSelect = ({ type, label }) => {
-  const [selectedValue, setSelectedValue] = useState("choose one");
-  const [date, setDate] = useState(new Date());
-  const [showStartPicker, setShowStartPicker] = useState(false);
-  const [showEndPicker, setShowEndPicker] = useState(false);
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [leaveType, setLeaveType] = useState("");
-  const [leaveReason, setLeaveReason] = useState("");
-
-  const toggleDatePicker = useCallback(
-    (pickerType) => {
-      if (pickerType === "start") {
-        setShowStartPicker(!showStartPicker);
-      } else {
-        setShowEndPicker(!showEndPicker);
-      }
-    },
-    [showStartPicker, showEndPicker]
-  );
-
-  const onDateChange = useCallback(
-    (event, selectedDate, dateType) => {
-      if (event.type === "dismissed") {
-        toggleDatePicker(dateType);
-        return;
-      }
-
-      if (selectedDate) {
-        const currentDate = selectedDate || date;
-        setDate(currentDate);
-        if (dateType === "start") {
-          setStartDate(currentDate.toDateString());
-        } else {
-          setEndDate(currentDate.toDateString());
-        }
-      }
-      toggleDatePicker(dateType);
-    },
-    [date, toggleDatePicker]
-  );
-
-  return (
-    <View style={{ gap: 3 }}>
-      <Text style={{ fontSize: 18, fontWeight: "bold" }}>{label}</Text>
-
-      <View
-        style={{
-          height: 45,
-          width: "100%",
-          borderColor: "#BCC1CAFF",
-          borderWidth: 1,
-          borderRadius: 10,
-          alignItems: "center",
-          flexDirection: "row",
-        }}
-      >
-        <Picker
-          selectedValue={selectedValue}
-          onValueChange={(itemValue) => setSelectedValue(itemValue)}
-          style={styles.picker}
-        >
-          <Picker.Item
-            label={type}
-            value={null}
-            style={{ color: "#BCC1CAFF" }}
+    <TouchableOpacity 
+     onPress={handlePress}
+    style={{height:120, borderRadius:8, elevation:9, shadowColor:"#9095A0FF", backgroundColor:"white", paddingHorizontal:24, paddingVertical:21, justifyContent:"space-between"}}>
+      <View style={{height:24,  flexDirection:"row", justifyContent:"space-between", gap:10}}>
+        <View> 
+          <FontAwesome5
+            name={icon}
+            size={20}
+            color="#379AE6FF"
+            style={{ alignSelf: "center",}}
           />
-          <Picker.Item label="option 1" value="option 1" />
-          <Picker.Item label="option 2" value="option 2" />
-        </Picker>
-      </View>
-    </View>
-  );
-};
-
-const UploadInput = ({ label, placeholder }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <View
-          style={[
-            styles.input,
-            {
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            },
-          ]}
-        >
-          <Text style={{ color: "grey" }}>{placeholder}</Text>
-          <View
-            style={{
-              height: 30,
-              backgroundColor: "pink",
-              width: 70,
-              borderRadius: 10,
-            }}
-          ></View>
+        </View>
+        <View style={{flex:1}}>
+          <Text style={{color:"#171A1FFF", fontSize:14}} >{title}</Text>
+        </View>
+        <View> 
+          <EvilIcons
+            name="chevron-right"
+            size={30}
+            color="#9095A0FF"
+            style={{ alignSelf: "center", top: -4 }}
+          />
         </View>
       </View>
-    </View>
+      <View style={{flexDirection:"row", height:32,  gap:10}}>
+        <View style={{flex:1, flexDirection:"row",gap:2, backgroundColor:"#F3F4F6FF", borderRadius:6 , justifyContent:"center", alignItems:"center"}}>
+          <Text style={{color:"#565E6CFF"}}>1</Text>
+          <Text style={{color:"#565E6CFF"}}>Terkirim</Text>
+        </View>
+        <View style={{flex:1, flexDirection:"row",gap:2, backgroundColor:"#F1F8FDFF", borderRadius:6 , justifyContent:"center", alignItems:"center"}}>
+        <Text style={{color:"#379AE6FF"}}>2</Text>
+        <Text style={{color:"#379AE6FF"}}>Disetujui</Text>
+        </View>
+        <View style={{flex:1, flexDirection:"row",gap:2, backgroundColor:"#FDF2F2FF", borderRadius:6 , justifyContent:"center", alignItems:"center"}}>
+        <Text style={{color:"#DE3B40FF"}}>6</Text>
+        <Text style={{color:"#DE3B40FF"}}>Ditolak</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
-//-------------------------------------------
 
-const LabeledTextInput = ({ label, placeholder }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <TextInput style={styles.input} placeholder={placeholder} />
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  //----------Select option ----------------
-  pickerContainer: {
-    borderWidth: 1,
-    borderColor: "#ddd",
-    borderRadius: 5,
-    overflow: "hidden",
-  },
-  picker: {
-    width: "100%",
-    height: 50,
-  },
-
-  //---------- input ------------
-
-  container: {
-    gap: 3,
-  },
-  label: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  input: {
-    height: 45,
-    width: "100%",
-    borderColor: "#BCC1CAFF",
-    borderWidth: 1,
-    borderRadius: 10,
-    paddingHorizontal: 15,
-  },
-});
 
 export default function Pengajuan({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
-  const [active, setActive] = useState("Aksi");
-
-
-  const changeActive = (type) => {
-    setActive(type);
-  };
-
+ 
   return (
     <View style={{ width: screenWidth }}>
     <ScrollView>
       <View
         style={{
           height: "100%",
-
+          padding:20,
+          gap:16,
           backgroundColor: "white",
         }}
       >
-        <View
-          style={{
-            height: 120,
-            width: "100%",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingHorizontal:5
-          }}
-        >
-          <Pressable
-            style={{
-              flex: 1,
-              height: "50%",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: active === "Aksi" ? "#f1f7fd" : "white",
-            }}
-            onPress={() => changeActive("Aksi")}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: active === "Aksi" ? "#4599e8" : "#565e6c",
-              }}
-            >
-              Aksi
-            </Text>
-          </Pressable>
-          <Pressable
-            style={{
-              flex: 1,
-              height: "50%",
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: active === "RekapPengajuan" ? "#f1f7fd" : "white",
-            }}
-            onPress={() => changeActive("RekapPengajuan")}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                fontWeight: "bold",
-                color: active === "RekapPengajuan" ? "#4599e8" : "#565e6c",
-              }}
-            >
-              Rekap Pengajuan
-            </Text>
-          </Pressable>
-        </View>
 
-        {active === "Aksi" ? <Aksi /> : <RekapPengajuan />}
+        <ReimbursementCard title={"Reimbursement"} navigation={navigation}/>
+        <ReimbursementCard title={"Lembur"} navigation={navigation}/>
+        <ReimbursementCard title={"Cuti"} navigation={navigation}/>
+        <ReimbursementCard title={"Sakit"} navigation={navigation}/>
+        <ReimbursementCard title={"Izin"} navigation={navigation}/>
+      
       </View>
     </ScrollView>
   </View>

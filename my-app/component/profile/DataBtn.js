@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pressable, Text, View, Modal } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
+import EvilIcons from  "react-native-vector-icons/EvilIcons";
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
