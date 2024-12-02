@@ -58,16 +58,16 @@ export default function Home({ navigation }) {
                 justifyContent: "center",
               }}
             >
-              <Text style={{ color: "white", fontSize: 16 }}>
+              <Text style={{ color: "white", fontSize: 14 }}>
                 PT Radhika Amerta Gemilang
               </Text>
-              <Text style={{ color: "white", fontSize: 14 }}>
+              <Text style={{ color: "white", fontSize: 12 }}>
                 Kamis 27 Sep 2024, 09:33:12
               </Text>
             </View>
 
             <View style={{}}>
-              <Octicons name="bell" size={25} color="white" />
+              <Octicons name="bell" size={24} color="white" />
             </View>
           </View>
 
@@ -83,8 +83,8 @@ export default function Home({ navigation }) {
             <View
               style={{
                 backgroundColor: "white",
-                height: 50,
-                width: 50,
+                height: 44,
+                width: 44,
                 borderRadius: 100,
                 display: "flex",
                 justifyContent: "center",
@@ -93,16 +93,16 @@ export default function Home({ navigation }) {
             >
               <Image
                 source={require("../assets/employee.png")}
-                style={{ height: 50, width: 50, marginTop: 4 }}
+                style={{ height: 44, width: 44, marginTop: 4 }}
               />
             </View>
             <View>
               <Text
-                style={{ color: "white", fontSize: 16, fontWeight: "bold" }}
+                style={{ color: "white", fontSize: 14, fontWeight: "bold" }}
               >
                 Fery Cokroaminoto Dewantoro
               </Text>
-              <Text style={{ color: "white", fontSize: 13 }}>
+              <Text style={{ color: "white", fontSize: 12 }}>
                 Manager, People Developmet
               </Text>
             </View>
@@ -123,7 +123,7 @@ export default function Home({ navigation }) {
               flexDirection: "row",
               flexWrap: "wrap",
               columnGap: 10,
-              rowGap: 10,
+              rowGap: 26,
               justifyContent: "center",
               alignContent: "center",
               width: 380,

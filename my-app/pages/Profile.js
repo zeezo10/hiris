@@ -281,6 +281,7 @@ export default function Profile({ navigation }) {
             alignItems: "center",
             gap: 15,
             paddingVertical: 10,
+            paddingBottom:50
           }}
         >
           <View
@@ -297,8 +298,8 @@ export default function Profile({ navigation }) {
               alignItems: "center",
             }}
           >
-            <Text style={{ fontWeight: "bold" }}>Jennifer Lopez</Text>
-            <Text style={{ color: "#565E6CFF", fontWeight: "200" }}>
+            <Text style={{ fontWeight: "700" }}>Jennifer Lopez</Text>
+            <Text style={{ color: "#565E6CFF", fontWeight: "400" }}>
               Manager People Development
             </Text>
           </View>
@@ -308,10 +309,11 @@ export default function Profile({ navigation }) {
 
         <View
           style={{
-            paddingTop: 50,
+            paddingTop: 20,
             paddingBottom: 10,
             paddingHorizontal: 20,
             gap: 10,
+            backgroundColor:"#fafafb"
           }}
         >
           <DataBtn
@@ -350,17 +352,17 @@ export default function Profile({ navigation }) {
 
         <View
           style={{
-            height: 200,
-            backgroundColor: "white",
+            height: 150,
+            backgroundColor: "#fafafb",
             justifyContent: "center",
             paddingBottom: 55,
             paddingHorizontal: 40,
           }}
         >
           <View style={{ gap: 10 }}>
-            <Text>V 1.1</Text>
+            <Text style={{color:"#9095A0FF"}}>V 1.1</Text>
             <Pressable>
-              <Text style={{ color: "red" }}>Log out</Text>
+              <Text style={{ color: "#E5696DFF" }}>Log out</Text>
             </Pressable>
           </View>
         </View>

@@ -30,7 +30,7 @@ export default function AbsensiHari() {
   ];
 
   return (
-    <View style={{ gap: 10, width: "100%", marginBottom:10}}>
+    <View style={{ gap: 5 , width: "100%", marginBottom:10}}>
       <View
         style={{
           display: "flex",
@@ -43,6 +43,7 @@ export default function AbsensiHari() {
           style={{
             fontSize:14,
             fontWeight:"700",
+            color:"#171A1FFF"
           }}
         >
           Absensi Hari Ini
@@ -79,7 +80,7 @@ export default function AbsensiHari() {
                   alignItems: "center",
                 }}
               >
-                <AntDesign name="clockcircleo" size={30} color="black" />
+                <AntDesign name="clockcircleo" size={30} color="#323842FF" />
               </View>
               <View style={{ flex: 4 }}>
                 <Text style={{ fontSize: 14, fontWeight: "bold", color:"#323842FF" }}>

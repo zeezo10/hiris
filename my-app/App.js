@@ -113,7 +113,7 @@ function MainTab() {
 export default function App() {
   //// delete after ----------------
 
-  const [isLoad, setLoading] = useState(false);
+  const [isLoad, setLoading] = useState(true);
 
   useEffect(() => {
     if (isLoad) {
@@ -143,7 +143,7 @@ export default function App() {
               ) : (
                 <Stack.Screen
                   name="Login"
-                  component={LoadingPage}
+                  component={Login}
                   options={{ headerShown: false }}
                 />
               )}

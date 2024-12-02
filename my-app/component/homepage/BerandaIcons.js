@@ -10,7 +10,7 @@ export default function BerandaIcons() {
     <View style={{ width: "100%" }}>
       <View
         style={{
-          height: 230,
+          
           width: "100%",
           justifyContent: "center",
         }}
@@ -21,6 +21,7 @@ export default function BerandaIcons() {
             justifyContent: "space-between",
             flexWrap: "wrap",
             width: "100%",
+            
             rowGap:20,
           }}
         >

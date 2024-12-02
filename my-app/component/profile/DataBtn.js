@@ -34,7 +34,7 @@ export default function DataBtn({ type, navigation, active }) {
     title = "Informasi Pribadi";
   }
    else if (type === "Profile_InfoPekerjaan"){
-    name = "user-alt";
+    name = "briefcase";
     title = "Informasi Pekerjaan";
   }
 
@@ -97,12 +97,12 @@ export default function DataBtn({ type, navigation, active }) {
 
       <Pressable
         style={{
-          backgroundColor: active ? "white" : "#f5f5f5",
+          backgroundColor: "white" ,
 
-          height: 70,
-          borderRadius: 10,
-          borderWidth: 0.3,
-          borderColor: "#BCC1CAFF",
+          height: 68,
+          borderRadius: 12,
+          elevation:5,
+          shadowColor: "#BCC1CAFF",
           flexDirection: "row",
           alignItems: "center",
           padding: 15,
@@ -112,8 +112,8 @@ export default function DataBtn({ type, navigation, active }) {
         <View
           style={{
             backgroundColor: "#DAECFAFF",
-            height: 40,
-            width: 40,
+            height: 32,
+            width: 32,
             borderRadius: 100,
             justifyContent: "center",
             alignItems: "center",
@@ -132,8 +132,10 @@ export default function DataBtn({ type, navigation, active }) {
           style={{
             flex: 1,
             paddingHorizontal: 10,
-            fontSize: 15,
-            color: "black",
+            fontSize: 14,
+            color: active ?  "#171A1FFF" : "#565E6CFF",
+            fontWeight:"500"
+
           }}
         >
           {title}

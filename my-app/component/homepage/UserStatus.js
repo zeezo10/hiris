@@ -39,7 +39,7 @@ export default function UserStatus() {
     <View
       style={{
         backgroundColor: "#F1F8FDFF",
-        height: 190,
+        height: 180,
         width: "100%",
         borderRadius: 8,
         shadowColor: "#6a6a6b",
@@ -65,7 +65,7 @@ export default function UserStatus() {
       >
         <Text
           style={{
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: "bold",
             color: "#565E6CFF",
             flex: 1,
@@ -76,7 +76,7 @@ export default function UserStatus() {
         </Text>
         <Text
           style={{
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: "bold",
             color: "#565E6CFF",
             flex: 1,
@@ -116,13 +116,13 @@ export default function UserStatus() {
               justifyContent: "center",
             }}
           >
-            <Text style={{ fontSize: 18 }}>08:09:39</Text>
-            <Text style={{ fontSize: 12 }}>Anda Terlambat</Text>
+            <Text style={{ fontSize: 14 }}>08:09:39</Text>
+            <Text style={{ fontSize: 11, color:"#565E6CFF" }}>Anda Terlambat</Text>
           </View>
 
           <Pressable
             style={{
-              height: 40,
+              height: 39,
               width: "100%",
               backgroundColor: "#379AE6FF",
               borderRadius: 15,
@@ -134,7 +134,7 @@ export default function UserStatus() {
           >
             <MaterialIcons name="login" size={25} color="white" />
 
-            <Text style={{ color: "white", fontSize: 15, fontWeight:"600" }}>Clock In</Text>
+            <Text style={{ color: "white", fontSize: 14, fontWeight:"400" }}>Clock In</Text>
           </Pressable>
         </View>
         <View
@@ -157,12 +157,12 @@ export default function UserStatus() {
             }}
           >
             <Text style={{ fontSize: 18 }}>--:--:--</Text>
-            <Text style={{ fontSize: 12 }}>Clock Out Awal</Text>
+            <Text style={{ fontSize: 12 ,color:"#565E6CFF"}}>Clock Out Awal</Text>
           </View>
 
           <Pressable
             style={{
-              height: 40,
+              height: 39,
               width: "100%",
               backgroundColor: "#379AE6FF",
               borderRadius: 15,
@@ -174,7 +174,7 @@ export default function UserStatus() {
           >
             <MaterialIcons name="logout" size={25} color="white" />
 
-            <Text style={{ color: "white", fontSize: 15, fontWeight:"600" }}>Clock Out</Text>
+            <Text style={{ color: "white",fontSize: 14, fontWeight:"400" }}>Clock Out</Text>
           </Pressable>
         </View>
       </View>
