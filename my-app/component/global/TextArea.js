@@ -1,12 +1,12 @@
 import React, { useState } from "react"; // Added useState import
 import { View, Text, TextInput, StyleSheet } from "react-native"; // Added necessary imports
 
-export default function TextArea({label , placeholder}) {
+export default function TextArea({ label, placeholder }) {
   const [text, setText] = useState("");
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 14, fontWeight: "bold" ,color:"#424955FF"}}>
+      <Text style={{ fontSize: 14, fontWeight: "bold", color: "#424955FF" }}>
         {label}
       </Text>
       <TextInput
@@ -22,7 +22,8 @@ export default function TextArea({label , placeholder}) {
   );
 }
 
-const styles = StyleSheet.create({ // Wrapped styles in StyleSheet.create
+const styles = StyleSheet.create({
+  // Wrapped styles in StyleSheet.create
   container: {
     flex: 1,
     justifyContent: "center",

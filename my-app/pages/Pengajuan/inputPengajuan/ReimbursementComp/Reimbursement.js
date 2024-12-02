@@ -46,6 +46,7 @@ export default function Reimbursement({ navigation }) {
                 height: 52,
                 justifyContent: "center",
                 alignItems: "center",
+                borderRadius:6,
                 backgroundColor:
                   active === "Buat_Pengajuan" ? "#f1f7fd" : "white",
               }}
@@ -67,6 +68,7 @@ export default function Reimbursement({ navigation }) {
                 height: 52,
                 justifyContent: "center",
                 alignItems: "center",
+                borderRadius:6,
                 backgroundColor: active === "Riwayat" ? "#f1f7fd" : "white",
               }}
               onPress={() => changeActive("Riwayat")}
@@ -85,7 +87,7 @@ export default function Reimbursement({ navigation }) {
 
           {/* --------------------------------------------------------- */}
 
-          {active === "Buat_Pengajuan" ? <Buat_Pengajuan /> : <Riwayat />}
+          {active === "Buat_Pengajuan" ? <Buat_Pengajuan navigation={navigation} /> : <Riwayat />}
         </View>
       </ScrollView>
     </View>

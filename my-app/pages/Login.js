@@ -13,6 +13,8 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import Octicons from "react-native-vector-icons/Octicons";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import {FontAwesome6} from "react-native-vector-icons";
+import {Foundation} from "react-native-vector-icons";
 
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
@@ -89,7 +91,15 @@ export default function Login() {
     <View style={styles.container}>
       <View style={[styles.formContainer, { width: screenWidth }]}>
         <View style={styles.welcomeTextContainer}>
-          <View style={styles.logo}></View>
+          <View style={styles.logo}>
+          <Foundation
+                  name="torsos-all"
+                  size={100}
+                  color="#379AE6FF"
+                  style={{}}
+                />
+         
+          </View>
           <Text style={styles.appNameText}>persona</Text>
           <Text style={styles.signInText}>Log into your account</Text>
         </View>
@@ -189,7 +199,7 @@ export default function Login() {
             </View>
 
             <Pressable style={styles.signInButton} onPress={handleLogin}>
-              <Text style={styles.signInButtonText}>Login</Text>
+              <Text style={styles.signInButtonText}>Masuk</Text>
             </Pressable>
           </>
         ) : (
@@ -214,7 +224,11 @@ const styles = StyleSheet.create({
   logo: {
     height: 100,
     width: 100,
-    backgroundColor: "pink",
+    flexDirection:"row",
+    padding:1,
+  
+    justifyContent:"center",
+    alignItems:"center"
   },
   formContainer: {
     gap: 20,
@@ -304,7 +318,7 @@ const styles = StyleSheet.create({
     width: 335,
     backgroundColor: "#379ae6",
     alignItems: "center",
-    height: 50,
+    height: 45,
     justifyContent: "center",
     borderRadius: 15,
     elevation: 3,

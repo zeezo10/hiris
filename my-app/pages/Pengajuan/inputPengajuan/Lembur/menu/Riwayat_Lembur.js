@@ -277,23 +277,64 @@ function DatePickerInput({ placeholder }) {
 
 // ... existing code ...
 
-const ReimbursementItem = ({ title, amount, date, status, admin, reason }) => {
+const Riwayat_Lembur_Item = ({
+  title,
+  amount,
+  date,
+  status,
+  admin,
+  reason,
+}) => {
   return (
     <View
       style={{
-        height: 170,
+        height: 330,
         width: "100%",
         backgroundColor: "white",
-        padding: 20,
-        gap: 3,
+        padding: 26,
+        gap: 20,
         justifyContent: "space-between",
         borderRadius: 8,
         elevation: 10,
         shadowColor: "grey",
-        flexDirection: "row",
         marginBottom: 10,
       }}
     >
+      <View
+        style={{
+          backgroundColor:
+            status === "Ditolak"
+              ? "#FDF2F2FF"
+              : status === "Diterima"
+              ? "#F1F8FDFF"
+              : status === "Terkirim"
+              ? "#F3F4F6FF"
+              : "#EEFDF3FF",
+          borderRadius: 6,
+          height: 32,
+          width: 190,
+          padding: 8,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 12,
+            color:
+              status === "Ditolak"
+                ? "#DE3B40FF"
+                : status === "Diterima"
+                ? "#379AE6FF"
+                : status === "Terkirim"
+                ? "#565E6CFF"
+                : "#117B34FF",
+          }}
+        >
+          Pengajuan Lembur {status}
+        </Text>
+      </View>
+
       <View
         style={{
           flex: 1.5,
@@ -309,90 +350,68 @@ const ReimbursementItem = ({ title, amount, date, status, admin, reason }) => {
           }}
         >
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-            <Text style={{ fontWeight: "bold", fontSize: 14 }}>{title}</Text>
-          </View>
-          <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
             <FontAwesome5
-              name="coins"
+              name="calendar"
               size={16}
               color="#379AE6FF"
               style={{ alignSelf: "center" }}
             />
-            <Text style={{ fontWeight: "bold", fontSize: 12 }}>{amount}</Text>
+            <Text
+              style={{ fontWeight: "400", fontSize: 14, color: "#171A1FFF" }}
+            >
+              {date}
+            </Text>
           </View>
 
           <View style={{ flexDirection: "row", gap: 5, alignItems: "center" }}>
-            <AntDesign name="calendar" size={16} color="#4599e8" />
-            <View style={{ flexDirection: "row", gap: 13, flex: 1 }}>
-              <Text style={{ fontSize: 12, flex: 1 }}>{date}</Text>
-              <View
-                style={{
-                  paddingHorizontal: 5,
-                  borderRadius: 10,
-                  backgroundColor: "#F1F8FDFF",
-                  height: 20,
-                  width: 139,
-                  gap: 4,
-                  alignItems: "center",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <AntDesign name="pdffile1" size={11} color="#4599e8" />
-                <Text style={{ fontSize: 11, color: "#4599e8" }}>
-                  Bukti Reimbursement
-                </Text>
-              </View>
-            </View>
+            <AntDesign name="clockcircleo" size={16} color="#4599e8" />
+
+            <Text style={{ fontSize: 12, color: "#9095A0FF" }}>
+              09:05 - 17:10
+            </Text>
+            <Text style={{ fontSize: 12, color: "#4E3630FF" }}>
+              (08:05:36 jam)
+            </Text>
+          </View>
+
+          <View style={{ marginLeft: 20 }}>
+            <Text
+              style={{ color: "#565E6CFF", fontWeight: "600", fontSize: 13 }}
+            >
+              Tugas yang akan diselesaikan:
+            </Text>
+            <Text style={{ color: "#565E6CFF", fontSize: 13 }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore mi
+            </Text>
           </View>
         </View>
         <View
           style={{
             color: "#565E6CFF",
             fontWeight: "bold",
+            marginTop:20,
+            flex:1,
             fontSize: 12,
-            flex: 1,
-            alignItems: "flex-end",
             flexDirection: "row",
-            justifyContent: "space-between",
+            marginLeft: 20,
           }}
         >
-          <View style={{ gap: 5 }}>
-            <Text style={{ fontSize: 11, color: "#565E6CFF" }}>{admin}</Text>
-            <Text style={{ fontSize: 11, color: "#565E6CFF" }}>{reason}</Text>
-          </View>
-
-          <View
-            style={{
-              backgroundColor:
-                status === "Ditolak"
-                  ? "#FDF2F2FF"
-                  : status === "Disetujui"
-                  ? "#F1F8FDFF"
-                  : status === "Terkirim"
-                  ? "#F3F4F6FF"
-                  : "#EEFDF3FF",
-              borderRadius: 6,
-              height: 32,
-              width: 67,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+            
+          <View style={{}}>
+            <Text style={{ fontSize: 13, color: status === "Terkirim" ?  "#9095A0FF" :  "#379AE6FF" }}>
+              { status === "Terkirim" ? "Terkirim" : "Diterima"} oleh Ruud Van Nisterloy
+            </Text>
             <Text
-              style={{
-                fontSize: 12,
-                color:
-                  status === "Ditolak"
-                    ? "#DE3B40FF"
-                    : status === "Disetujui"
-                    ? "#379AE6FF"
-                    : status === "Terkirim"
-                    ? "#565E6CFF"
-                    : "#117B34FF",
-              }}
+              style={{ color: "#565E6CFF", fontWeight: "600", fontSize: 13 }}
             >
-              {status}
+                {status === "Terkirim" ? "-" : `Alasan pengajuan ${status}:`}
+             
+            </Text>
+            <Text style={{ color: "#565E6CFF", fontSize: 13 }}>
+                {status === "Terkirim" ? "" : `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore mi`}
+          
             </Text>
           </View>
         </View>
@@ -403,13 +422,11 @@ const ReimbursementItem = ({ title, amount, date, status, admin, reason }) => {
 
 // ... existing code ...
 
-export default function Riwayat() {
+export default function Riwayat_Lembur() {
   return (
     <View style={{ paddingHorizontal: 20, gap: 10, marginTop: 30 }}>
       <View style={{ flexDirection: "row", gap: 15 }}>
-      
         <DatePickerInput placeholder={"Desember 2024"} />
-
 
         <SelectOption
           name={"Status"}
@@ -418,39 +435,31 @@ export default function Riwayat() {
       </View>
 
       {/* title, amount, date, status, reason */}
-      <ReimbursementItem
-        title={"-"}
-        amount={"-"}
-        date={"-"}
-        status={"-"}
-        admin={"-"}
-        reason={"-"}
-      />
-      <ReimbursementItem
-        title={"001- Instalasi UPS  BDx"}
-        amount={"Rp500.000 Makan Siang"}
+
+      <Riwayat_Lembur_Item
+       
+        status={"Diterima"}
+     
         date={"Kamis 27 Des 2024"}
-        status={"Ditolak"}
         admin={"Ditolak oleh Ruud Van Nisterloy"}
-        reason={"Beli Nasi Padang 100 bungkus"}
       />
-      <ReimbursementItem
-        title={"002- Instalasi UPS  BDx"}
-        amount={"Rp300.000 Bahan Bakar"}
+
+      <Riwayat_Lembur_Item
+      
+        status={"Ditolak"}
+     
         date={"Kamis 27 Des 2024"}
-        status={"Disetujui"}
-        admin={"Disetujui oleh Ruud Van Nisterloy"}
-        reason={"Isi Bensin Meeting ke Bandung"}
-      />
-      <ReimbursementItem
-        title={"001- Jualan HRIS ke BJB"}
-        amount={"Rp300.000 Bahan Bakar"}
-        date={"Kamis 27 Des 2024"}
-        status={"Terkirim"}
-        admin={"Terkirim ke Dimas Anggawijaya"}
-        reason={"Isi Bensin Meeting ke Bandung"}
+        admin={"Ditolak oleh Ruud Van Nisterloy"}
       />
      
+      <Riwayat_Lembur_Item
+       
+        status={"Terkirim"}
+     
+        date={"Kamis 27 Des 2024"}
+        admin={"Ditolak oleh Ruud Van Nisterloy"}
+      />
+
       {/* ---------------------------------- */}
 
       {/* ------------------------------------ */}

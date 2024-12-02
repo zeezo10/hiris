@@ -79,7 +79,7 @@ export default function DatePickerInput({ label , placeholder}) {
           width: "100%",
           borderColor: "#BCC1CAFF",
           borderWidth: 1,
-          borderRadius: 10,
+          borderRadius: 6,
           paddingHorizontal: 10,
         }}
         onPress={showDatepicker}

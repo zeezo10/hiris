@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Text, View, StyleSheet, Dimensions ,ActivityIndicator } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import {Foundation} from "react-native-vector-icons";
 
 export default function LoadingPage() {
 
@@ -25,6 +26,14 @@ export default function LoadingPage() {
   }
   return (
     <View style={styles.container}>
+        <Foundation
+                  name="torsos-all"
+                  size={110}
+                  color="white"
+                  style={{}}
+                />
+                
+         
       <Text style={styles.title}>persona</Text>
     </View>
   );

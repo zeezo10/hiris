@@ -4,7 +4,7 @@ import { AntDesign } from "react-native-vector-icons/";
 import { MaterialCommunityIcons } from "react-native-vector-icons/";
 import { Entypo } from "react-native-vector-icons/";
 
-export default function SelectOption({ name, items }) {
+export default function SelectOption({ name, items}) {
   const [visible, setVisible] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [value, setValue] = useState(name);
@@ -25,7 +25,7 @@ export default function SelectOption({ name, items }) {
     <>
       <View style={{ gap: 3 }}>
         <Text style={{ fontSize: 14, fontWeight: "bold",color:"#424955FF" }}>{name}</Text>
-        <TouchableOpacity
+        <Pressable
           style={{
             height: 40,
             width: "100%",
@@ -44,7 +44,7 @@ export default function SelectOption({ name, items }) {
             {value}
           </Text>
           <Entypo name="chevron-thin-down" size={15} />
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <Modal animationType="fade" transparent={true} visible={visible}>

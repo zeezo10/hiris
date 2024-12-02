@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Dimensions,
   Modal,
-  TouchableOpacity
+  TouchableOpacity,
+  Button,
 } from "react-native";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
@@ -16,9 +17,74 @@ import UploadFile from "../../../../../component/global/UploadFile";
 import TextArea from "../../../../../component/global/TextArea";
 import DatePickerInput from "../../../../../component/global/DatePickerInput";
 import ModalKirim from "../../../../../component/global/ModalKirim";
+import { Entypo } from "react-native-vector-icons";
+import SelectOption from "../../../../../component/global/SelectOption";
 
 SplashScreen.preventAutoHideAsync();
 
+import DateTimePicker from "@react-native-community/datetimepicker"; // Import DateTimePicker
+
+// import HourPicker from "../../../../../component/global/HourPicker";
+
+// New HourPicker component
+const HourPicker = ({ label, placeholder }) => {
+  const [show, setShow] = useState(false);
+  const [hour, setHour] = useState(new Date());
+  const [selected, setSelected] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || hour;
+    setShow(false);
+    setHour(currentDate);
+    setSelected(true);
+  };
+
+  return (
+    <View style={{ gap: 3 }}>
+      <Text style={{ fontSize: 14, fontWeight: "bold", color: "#424955FF" }}>
+        {label}
+      </Text>
+      <Pressable
+        style={{
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignItems: "center",
+          height: 40,
+          width: "100%",
+          borderColor: "#BCC1CAFF",
+          borderWidth: 1,
+          borderRadius: 6,
+          paddingHorizontal: 10,
+        }}
+        title="Show Hour Picker"
+        onPress={() => setShow(true)}
+      >
+        {show && (
+          <DateTimePicker
+            value={hour}
+            mode="time" // Keep mode as 'time' to select hours
+            is24Hour={true}
+            display="default"
+            onChange={(event, selectedDate) => {
+              onChange(event, selectedDate);
+            }}
+          />
+        )}
+        <Text style={{ fontSize: 14, color: selected ? "" : "#BCC1CAFF" }}>
+          {selected
+            ? hour.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: undefined,
+                hour12: true,
+              })
+            : placeholder}
+        </Text>
+        <Entypo name="chevron-thin-down" size={15} />
+      </Pressable>
+    </View>
+  );
+};
 
 //---------------------------------
 
@@ -124,13 +190,13 @@ const styles = StyleSheet.create({
   modalConfirmButtonText: {
     color: "white",
     fontSize: 16,
-  }
+  },
 });
 
-export default function Buat_Pengajuan({ navigation }) {
+export default function Lembur_Pengajuan({ navigation }) {
   const screenWidth = Dimensions.get("window").width;
+  const screenHeight = Dimensions.get("window").height;
 
-  const [tanjungan, setTnjungan] = useState(1);
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -138,27 +204,29 @@ export default function Buat_Pengajuan({ navigation }) {
     setModalVisible(true);
   };
 
-
   return (
     <>
-      <View
-        style={{paddingHorizontal: 20, gap: 10, marginTop: 30 }}
-      >
+      <View style={{ paddingHorizontal: 20, gap: 10, marginTop: 30  }}>
         <View style={{ gap: 20 }}>
-          <LabeledTextInput
-            label={"Nama Project & Pekerjaan"}
-            placeholder={"Ketik Nama Project & Pekerjaan"}
+          <DatePickerInput
+            label={"Tanggal Lembur"}
+            placeholder={"Pilih Tanggal Lembur"}
           />
 
-          <LabeledTextInput label={"Kategori"} placeholder={"Ketik Kategori"} />
+          <HourPicker
+            label={"Jam Mulai Lembur"}
+            placeholder={"Pilih Jam Mulai Lembur"}
+          />
+          <HourPicker
+            label={"Jam Selesai Lembur"}
+            placeholder={"Pilih Jam Selesai Lembur"}
+          />
 
-          <LabeledTextInput label={"Nilai Reimbursment"} placeholder={"Rp"} />
+          <SelectOption name={"Yang Menyetujui"} items={[1, 2, 3]} />
 
-            <DatePickerInput label={"Tanggal Transaksi"} placeholder={"Pilih Tanggal Transaksi"} />
-         
-          <UploadFile label={"Bukti Reimbursement"} placeholder={"Upload Bukti Reimbursement"} />
 
-          <TextArea label={"Bukti Reimbursement"} placeholder={"Tulis Keterangan"}/>
+        <TextArea label={"Tugas yang akan Diselesaikan"} placeholder={"Tulis tugas apa yang akan diselesaikan saat lembur"}/>
+
 
           <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
             <Pressable
@@ -182,15 +250,16 @@ export default function Buat_Pengajuan({ navigation }) {
             </Pressable>
             <ModalKirim
               navigation={navigation}
-              title={"Informasi Pekerjaan"}
+              title={"Informasi Pekerjaan"} /// change this later 
               name={"InfoPekerjaan"}
             />
           </View>
         </View>
       </View>
 
-      <View style={{ height: 50 }}></View>
-
+      <View style={{ height: 100, backgroundColor:"white" }}>
+        {/* <HourPicker selectedHour={hour} onHourChange={setHour} /> */}
+      </View>``
 
       <Modal animationType="fade" transparent={true} visible={modalVisible}>
         <View style={styles.modalContainer}>

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
+import {Foundation} from "react-native-vector-icons";
+
 
 export default function SuccessLoginLoading() {
   const screenWidth = Dimensions.get("window").width;
@@ -25,6 +27,13 @@ export default function SuccessLoginLoading() {
 
   return (
     <View style={styles.container}>
+      <Foundation
+                  name="torsos-all"
+                  size={110}
+                  color="#379AE6FF"
+                  style={{}}
+                />
+                
       <Text style={styles.title}>persona</Text>
     </View>
   );

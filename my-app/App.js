@@ -31,10 +31,11 @@ import Profile_InfoPekerjaan from "./pages/Profile/FinalProfile/Profile_InfoPeke
 import DataPribadi from "./pages/Profile/inputDataKeryawan/DataPribadi";
 import DataPekerjaan from "./pages/Profile/inputDataKeryawan/DataPekerjaan";
 import Reimbursement from "./pages/Pengajuan/inputPengajuan/ReimbursementComp/Reimbursement";
-import Lembur from "./pages/Pengajuan/inputPengajuan/Lembur";
+
 import Cuti from "./pages/Pengajuan/inputPengajuan/Cuti";
 import Sakit from "./pages/Pengajuan/inputPengajuan/Sakit";
 import Izin from "./pages/Pengajuan/inputPengajuan/Izin";
+import Lembur from "./pages/Pengajuan/inputPengajuan/Lembur/Lembur";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -112,17 +113,17 @@ function MainTab() {
 export default function App() {
   //// delete after ----------------
 
-  const [isLoad, setLoading] = useState(true);
+  const [isLoad, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   if (isLoad) {
-  //     const timer = setTimeout(() => {
-  //       setLoading(false);
-  //     }, 3000);
+  useEffect(() => {
+    if (isLoad) {
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 3000);
 
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isLoad]);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoad]);
 
   //// delete after ----------------
 
@@ -136,13 +137,13 @@ export default function App() {
               {isLoad ? (
                 <Stack.Screen
                   name="Laoding"
-                  component={MainTab}
+                  component={LoadingPage}
                   options={{ headerShown: false }}
                 />
               ) : (
                 <Stack.Screen
                   name="Login"
-                  component={Login}
+                  component={LoadingPage}
                   options={{ headerShown: false }}
                 />
               )}
