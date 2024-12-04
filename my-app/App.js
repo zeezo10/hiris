@@ -115,15 +115,15 @@ export default function App() {
 
   const [isLoad, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (isLoad) {
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+  // useEffect(() => {
+  //   if (isLoad) {
+  //     const timer = setTimeout(() => {
+  //       setLoading(false);
+  //     }, 3000);
 
-      return () => clearTimeout(timer);
-    }
-  }, [isLoad]);
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isLoad]);
 
   //// delete after ----------------
 
@@ -137,7 +137,7 @@ export default function App() {
               {isLoad ? (
                 <Stack.Screen
                   name="Laoding"
-                  component={LoadingPage}
+                  component={MainTab}
                   options={{ headerShown: false }}
                 />
               ) : (

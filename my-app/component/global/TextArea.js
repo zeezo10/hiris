@@ -25,7 +25,7 @@ export default function TextArea({ label, placeholder }) {
 const styles = StyleSheet.create({
   // Wrapped styles in StyleSheet.create
   container: {
-    flex: 1,
+    
     justifyContent: "center",
     gap: 3,
   },

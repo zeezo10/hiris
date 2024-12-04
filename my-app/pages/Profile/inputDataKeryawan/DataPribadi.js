@@ -471,33 +471,33 @@ export default function DataPribadi({ navigation }) {
             items={["Kode Pos A", "Kode Pos B", "Kode Pos C"]}
           />
 
-          <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
-            <Pressable
-              style={{
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-              onPress={handleBack}
-            >
-              <Text
+            <View style={{ height: 40, flexDirection: "row", marginTop: 15 }}>
+              <Pressable
                 style={{
-                  textAlign: "center",
-                  fontSize: 14,
-                  color: "#379AE6FF",
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
                 }}
+                onPress={handleBack}
               >
-                Batal
-              </Text>
-            </Pressable>
-            <ModalKirim
-              navigation={navigation}
-              title={"Data Pribadi"}
-              name={"InfoPribadi"}
-            />
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 14,
+                    color: "#379AE6FF",
+                  }}
+                >
+                  Batal
+                </Text>
+              </Pressable>
+              <ModalKirim
+                navigation={navigation}
+                title={"Data Pribadi"}
+                name={"InfoPribadi"}
+              />
+            </View>
           </View>
-        </View>
 
         <View style={{ height: 100 }}></View>
       </ScrollView>
