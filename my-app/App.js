@@ -32,9 +32,9 @@ import DataPribadi from "./pages/Profile/inputDataKeryawan/DataPribadi";
 import DataPekerjaan from "./pages/Profile/inputDataKeryawan/DataPekerjaan";
 import Reimbursement from "./pages/Pengajuan/inputPengajuan/ReimbursementComp/Reimbursement";
 
-import Cuti from "./pages/Pengajuan/inputPengajuan/Cuti";
+import Cuti from "./pages/Pengajuan/inputPengajuan/Cuti/Cuti";
 import Sakit from "./pages/Pengajuan/inputPengajuan/Sakit";
-import Izin from "./pages/Pengajuan/inputPengajuan/Izin";
+import Izin from "./pages/Pengajuan/inputPengajuan/Izin/Izin";
 import Lembur from "./pages/Pengajuan/inputPengajuan/Lembur/Lembur";
 
 const Stack = createStackNavigator();

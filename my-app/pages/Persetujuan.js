@@ -56,7 +56,8 @@ export default function Persetujuan() {
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
+            Alert.alert("Modal has been closed.");     //////////////////////////  importnt very very 
+            
             setModalVisible(!modalVisible);
           }}
         >
